@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">FitMe</string>
+    <string name="MAPS_API_kEY">AIzaSyBf4RmpYPt8ZiG7SmISU0I9Y--XlxL-DMM</string>
+    <string-array name="filter_options">
+        <item>Date</item>
+        <item>Running Time</item>
+        <item>Distance</item>
+        <item>Average Speed</item>
+        <item>Calories Burned</item>
+    </string-array>
+
+</resources>
