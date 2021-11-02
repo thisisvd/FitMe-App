@@ -1,5 +1,6 @@
 package com.vdcodeassociate.fitme.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.vdcodeassociate.fitme.R
+import com.vdcodeassociate.fitme.constants.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.vdcodeassociate.fitme.databinding.ActivityMainBinding
 import com.vdcodeassociate.fitme.room.RunDao
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,16 +23,22 @@ class MainActivity : AppCompatActivity() {
     // viewBinding
     lateinit var binding: ActivityMainBinding
 
+    // navHostFragment
+    lateinit var navHostFragment: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Setting up bottom nav controller
+        navHostFragment = findViewById(R.id.navHostFragment)
+
+        // check for notification (tracking) fragment
+        navigateToTrackingFragment(intent)
+
         // Toolbar support
         setSupportActionBar(binding.toolbar)
-
-        // Setting up bottom nav controller
-        val navHostFragment: View? = findViewById(R.id.navHostFragment)
 
         binding.bottomNavigationView.setupWithNavController(navHostFragment!!.findNavController())
 
@@ -47,5 +55,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun navigateToTrackingFragment(intent: Intent?) {
+        if(intent?.action == ACTION_SHOW_TRACKING_FRAGMENT) {
+            navHostFragment.findNavController().navigate(R.id.action_global_tracking_fragment)
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        navigateToTrackingFragment(intent)
+    }
 
 }

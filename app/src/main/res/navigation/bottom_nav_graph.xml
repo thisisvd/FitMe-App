@@ -4,6 +4,10 @@
     android:id="@+id/bottom_nav_graph"
     app:startDestination="@id/setupFragment">
 
+    <action android:id="@+id/action_global_tracking_fragment"
+        app:destination="@+id/trackingFragment"
+        app:launchSingleTop="true" />
+
     <fragment
         android:id="@+id/setupFragment"
         android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.SetupFragment"
