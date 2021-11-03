@@ -82,11 +82,13 @@ class TrackingService: LifecycleService() {
                         startForegroundService()
                         isFirstRun = false
                     }else {
+                        startForegroundService()
                         Log.d("$TAG -> ", "RESUME_SERVICE")
                     }
                 }
                 ACTION_PAUSE_SERVICE -> {
                     Log.d("$TAG -> ","ACTION_PAUSE_SERVICE")
+                    pauseService()
                 }
                 ACTION_STOP_SERVICE -> {
                     Log.d("$TAG -> ","ACTION_STOP_SERVICE")
@@ -99,6 +101,10 @@ class TrackingService: LifecycleService() {
         }
 
         return super.onStartCommand(intent, flags, startId)
+    }
+
+    private fun pauseService(){
+        isTracking.postValue(false)
     }
 
     private fun addPathPoints(location: Location?) {

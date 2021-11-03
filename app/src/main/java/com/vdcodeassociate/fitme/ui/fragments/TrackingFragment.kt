@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.PolylineOptions
 import dagger.hilt.android.AndroidEntryPoint
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants
+import com.vdcodeassociate.fitme.constants.Constants.ACTION_PAUSE_SERVICE
+import com.vdcodeassociate.fitme.constants.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.vdcodeassociate.fitme.constants.Constants.MAP_ZOOM
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_COLOR
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_WIDTH
@@ -43,17 +46,52 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
 
         // Making new updates
         binding.btnToggleRun.setOnClickListener {
-            sendCommandToService(Constants.ACTION_START_OR_RESUME_SERVICE)
+//            sendCommandToService(Constants.ACTION_START_OR_RESUME_SERVICE)
+            toggleRun()
         }
 
         binding.mapView.getMapAsync {
             map = it
+            addAllPolyline()
         }
+
+        subscribeToObservers()
 
     }
 
-    // Update Tracking with ui
+    // Observers init
+    private fun subscribeToObservers() {
+        TrackingService.isTracking.observe(viewLifecycleOwner, Observer {
+            updateTracking(it)
+        })
 
+        TrackingService.pathPoints.observe(viewLifecycleOwner, Observer {
+            pathPoints = it
+            addLatestPolyline() // connect 2 latest polyline
+            moveCamera() // move camera
+        })
+    }
+
+    // toggle run button services
+    private fun toggleRun(){
+        if(isTracking){
+            sendCommandToService(ACTION_PAUSE_SERVICE)
+        }else {
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
+        }
+    }
+
+    // Update Tracking with ui
+    private fun updateTracking(isTracking: Boolean) {
+        this.isTracking = isTracking
+        if(!isTracking){
+            binding.btnToggleRun.text = "Start"
+            binding.btnFinishRun.visibility = View.VISIBLE
+        }else {
+            binding.btnToggleRun.text = "Stop"
+            binding.btnFinishRun.visibility = View.GONE
+        }
+    }
 
     // Moving camera to users position
     private fun moveCamera(){
