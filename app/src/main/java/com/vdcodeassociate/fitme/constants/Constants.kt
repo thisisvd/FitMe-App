@@ -30,6 +30,9 @@ object Constants {
     // Map Zoom
     const val MAP_ZOOM = 15f
 
+    // TIMER_UPDATE_INTERVAL
+    const val TIMER_UPDATE_INTERVAL = 50L
+
     // Notifications Constants
     const val NOTIFICATION_CHANNEL_ID = "tracking_channel"
 

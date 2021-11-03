@@ -21,6 +21,7 @@ import com.vdcodeassociate.fitme.databinding.FragmentTrackingBinding
 import com.vdcodeassociate.fitme.services.Polyline
 import com.vdcodeassociate.fitme.services.Polylines
 import com.vdcodeassociate.fitme.services.TrackingService
+import com.vdcodeassociate.fitme.utils.TrackingUtility
 import com.vdcodeassociate.fitme.viewmodel.MainViewModel
 
 @AndroidEntryPoint
@@ -38,6 +39,9 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     //
     private var isTracking = false
     private var pathPoints = mutableListOf<Polyline>()
+
+    // Time Format
+    private var currentTimeInmillis = 0L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,6 +73,12 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
             pathPoints = it
             addLatestPolyline() // connect 2 latest polyline
             moveCamera() // move camera
+        })
+
+        TrackingService.timeRunsInMillis.observe(viewLifecycleOwner, Observer {
+            currentTimeInmillis = it
+            val formattedTime = TrackingUtility.getFormattedStopWatchTime(currentTimeInmillis,true)
+            binding.tvTimer.text = formattedTime
         })
     }
 

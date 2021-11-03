@@ -36,8 +36,13 @@ import com.vdcodeassociate.fitme.constants.Constants.LOCATION_UPDATE_INTERVAL
 import com.vdcodeassociate.fitme.constants.Constants.NOTIFICATION_CHANNEL_ID
 import com.vdcodeassociate.fitme.constants.Constants.NOTIFICATION_CHANNEL_NAME
 import com.vdcodeassociate.fitme.constants.Constants.NOTIFICATION_ID
+import com.vdcodeassociate.fitme.constants.Constants.TIMER_UPDATE_INTERVAL
 import com.vdcodeassociate.fitme.ui.MainActivity
 import com.vdcodeassociate.fitme.utils.TrackingUtility
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 typealias Polyline = MutableList<LatLng>
 typealias Polylines = MutableList<Polyline>
@@ -51,7 +56,23 @@ class TrackingService: LifecycleService() {
 
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
+    // livedata for current time runs in sec (for notification)
+    private val timeRunsInSec = MutableLiveData<Long>()
+
+    // timer is on/off
+    private var isTimeEnable = false
+    // total time from beginning (start) to end (pause/stop)
+    private var lapTime = 0L
+    // total time of run (whole)
+    private var timeRun = 0L
+    // time at the start of run
+    private var timeStart = 0L
+    //
+    private var lastSecondTimestamp = 0L
+
     companion object{
+        // livedata for current time runs in Milli-sec (for accurate fragment ui changes)
+        val timeRunsInMillis = MutableLiveData<Long>()
 
         var isTracking = MutableLiveData<Boolean>()
         var pathPoints = MutableLiveData<Polylines>()
@@ -61,6 +82,8 @@ class TrackingService: LifecycleService() {
     private fun postInitValues(){
         isTracking.postValue(false)
         pathPoints.postValue(mutableListOf())
+        timeRunsInSec.postValue(0L)
+        timeRunsInMillis.postValue(0L)
     }
 
     override fun onCreate() {
@@ -73,6 +96,7 @@ class TrackingService: LifecycleService() {
         })
     }
 
+    // starting, resume, stop
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
         intent?.let {
@@ -82,8 +106,8 @@ class TrackingService: LifecycleService() {
                         startForegroundService()
                         isFirstRun = false
                     }else {
-                        startForegroundService()
                         Log.d("$TAG -> ", "RESUME_SERVICE")
+                        startTimer()
                     }
                 }
                 ACTION_PAUSE_SERVICE -> {
@@ -103,8 +127,33 @@ class TrackingService: LifecycleService() {
         return super.onStartCommand(intent, flags, startId)
     }
 
+    // pausing the service
     private fun pauseService(){
         isTracking.postValue(false)
+        isTimeEnable = false
+    }
+
+    // Start Timer method
+    private fun startTimer(){
+        addEmptyPolyline()
+        isTracking.postValue(true)
+        timeStart = System.currentTimeMillis()
+        isTimeEnable = true
+        // track current time in coroutine
+        CoroutineScope(Dispatchers.Main).launch {
+            while (isTracking.value!!){
+                // time difference between now and timeStart
+                lapTime = System.currentTimeMillis() - timeStart
+                // post the new lapTime
+                timeRunsInMillis.postValue(timeRun + lapTime)
+                if(timeRunsInMillis.value!! >= lastSecondTimestamp + 1000L) {
+                    timeRunsInSec.postValue(timeRunsInSec.value!! + 1)
+                    lastSecondTimestamp += 1000L
+                }
+                delay(TIMER_UPDATE_INTERVAL)
+            }
+            timeRun += lapTime
+        }
     }
 
     private fun addPathPoints(location: Location?) {
@@ -116,7 +165,6 @@ class TrackingService: LifecycleService() {
             }
         }
     }
-
 
     private fun updateLocationTracking(isTracking: Boolean) {
         if(isTracking){
@@ -170,6 +218,7 @@ class TrackingService: LifecycleService() {
 
     @RequiresApi(Build.VERSION_CODES.ECLAIR)
     private fun startForegroundService() {
+        startTimer()
         // need or create empty polyline
         addEmptyPolyline()
 
