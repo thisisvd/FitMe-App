@@ -1,5 +1,7 @@
 package com.vdcodeassociate.fitme.viewmodel.repository
 
+import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIClient
+import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIInterface
 import com.vdcodeassociate.fitme.room.Run
 import com.vdcodeassociate.fitme.room.RunDao
 import javax.inject.Inject

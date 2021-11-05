@@ -4,6 +4,10 @@ import android.graphics.Color
 
 object Constants {
 
+    // URL
+    const val WEATHER_URL = "http://api.weatherapi.com/"
+    const val WEATHER_API_KEY = "002e410db6ef45eaae3174227210511"
+
     // Database Constant
     const val RUNNING_DATABASE_NAME = "running_db"
 

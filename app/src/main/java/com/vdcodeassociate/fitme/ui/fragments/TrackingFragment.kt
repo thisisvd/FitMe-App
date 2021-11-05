@@ -2,7 +2,9 @@ package com.vdcodeassociate.runningtrackerapp.ui.Fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -10,8 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants
@@ -22,11 +26,16 @@ import com.vdcodeassociate.fitme.constants.Constants.MAP_ZOOM
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_COLOR
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_WIDTH
 import com.vdcodeassociate.fitme.databinding.FragmentTrackingBinding
+import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIClient
+import com.vdcodeassociate.fitme.room.Run
 import com.vdcodeassociate.fitme.services.Polyline
 import com.vdcodeassociate.fitme.services.Polylines
 import com.vdcodeassociate.fitme.services.TrackingService
+import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.utils.TrackingUtility
 import com.vdcodeassociate.fitme.viewmodel.MainViewModel
+import java.lang.Math.round
+import java.util.*
 
 @AndroidEntryPoint
 class TrackingFragment : Fragment(R.layout.fragment_tracking){
@@ -50,6 +59,9 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     // menu
     private var menu: Menu? = null
 
+    // weight
+    private var weight = 80
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -68,6 +80,11 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
         binding.btnToggleRun.setOnClickListener {
 //            sendCommandToService(Constants.ACTION_START_OR_RESUME_SERVICE)
             toggleRun()
+        }
+
+        binding.btnFinishRun.setOnClickListener {
+            zoomToSeeMap()
+            saveDataToRoom()
         }
 
         binding.mapView.getMapAsync {
@@ -130,6 +147,45 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
                     MAP_ZOOM
                 )
             )
+        }
+    }
+
+    private fun zoomToSeeMap() {
+        val bounce = LatLngBounds.Builder()
+        for(polyline in pathPoints){
+            for(pos in polyline){
+                bounce.include(pos)
+            }
+        }
+
+        map?.moveCamera(
+            CameraUpdateFactory.newLatLngBounds(
+                bounce.build(),
+                binding.mapView.width,
+                binding.mapView.height,
+                (binding.mapView.height * 0.05).toInt()
+            )
+        )
+    }
+
+    private fun saveDataToRoom(){
+        map?.snapshot { bitmap ->
+            var distanceInMeters = 0
+            for(polyline in pathPoints){
+                distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
+            }
+
+            val avgSpeed = round((distanceInMeters/1000f) / (currentTimeInmillis / 1000f / 60 / 60) * 10) / 10f
+            val dateTimeStamp = Calendar.getInstance().timeInMillis
+            val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
+            val run = Run(bitmap,dateTimeStamp,avgSpeed,distanceInMeters,currentTimeInmillis,caloriesBurned,18,8.09f,"Clear")
+            viewModel.insertRun(run)
+            Snackbar.make(
+                requireActivity().findViewById(R.id.main_root_view),
+                "Run saved successfully",
+                Snackbar.LENGTH_LONG
+            ).show()
+            stopRun()
         }
     }
 
