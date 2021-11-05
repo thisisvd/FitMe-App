@@ -2,18 +2,22 @@ package com.vdcodeassociate.runningtrackerapp.ui.Fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.view.*
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_PAUSE_SERVICE
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.vdcodeassociate.fitme.constants.Constants.ACTION_STOP_SERVICE
 import com.vdcodeassociate.fitme.constants.Constants.MAP_ZOOM
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_COLOR
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_WIDTH
@@ -42,6 +46,18 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
 
     // Time Format
     private var currentTimeInmillis = 0L
+
+    // menu
+    private var menu: Menu? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        setHasOptionsMenu(true)
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,6 +101,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     // toggle run button services
     private fun toggleRun(){
         if(isTracking){
+            menu?.getItem(0)?.isVisible = true
             sendCommandToService(ACTION_PAUSE_SERVICE)
         }else {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
@@ -99,6 +116,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
             binding.btnFinishRun.visibility = View.VISIBLE
         }else {
             binding.btnToggleRun.text = "Stop"
+            menu?.getItem(0)?.isVisible = true
             binding.btnFinishRun.visibility = View.GONE
         }
     }
@@ -145,6 +163,50 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
             it.action = action
             requireContext().startService(it)
         }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.tracking_menu, menu)
+        this.menu = menu
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        if(currentTimeInmillis > 0){
+            this.menu?.getItem(0)?.isVisible = true
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.cancelRun -> {
+                showCancelDialog()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun showCancelDialog(){
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Cancel the Run?")
+            .setMessage("Are you sure to cancel the current run?")
+            .setIcon(R.drawable.ic_delete)
+            .setPositiveButton("Yes") { _,_ ->
+                stopRun()
+            }
+            .setNegativeButton("No") { dialogInterface,_ ->
+                dialogInterface.cancel()
+            }
+            .create()
+        dialog.show()
+    }
+
+    private fun stopRun(){
+        sendCommandToService(ACTION_STOP_SERVICE)
+        findNavController().navigate(R.id.action_trackingFragment_to_runFragment)
+    }
 
     override fun onResume() {
         super.onResume()
