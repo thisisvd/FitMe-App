@@ -10,6 +10,12 @@ class StatisticsViewModel @Inject constructor(
     val repository: MainRepository
 ): ViewModel(){
 
+    val totalItemCount = repository.getTotalItemCount()
+    val totalTimeRun = repository.getTotalTimeInMillis()
+    val totalDistance = repository.getTotalDistanceInMeters()
+    val totalCaloriesBurned = repository.getTotalCaloriesBurned()
+    val totalAvgSpeed = repository.getTotalAvgSpeedInKMH()
 
+    val runSortedByDate = repository.getAllRunSortedByDate()
 
 }

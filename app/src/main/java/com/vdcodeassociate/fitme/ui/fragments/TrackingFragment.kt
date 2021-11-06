@@ -22,6 +22,7 @@ import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_PAUSE_SERVICE
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_STOP_SERVICE
+import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
 import com.vdcodeassociate.fitme.constants.Constants.MAP_ZOOM
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_COLOR
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_WIDTH
@@ -31,11 +32,16 @@ import com.vdcodeassociate.fitme.room.Run
 import com.vdcodeassociate.fitme.services.Polyline
 import com.vdcodeassociate.fitme.services.Polylines
 import com.vdcodeassociate.fitme.services.TrackingService
+import com.vdcodeassociate.fitme.ui.fragments.Dialog
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.utils.TrackingUtility
 import com.vdcodeassociate.fitme.viewmodel.MainViewModel
 import java.lang.Math.round
 import java.util.*
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
+
+const val CANCEL_TRACKING_DIALOG_TAG = "Cancel Dialog"
 
 @AndroidEntryPoint
 class TrackingFragment : Fragment(R.layout.fragment_tracking){
@@ -59,8 +65,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     // menu
     private var menu: Menu? = null
 
-    // weight
-    private var weight = 80
+    @set:Inject
+    private var weight = 80f
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,6 +86,16 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
         binding.btnToggleRun.setOnClickListener {
 //            sendCommandToService(Constants.ACTION_START_OR_RESUME_SERVICE)
             toggleRun()
+        }
+
+        // cancel run dialog things
+        if(savedInstanceState != null){
+            val dialog = parentFragmentManager.findFragmentByTag(
+                CANCEL_TRACKING_DIALOG_TAG
+            ) as Dialog?
+            dialog?.setListener {
+                stopRun()
+            }
         }
 
         binding.btnFinishRun.setOnClickListener {
@@ -112,8 +128,19 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
             currentTimeInmillis = it
             val formattedTime = TrackingUtility.getFormattedStopWatchTime(currentTimeInmillis,true)
             binding.tvTimer.text = formattedTime
+//            if(TimeUnit.MILLISECONDS.toMinutes(currentTimeInmillis) % 10 == 0L){
+//                calDistanceRough()
+//            }
         })
     }
+
+//    fun calDistanceRough() {
+//        var distanceInMeters = 0
+//        for(polyline in pathPoints){
+//            distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
+//        }
+//        binding.tvLetsGo.text = distanceInMeters.toString()
+//    }
 
     // toggle run button services
     private fun toggleRun(){
@@ -128,10 +155,10 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     // Update Tracking with ui
     private fun updateTracking(isTracking: Boolean) {
         this.isTracking = isTracking
-        if(!isTracking){
+        if(!isTracking && currentTimeInmillis > 0L){
             binding.btnToggleRun.text = "Start"
             binding.btnFinishRun.visibility = View.VISIBLE
-        }else {
+        }else if(isTracking){
             binding.btnToggleRun.text = "Stop"
             menu?.getItem(0)?.isVisible = true
             binding.btnFinishRun.visibility = View.GONE
@@ -245,21 +272,15 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     }
 
     private fun showCancelDialog(){
-        val dialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Cancel the Run?")
-            .setMessage("Are you sure to cancel the current run?")
-            .setIcon(R.drawable.ic_delete)
-            .setPositiveButton("Yes") { _,_ ->
+        Dialog().apply {
+            setListener {
                 stopRun()
             }
-            .setNegativeButton("No") { dialogInterface,_ ->
-                dialogInterface.cancel()
-            }
-            .create()
-        dialog.show()
+        }.show(parentFragmentManager,CANCEL_TRACKING_DIALOG_TAG)
     }
 
     private fun stopRun(){
+        binding.tvTimer.text = "00:00:00:00"
         sendCommandToService(ACTION_STOP_SERVICE)
         findNavController().navigate(R.id.action_trackingFragment_to_runFragment)
     }

@@ -41,7 +41,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         binding.bottomNavigationView.setupWithNavController(navHostFragment!!.findNavController())
-
+        binding.bottomNavigationView.setOnNavigationItemReselectedListener {
+            // not to be implemented
+        }
         navHostFragment.findNavController()
             .addOnDestinationChangedListener { _, destination, _ ->
 

@@ -11,6 +11,12 @@ object Constants {
     // Database Constant
     const val RUNNING_DATABASE_NAME = "running_db"
 
+    // Shared Preferences
+    const val SHARED_PREFERENCES_NAME = "Shared_preferences"
+    const val KEY_FIRST_TIME_TOGGLE = "KEY_FIRST_TIME_TOGGLE"
+    const val KEY_WEIGHT = "KEY_WEIGHT"
+    const val KEY_NAME = "KEY_NAME"
+
     // Location Permission Constant
     const val REQUEST_CODE_LOCATION_PERMISSION = 0
 
