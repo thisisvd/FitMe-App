@@ -1,16 +1,17 @@
 package com.vdcodeassociate.fitme.viewmodel
 
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.vdcodeassociate.fitme.room.Run
+import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.utils.SortsEnum
 import com.vdcodeassociate.fitme.viewmodel.repository.MainRepository
+import com.vdcodeassociate.newsheadlines.kotlin.model.ResponseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
-@HiltViewModel
+@HiltViewModel  // injection to view model internally
 class MainViewModel @Inject constructor(
     val repository: MainRepository
 ): ViewModel(){

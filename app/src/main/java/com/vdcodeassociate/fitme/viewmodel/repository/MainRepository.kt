@@ -1,5 +1,6 @@
 package com.vdcodeassociate.fitme.viewmodel.repository
 
+import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIHelper
 import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIClient
 import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIInterface
 import com.vdcodeassociate.fitme.room.Run
@@ -8,7 +9,8 @@ import javax.inject.Inject
 
 // Job of main repo is to collect data from all data sources (i.e, room or retrofit etc...)
 class MainRepository @Inject constructor(
-    val runDao: RunDao
+    val runDao: RunDao,
+    private val newsAPIHelper: NewsAPIHelper
 ) {
 
     suspend fun insertRun(run: Run) = runDao.insertRun(run)
@@ -34,5 +36,8 @@ class MainRepository @Inject constructor(
     fun getTotalDistanceInMeters() = runDao.getTotalDistanceInMeters()
 
     fun getTotalItemCount() = runDao.getItemCount()
+
+    // News functions
+    suspend fun getLatestNews() = newsAPIHelper.getLatestNews()
 
 }

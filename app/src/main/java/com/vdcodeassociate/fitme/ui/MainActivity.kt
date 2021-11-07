@@ -3,7 +3,6 @@ package com.vdcodeassociate.fitme.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -48,13 +47,12 @@ class MainActivity : AppCompatActivity() {
             .addOnDestinationChangedListener { _, destination, _ ->
 
                 when(destination.id){
-                    R.id.settingsFragment, R.id.runFragment, R.id.statisticsFragment ->
+                    R.id.settingsFragment, R.id.runFragment, R.id.statisticsFragment, R.id.newsFragment ->
                         binding.bottomNavigationView.visibility = View.VISIBLE
                     else -> binding.bottomNavigationView.visibility = View.GONE
                 }
 
             }
-
     }
 
     private fun navigateToTrackingFragment(intent: Intent?) {

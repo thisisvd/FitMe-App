@@ -112,11 +112,14 @@ dependencies {
     // MP Android chart
 //    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.'
 
+    // Arch lifecycles
     implementation 'android.arch.lifecycle:extensions:1.1.1'
-
     kapt "android.arch.persistence.room:compiler:1.0.0"
 
     // location
     implementation 'com.google.android.gms:play-services-location:11.0.2'
+
+    //Times Formatter
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 
 }

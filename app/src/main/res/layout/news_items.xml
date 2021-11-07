@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/newsCardView"
+            android:layout_width="111dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:cardCornerRadius="5dp"
+            android:elevation="0dp"
+            android:layout_margin="5dp"
+            android:outlineSpotShadowColor="@color/white"
+            android:outlineAmbientShadowColor="@color/white">
+
+            <ImageView
+                android:id="@+id/vNewsImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/question_mark5"
+                android:transitionName="transaction_image" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/newsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/newsCardView"
+            android:fontFamily="@font/bookmanoldstyle"
+            android:maxLines="3"
+            android:textColor="#080707"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:src="@drawable/ic_baseline_date_range_24" />
+
+            <TextView
+                android:id="@+id/newsDate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:fontFamily="@font/segoeui"
+                android:maxLines="3"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="7sp" />
+
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_marginLeft="7dp"
+                android:src="@drawable/ic_baseline_chrome_reader_mode_24" />
+
+            <TextView
+                android:id="@+id/newsViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:fontFamily="@font/segoeui"
+                android:maxLines="3"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="7sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LLIV1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@id/newsCardView"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_marginLeft="7dp"
+                android:src="@drawable/ic_baseline_access_time_24" />
+
+            <TextView
+                android:id="@+id/newsTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:fontFamily="@font/segoeui"
+                android:maxLines="3"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="7sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/LLIV1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:background="#AEB1AF" />
+
+    </RelativeLayout>
+
+</LinearLayout>

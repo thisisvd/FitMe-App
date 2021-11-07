@@ -40,4 +40,8 @@
             android:id="@+id/action_trackingFragment_to_runFragment"
             app:destination="@id/runFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.vdcodeassociate.fitme.ui.fragments.NewsFragment"
+        android:label="NewsFragment" />
 </navigation>

@@ -12,6 +12,11 @@
         android:icon="@drawable/ic_graph"/>
 
     <item
+        android:id="@+id/newsFragment"
+        android:title="FitNews"
+        android:icon="@drawable/ic_baseline_chrome_reader_mode_24"/>
+
+    <item
         android:id="@+id/settingsFragment"
         android:title="Settings"
         android:icon="@drawable/ic_settings"/>
