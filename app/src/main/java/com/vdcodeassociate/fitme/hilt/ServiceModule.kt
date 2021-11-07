@@ -16,7 +16,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ServiceScoped
 
 @Module
-@InstallIn(ServiceComponent::class)   // how long the dependency of Service module will livw
+@InstallIn(ServiceComponent::class)   // how long the dependency of Service module will live
 object ServiceModule {
 
     @ServiceScoped   // single instance (owned scope)

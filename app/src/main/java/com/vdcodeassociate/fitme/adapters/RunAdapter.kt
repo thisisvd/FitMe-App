@@ -1,14 +1,14 @@
 package com.vdcodeassociate.fitme.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.vdcodeassociate.fitme.R
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.vdcodeassociate.fitme.databinding.ItemRunBinding
 import com.vdcodeassociate.fitme.room.Run
 import com.vdcodeassociate.fitme.utils.TrackingUtility
@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
+
+    var globalPosition = 0
 
     inner class RunViewHolder(val binding: ItemRunBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -31,9 +33,10 @@ class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
     }
 
     // differ
-    private val differ = AsyncListDiffer(this,diffCallBack)
+    val differ = AsyncListDiffer(this,diffCallBack)
 
     fun submitList(list: List<Run>) = differ.submitList(list)
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RunViewHolder {
         val binding = ItemRunBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -44,7 +47,10 @@ class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
         val run = differ.currentList[position]
 
         holder.binding.apply {
-            Glide.with(root).load(run.img).into(ivRunImage)
+            Glide.with(root)
+                .load(run.img)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(ivRunImage)
 
             val calendar = Calendar.getInstance().apply {
                 timeInMillis = run.timestamp
@@ -54,16 +60,28 @@ class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
             tvDate.text = dateFormat.format(calendar.time)
 
-            val avgSpeed = "${run.avgSpeedInKMH}km/h"
+            val avgSpeed = "${run.avgSpeedInKMH} km/h"
             tvAvgSpeed.text = avgSpeed
 
-            val distanceInKm = "${run.distanceInMeters / 1000f}km"
+            val distanceInKm = "${run.distanceInMeters / 1000f} km"
             tvDistance.text = distanceInKm
 
             tvTime.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)
 
-            val caloriesBurned = "${run.caloriesBurned}kcal"
+            val caloriesBurned = "${run.caloriesBurned} kcal"
             tvCalories.text = caloriesBurned
+
+            runWeatherStatus.text = run.weatherStatus
+            runWeatherCelcius.text = "${run.weatherCelsius} \u00B0C"
+            runWindSpeed.text = "${run.windSpeed} km/h"
+
+            removeRun.setOnClickListener {
+                onItemClickListener?.let { it(run) }
+            }
+
+//            root.setOnClickListener {
+//                onItemClickListener?.let { it(run) }
+//            }
 
         }
 
@@ -73,5 +91,11 @@ class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
         return differ.currentList.size
     }
 
+    // On click listener
+    private var onItemClickListener: ((Run) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Run) -> Unit) {
+        onItemClickListener = listener
+    }
 
 }

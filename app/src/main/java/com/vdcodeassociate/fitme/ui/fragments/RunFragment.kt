@@ -12,10 +12,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.adapters.RunAdapter
 import com.vdcodeassociate.fitme.constants.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.vdcodeassociate.fitme.databinding.FragmentRunBinding
+import com.vdcodeassociate.fitme.room.Run
 import com.vdcodeassociate.fitme.utils.SortsEnum
 import com.vdcodeassociate.fitme.utils.TrackingUtility
 import com.vdcodeassociate.fitme.viewmodel.MainViewModel
@@ -70,6 +73,10 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
 
+        runAdapter.setOnItemClickListener {
+            onSNACK(view,it)
+        }
+
     }
 
     // Recycler view setup
@@ -116,6 +123,21 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this)
+    }
+
+    private fun onSNACK(view: View, run: Run){
+        viewModel.deleteRun(run)
+        runAdapter.notifyDataSetChanged()
+        Snackbar.make(
+            view.findViewById(R.id.runFragmentID),
+            "Deleted a run from recent runs!",
+            Snackbar.LENGTH_LONG).setAction(
+            "UNDO"
+        ){
+            viewModel.insertRun(run)
+            runAdapter.notifyDataSetChanged()
+        }.show()
+
     }
 
 }
