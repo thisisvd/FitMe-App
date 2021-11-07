@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/newsFragmentID" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/newsFragmentID">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/newsTabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:tabGravity="fill"
+        app:tabMode="scrollable"
+        app:tabTextColor="#C4C4C4"
+        android:layout_marginLeft="15dp"
+        app:tabSelectedTextColor="@color/black"
+        app:tabInlineLabel="true"
+        app:tabIndicatorColor="@color/black"/>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/newsViewPager2"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/newsTabLayout" />
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</LinearLayout>

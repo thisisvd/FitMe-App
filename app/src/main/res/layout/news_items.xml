@@ -55,13 +55,14 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:gravity="center_vertical"
+            android:layout_alignRight="@+id/LLIV1"
             android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="9dp"
                 android:layout_height="9dp"
-                android:src="@drawable/ic_baseline_date_range_24" />
+                android:src="@drawable/ic_baseline_person_24" />
 
             <TextView
                 android:id="@+id/newsDate"
@@ -69,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:fontFamily="@font/segoeui"
-                android:maxLines="3"
+                android:maxLines="1"
                 android:textColor="?attr/colorControlNormal"
                 android:textSize="7sp" />
 
@@ -85,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:fontFamily="@font/segoeui"
-                android:maxLines="3"
+                android:maxLines="1"
                 android:textColor="?attr/colorControlNormal"
                 android:textSize="7sp" />
 
@@ -105,7 +106,7 @@
                 android:layout_width="9dp"
                 android:layout_height="9dp"
                 android:layout_marginLeft="7dp"
-                android:src="@drawable/ic_baseline_access_time_24" />
+                android:src="@drawable/ic_baseline_date_range_24" />
 
             <TextView
                 android:id="@+id/newsTime"
@@ -113,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:fontFamily="@font/segoeui"
-                android:maxLines="3"
+                android:maxLines="1"
                 android:textColor="?attr/colorControlNormal"
                 android:textSize="7sp" />
 

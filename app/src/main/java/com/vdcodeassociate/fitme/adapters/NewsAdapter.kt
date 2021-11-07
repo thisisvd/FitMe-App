@@ -59,7 +59,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
             }
             newsTitle.text = article.title
             newsViews.text = article.source.name
-            newsDate.text = Utils().DateFormat(article.publishedAt)
+            newsDate.text = article.author
             newsTime.text = Utils().DateToTimeFormat(article.publishedAt)
 
             root.setOnClickListener {
