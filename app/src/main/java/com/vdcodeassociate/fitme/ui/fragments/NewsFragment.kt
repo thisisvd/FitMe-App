@@ -16,7 +16,6 @@ import com.vdcodeassociate.fitme.viewmodel.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
-
 @AndroidEntryPoint
 class NewsFragment: Fragment(R.layout.fragment_news) {
 
@@ -36,31 +35,41 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNewsBinding.bind(view)
 
+        // init recyclerView
+        setUpRecyclerView()
 
+        // Tab Layout init
         binding.apply {
 
             // Adding news tabs
             newsTabLayout.addTab(newsTabLayout.newTab().setText("ALL"))
             newsTabLayout.addTab(newsTabLayout.newTab().setText("TIPS"))
-            newsTabLayout.addTab(newsTabLayout.newTab().setText("EXERCISE"))
             newsTabLayout.addTab(newsTabLayout.newTab().setText("DIET"))
+            newsTabLayout.addTab(newsTabLayout.newTab().setText("EXERCISE"))
             newsTabLayout.addTab(newsTabLayout.newTab().setText("MEDITATION"))
 
             // on tab select listener
             newsTabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
 
                 override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                    var queryPosition = 0
+
                     when(tab?.position) {
-                        1 -> tab?.text = "Tips"
-                        2 -> tab?.text = "Exercise"
-                        3 -> tab?.text = "Diet"
-                        4 -> tab?.text = "Meditation"
-                        else -> tab?.text = "All"
+                        1 -> queryPosition = 1
+                        2 -> queryPosition = 2
+                        3 -> queryPosition = 3
+                        4 -> queryPosition = 4
                     }
+
+                    viewModel.tabLatestNews(queryPosition)
+//                    binding.recyclerView.visibility = View.GONE
+                    newsAdapter.notifyDataSetChanged()
+
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
-
+                    // Do not implement anything
                 }
 
                 override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -70,14 +79,18 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
             })
         }
 
-        setUpRecyclerView()
+        viewModelObserver()
 
+    }
+
+    // viewModel observer method
+    private fun viewModelObserver() {
         // viewModel observe
         viewModel.getLatestNews.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
-                    binding.progress.visibility = View.GONE
-                    binding.recyclerView.visibility = View.VISIBLE
+//                    binding.progress.visibility = View.GONE
+//                    binding.recyclerView.visibility = View.VISIBLE
                     response.data?.let { newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.articles)
                     }
@@ -88,12 +101,11 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
                     }
                 }
                 is Resource.Loading -> {
-                    binding.progress.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.GONE
+//                    binding.progress.visibility = View.VISIBLE
+//                    binding.recyclerView.visibility = View.GONE
                 }
             }
         })
-
     }
 
     // set up recycler view

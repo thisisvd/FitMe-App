@@ -5,6 +5,6 @@ import retrofit2.Response
 
 interface NewsAPIHelper {
 
-    suspend fun getLatestNews(): Response<ResponseModel>
+    suspend fun getLatestNews(query: String): Response<ResponseModel>
 
 }

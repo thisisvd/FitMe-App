@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
@@ -69,7 +70,7 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
             .apply()
 
         val toolbarText = "Let's go, $name!"
-        requireActivity().findViewById<MaterialTextView>(R.id.tvToolbarTitle).text = toolbarText
+//        requireActivity().findViewById<TextView>(R.id.tvToolbarTitle).text = toolbarText
         return true
 
     }

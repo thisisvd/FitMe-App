@@ -122,4 +122,10 @@ dependencies {
     //Times Formatter
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 
+    // chip navigation bar
+    implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.2.0'
+
+    // circular image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 }

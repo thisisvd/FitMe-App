@@ -29,9 +29,9 @@
         android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.StatisticsFragment"
         android:label="StatisticsFragment" />
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:id="@+id/profileFragment"
+        android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.ProfileFragment"
+        android:label="ProfileFragment" />
     <fragment
         android:id="@+id/trackingFragment"
         android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.TrackingFragment"
@@ -44,4 +44,8 @@
         android:id="@+id/newsFragment"
         android:name="com.vdcodeassociate.fitme.ui.fragments.NewsFragment"
         android:label="NewsFragment" />
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.vdcodeassociate.fitme.ui.fragments.HomeFragment"
+        android:label="HomeFragment" />
 </navigation>

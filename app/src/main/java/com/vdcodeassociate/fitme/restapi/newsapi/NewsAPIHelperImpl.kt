@@ -9,7 +9,7 @@ class NewsAPIHelperImpl @Inject constructor(
     private val apiInterface: NewsAPIInterface
 ): NewsAPIHelper {
 
-    override suspend fun getLatestNews(): Response<ResponseModel> =
-        apiInterface.getBreakingNews()
+    override suspend fun getLatestNews(query: String): Response<ResponseModel> =
+        apiInterface.getBreakingNews(query)
 
 }

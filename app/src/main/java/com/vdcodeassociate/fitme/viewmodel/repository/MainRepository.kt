@@ -38,6 +38,6 @@ class MainRepository @Inject constructor(
     fun getTotalItemCount() = runDao.getItemCount()
 
     // News functions
-    suspend fun getLatestNews() = newsAPIHelper.getLatestNews()
+    suspend fun getLatestNews(query: String) = newsAPIHelper.getLatestNews(query)
 
 }

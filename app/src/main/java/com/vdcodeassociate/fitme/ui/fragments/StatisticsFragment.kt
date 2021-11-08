@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.vdcodeassociate.fitme.R
-import com.vdcodeassociate.fitme.databinding.FragmentSettingsBinding
 import com.vdcodeassociate.fitme.databinding.FragmentStatisticsBinding
 import com.vdcodeassociate.fitme.utils.TrackingUtility
 import com.vdcodeassociate.fitme.viewmodel.StatisticsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Math.round
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class StatisticsFragment : Fragment(R.layout.fragment_statistics){
@@ -27,11 +25,11 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics){
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStatisticsBinding.bind(view)
 
-        subscribeToObservers()
+        viewModelObservers()
 
     }
 
-    private fun subscribeToObservers() {
+    private fun viewModelObservers() {
 
         viewModel.apply {
             totalItemCount.observe(viewLifecycleOwner, Observer {

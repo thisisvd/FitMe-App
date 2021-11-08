@@ -23,14 +23,14 @@ class NewsViewModel @Inject constructor(
     val getLatestNews: LiveData<Resource<ResponseModel>> get() = latestNews
 
     init {
-        getLatestNews()
+        getLatestNews("fitness")
     }
 
-    private fun getLatestNews() = viewModelScope.launch {
+    private fun getLatestNews(query: String) = viewModelScope.launch {
         latestNews.postValue(Resource.Loading())
-        val response = repository.getLatestNews()
-        Log.d("TAGHOST",response.body().toString())
+        val response = repository.getLatestNews(query)
         latestNews.postValue(handleLatestNewsResponse(response))
+
     }
 
     // handle Response for LatestNews()
@@ -41,6 +41,21 @@ class NewsViewModel @Inject constructor(
             }
         }
         return Resource.Error(response.message())
+    }
+
+    fun tabLatestNews(tabValue: Int){
+        // local variable
+        var query = "fitness"
+
+        // select query wrt to selected tab
+        when(tabValue) {
+            1 -> query = "fitness tips"
+            2 -> query = "diet"
+            3 -> query = "exercise"
+            4 -> query = "meditation"
+        }
+
+        getLatestNews(query)
     }
 
 }

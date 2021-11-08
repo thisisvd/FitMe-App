@@ -4,27 +4,25 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
 import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
-import com.vdcodeassociate.fitme.databinding.FragmentSettingsBinding
-import com.vdcodeassociate.fitme.databinding.FragmentSetupBinding
+import com.vdcodeassociate.fitme.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SettingsFragment : Fragment(R.layout.fragment_settings){
+class ProfileFragment : Fragment(R.layout.fragment_profile){
 
-    private lateinit var binding: FragmentSettingsBinding
+    private lateinit var binding: FragmentProfileBinding
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSettingsBinding.bind(view)
+        binding = FragmentProfileBinding.bind(view)
 
         loadFieldsFromSharedPreferences()
 

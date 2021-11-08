@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homeFragment2"
+        android:title="Home"
+        android:icon="@drawable/home_icons8"
+        android:enabled="true"
+        app:cnb_backgroundColor="@color/black"
+        app:cnb_iconColor="@color/white"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/white" />
 
     <item
         android:id="@+id/runFragment"
-        android:title="Runs"
-        android:icon="@drawable/ic_run"/>
+        android:title="Run"
+        android:icon="@drawable/run_icons8"
+        android:enabled="true"
+        app:cnb_backgroundColor="@color/black"
+        app:cnb_iconColor="@color/white"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/white" />
 
     <item
         android:id="@+id/statisticsFragment"
         android:title="Statistics"
-        android:icon="@drawable/ic_graph"/>
+        android:icon="@drawable/statistics_icons8"
+        app:cnb_backgroundColor="@color/black"
+        app:cnb_iconColor="@color/white"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/white" />
 
     <item
-        android:id="@+id/newsFragment"
-        android:title="FitNews"
-        android:icon="@drawable/ic_baseline_chrome_reader_mode_24"/>
-
-    <item
-        android:id="@+id/settingsFragment"
-        android:title="Settings"
-        android:icon="@drawable/ic_settings"/>
+        android:id="@+id/profileFragment"
+        android:title="Profile"
+        android:icon="@drawable/profile_icons8"
+        app:cnb_backgroundColor="@color/black"
+        app:cnb_iconColor="@color/white"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/white" />
 
 </menu>
