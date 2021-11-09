@@ -1,6 +1,7 @@
 package com.vdcodeassociate.fitme.ui
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -11,6 +12,8 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -49,6 +52,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
+        binding.toolbar.overflowIcon!!.setColorFilter(
+            ContextCompat.getColor(this, R.color.black),
+            PorterDuff.Mode.SRC_ATOP
+        )
 
         // Setting up bottom nav controller
         navHostFragment = findViewById(R.id.navHostFragment)
@@ -142,41 +149,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Toolbar Menu Item selected
+    // All Toolbar's Menu Item selected
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 drawerLayout.openDrawer(GravityCompat.START)
                 true
             }
-            R.id.profileFragmentIcon -> {
-                Toast.makeText(this,"Profile Icon",Toast.LENGTH_SHORT).show()
-                true
-            }
             R.id.schedulesItems -> {
                 Toast.makeText(this,"Schedule Icon",Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.logoutProfile -> {
+                Toast.makeText(this,"Logging out!",Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.editProfile -> {
+                Toast.makeText(this,"Edit Profile!",Toast.LENGTH_SHORT).show()
                 true
             }
             else -> false
         }
     }
 
-    // Menu init
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.nav_drawer_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        val alertMenuItem = menu!!.findItem(R.id.profileFragmentIcon)
-        val rootView = alertMenuItem.actionView as FrameLayout
-        rootView.setOnClickListener {
-            onOptionsItemSelected(alertMenuItem)
-        }
-        return super.onPrepareOptionsMenu(menu)
-    }
-
-     // On Back pressing
+    // Handle On Back pressing
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)

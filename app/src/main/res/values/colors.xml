@@ -11,4 +11,5 @@
     <color name="md_blue_900">#FF6200EE</color>
     <color name="md_blue_800">#FF6200EE</color>
     <color name="black_normal_text">#373938</color>
+    <color name="text_view_normal_color">#787878</color>
 </resources>

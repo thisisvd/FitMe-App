@@ -53,14 +53,10 @@ class Utils {
 
     fun DateFormat(oldstringDate: kotlin.String?): kotlin.String? {
         val newDate: kotlin.String?
-        val dateFormat = SimpleDateFormat("E, d MMM yyyy", Locale(getCountry()))
+        val dateFormat = SimpleDateFormat("EEEE, d MMM, yyyy", Locale(getCountry()))
         newDate = try {
-            val date: Date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(oldstringDate)
-            if(dateFormat.format(date) == dateFormat.format(Date())) {
-                "Today"
-            }else {
-                dateFormat.format(date)
-            }
+            val date: Date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS").parse(oldstringDate)
+            dateFormat.format(date)
         } catch (e: ParseException) {
             e.printStackTrace()
             oldstringDate
