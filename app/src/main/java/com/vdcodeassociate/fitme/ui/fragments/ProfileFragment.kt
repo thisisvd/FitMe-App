@@ -1,6 +1,7 @@
 package com.vdcodeassociate.runningtrackerapp.ui.Fragments
 
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -20,6 +21,10 @@ import com.vdcodeassociate.fitme.databinding.FragmentProfileBinding
 import com.vdcodeassociate.fitme.model.profilemodel.ProfileItemsClass
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import im.dacer.androidcharts.LineView
+
+
+
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile){
@@ -41,7 +46,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
 
-        setupRecyclerView()
+//        setupRecyclerView()
 
         val list = ArrayList<ProfileItemsClass>()
         list.add(ProfileItemsClass(R.drawable.save_icons8,"Saved Articles"))
@@ -52,26 +57,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         list.add(ProfileItemsClass(R.drawable.aboutus_icons8,"About us!"))
         list.add(ProfileItemsClass(R.drawable.logout_icons8,"Logout!"))
 
-        profileAdapter.differ.submitList(list)
-        profileAdapter.notifyDataSetChanged()
-
     }
 
-    // Recycler view setup
-    private fun setupRecyclerView(){
-        profileAdapter = ProfileAdapter()
-        val linearLayoutManager = object : LinearLayoutManager(requireContext()) {
-            override fun canScrollVertically(): Boolean {
-                return false
-            }
-        }
-        binding.profileRecyclerView.apply {
-            adapter = profileAdapter
-            layoutManager = linearLayoutManager
-            // decorator line
-            addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
-        }
-    }
+//    // Recycler view setup
+//    private fun setupRecyclerView(){
+//        profileAdapter = ProfileAdapter()
+//        binding.profileRecyclerView.apply {
+//            adapter = profileAdapter
+//            layoutManager = LinearLayoutManager(requireContext())
+//            // decorator line
+//            addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
+//        }
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.profile_menu, menu)

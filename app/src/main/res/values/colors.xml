@@ -12,4 +12,5 @@
     <color name="md_blue_800">#FF6200EE</color>
     <color name="black_normal_text">#373938</color>
     <color name="text_view_normal_color">#787878</color>
+    <color name="card_back_light">#33A6A4A4</color>
 </resources>

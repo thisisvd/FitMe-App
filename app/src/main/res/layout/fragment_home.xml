@@ -262,7 +262,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/homeImgSteps"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:gravity="center" >
 
                     <TextView
                         android:id="@+id/homeSteps"
@@ -308,6 +309,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/homeImgDistance"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -354,6 +356,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/homeImgCalories"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView

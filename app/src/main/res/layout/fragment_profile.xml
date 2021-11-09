@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:scrollbarThumbVertical="@null">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,34 +17,52 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/nav_profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/image_girl"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/profileName"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="7dp"
-                android:fontFamily="@font/allerta"
-                android:maxLines="1"
-                android:text="Christina Way"
-                android:textColor="@color/black"
-                android:textSize="23sp"
-                android:textStyle="bold" />
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/runCurrentTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/allerta"
-                android:maxLines="1"
-                android:text="christinaway22@gmail.com"
-                android:textSize="10sp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/nav_profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/image_girl"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="35dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/profileName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="7dp"
+                        android:fontFamily="@font/allerta"
+                        android:maxLines="1"
+                        android:text="Christina Way"
+                        android:textColor="@color/black"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/runCurrentTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/allerta"
+                        android:maxLines="1"
+                        android:text="christinaway22@gmail.com"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <GridLayout
                 android:layout_width="match_parent"
@@ -157,19 +173,513 @@
 
                 </LinearLayout>
 
-
             </GridLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_margin="12dp"
+                android:background="@color/card_back_light" />
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/profileRecyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/card_background"
-            android:padding="8dp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/allerta"
+                android:text="All Days Stats -"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="13dp"
+                android:weightSum="3">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/profileImgDistance"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/red_curve_background"
+                        android:padding="10dp"
+                        android:src="@drawable/distance_icons8" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/profileImgDistance"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/profileDist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
+                            android:text="101 km"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homeSteps"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/allerta"
+                            android:text="Distance"
+                            android:textColor="@color/black_normal_text"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp">
+
+                    <ImageView
+                        android:id="@+id/profileImgCalories"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="7dp"
+                        android:background="@drawable/orange_curve_background"
+                        android:padding="10dp"
+                        android:src="@drawable/calories_burn_icons8" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/profileImgCalories"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/profileCalories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
+                            android:text="220"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homeSteps"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/allerta"
+                            android:text="Calories"
+                            android:textColor="@color/black_normal_text"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp">
+
+                    <ImageView
+                        android:id="@+id/profileImgPace"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/green_card_round_background"
+                        android:padding="10dp"
+                        android:src="@drawable/speed_icons8" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/profileImgPace"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/profilePace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
+                            android:text="10 km/h"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homeSteps"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/allerta"
+                            android:text="Pace"
+                            android:textColor="@color/black_normal_text"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <view
+                android:id="@+id/lineView"
+                class="im.dacer.androidcharts.LineView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/card_back_light"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_background"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/profileItemsIcon2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/save_icons8" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profileItems2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_toRightOf="@+id/profileItemsIcon2"
+                    android:maxLines="1"
+                    android:text="Saved Articles"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/profileItemsForward2"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:transitionName="transaction_image" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:background="@color/card_back_light" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/profileItemsIcon3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/task_icons8" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profileItems3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_toRightOf="@+id/profileItemsIcon3"
+                    android:maxLines="1"
+                    android:text="Scheduled Runs"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/profileItemsForward3"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:transitionName="transaction_image" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:background="@color/card_back_light" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/profileItemsIcon4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/invite_friends_icons8"
+                    android:transitionName="transaction_image" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profileItems4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_toRightOf="@+id/profileItemsIcon4"
+                    android:maxLines="1"
+                    android:text="Invite Friends"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/profileItemsForward4"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:transitionName="transaction_image" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:background="@color/card_back_light" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/profileItemsIcon5"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/get_help_icons8" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profileItems5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_toRightOf="@+id/profileItemsIcon5"
+                    android:maxLines="1"
+                    android:text="Get Help!"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/profileItemsForward5"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:transitionName="transaction_image" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:background="@color/card_back_light" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/profileItemsIcon6"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/feedback_icons8" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profileItems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_toRightOf="@+id/profileItemsIcon6"
+                    android:maxLines="1"
+                    android:text="Give us Feedback"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/profileItemsForward6"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:transitionName="transaction_image" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:background="@color/card_back_light" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/profileItemsIcon7"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/aboutus_icons8" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profileItems7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_toRightOf="@+id/profileItemsIcon7"
+                    android:maxLines="1"
+                    android:text="About us!"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/profileItemsForward7"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:transitionName="transaction_image" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:background="@color/card_back_light" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/profileItemsIcon8"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/logout_icons8" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profileItems8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_toRightOf="@+id/profileItemsIcon8"
+                    android:maxLines="1"
+                    android:text="Logout!"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/profileItemsForward8"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:transitionName="transaction_image" />
+
+            </RelativeLayout>
+
+            <!--        <androidx.recyclerview.widget.RecyclerView-->
+            <!--            android:id="@+id/profileRecyclerView"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="match_parent"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:background="@drawable/card_background"-->
+            <!--            android:padding="8dp" />-->
+
+        </LinearLayout>
 
     </LinearLayout>
 

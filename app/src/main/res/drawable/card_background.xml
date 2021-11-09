@@ -5,6 +5,6 @@
 
     <solid android:color="@color/white"/>
 
-    <stroke android:width="2dp" android:color="#33A6A4A4"/>
+    <stroke android:width="2dp" android:color="@color/card_back_light"/>
 
 </shape>
