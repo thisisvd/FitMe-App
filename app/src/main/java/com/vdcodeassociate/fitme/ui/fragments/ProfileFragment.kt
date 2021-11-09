@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -45,7 +46,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         val list = ArrayList<ProfileItemsClass>()
         list.add(ProfileItemsClass(R.drawable.save_icons8,"Saved Articles"))
         list.add(ProfileItemsClass(R.drawable.task_icons8,"Scheduled Runs"))
-        list.add(ProfileItemsClass(R.drawable.weather_icons8,"Invite Friends"))
+        list.add(ProfileItemsClass(R.drawable.invite_friends_icons8,"Invite Friends"))
         list.add(ProfileItemsClass(R.drawable.get_help_icons8,"Get Help!"))
         list.add(ProfileItemsClass(R.drawable.feedback_icons8,"Give us Feedback"))
         list.add(ProfileItemsClass(R.drawable.aboutus_icons8,"About us!"))
@@ -67,6 +68,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         binding.profileRecyclerView.apply {
             adapter = profileAdapter
             layoutManager = linearLayoutManager
+            // decorator line
+            addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
         }
     }
 
