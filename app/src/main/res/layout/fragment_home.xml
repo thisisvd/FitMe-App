@@ -47,7 +47,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="5dp"
@@ -65,12 +65,28 @@
                 android:layout_weight="1"
                 android:padding="10dp">
 
+                <TextView
+                    android:id="@+id/weatherNoLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/allerta"
+                    android:text="No weather location founded!"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
                 <LinearLayout
+                    android:id="@+id/weatherNumbers"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/weatherCondition"
+                    android:gravity="center_vertical"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -83,7 +99,7 @@
                             android:id="@+id/weatherIcon"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:background="@color/white" />
+                            android:background="@drawable/white_curve_background_lite" />
 
                         <TextView
                             android:id="@+id/weatherStatus"
@@ -91,36 +107,76 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/allerta"
-                            android:text="Clear"
                             android:textColor="@color/white"
                             android:textSize="25sp"
+                            android:maxLines="2"
                             android:textStyle="bold" />
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/weatherCelcius"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/allerta"
-                        android:text="29 °C"
-                        android:textColor="@color/white"
-                        android:textSize="45sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/weatherCelciusFeelsLike"
+                        <TextView
+                            android:id="@+id/weatherCelcius"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
+                            android:textColor="@color/white"
+                            android:textSize="45sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
+                            android:text=" °C"
+                            android:textColor="@color/white"
+                            android:textSize="45sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/allerta"
-                        android:text="Feels like 29 °C"
-                        android:textColor="@color/white"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
+                            android:text="Feels like "
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/weatherCelciusFeelsLike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
+                            android:text=" °C"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/weatherCondition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -153,7 +209,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:fontFamily="@font/segoeui"
-                                android:text="5.6 m/h"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/segoeui"
+                                android:text=" m/h"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -178,7 +242,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:fontFamily="@font/segoeui"
-                                android:text="64 %"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/segoeui"
+                                android:text=" %"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -203,7 +275,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:fontFamily="@font/segoeui"
-                                android:text="1016.0 mb"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/segoeui"
+                                android:text=" mb"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -224,164 +304,234 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             android:fontFamily="@font/allerta"
             android:text="Weekly Stats"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/card_background"
-            android:gravity="center"
             android:orientation="horizontal"
-            android:padding="13dp"
-            android:weightSum="3">
+            android:stretchColumns="1">
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/homeStats1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1">
+                android:layout_height="match_parent"
+                android:background="@drawable/card_background_lite"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="15dp">
 
                 <ImageView
-                    android:id="@+id/homeImgSteps"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/curve_background"
-                    android:padding="10dp"
-                    android:src="@drawable/steps_icons8" />
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/run_icons8" />
 
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/homeImgSteps"
-                    android:orientation="vertical"
-                    android:gravity="center" >
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Total\nworkout"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/homeSteps"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/allerta"
+                    android:text="Activate every \nmuscle"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/homeImgSteps"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/curve_background"
+                        android:padding="10dp"
+                        android:src="@drawable/steps_icons8" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/allerta"
-                        android:text="5660"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/homeImgSteps"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/homeStepsTV1"
+                        <TextView
+                            android:id="@+id/homeSteps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
+                            android:text="5660"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/homeStepsTV1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homeSteps"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/allerta"
+                            android:text="Total Steps"
+                            android:textColor="@color/black_normal_text"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/homeStats2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/homeSteps"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/allerta"
-                        android:text="Total Steps"
-                        android:textColor="@color/black_normal_text"
-                        android:textSize="10sp" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/yellow_card_background_lite"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/homeImgCalories"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="7dp"
+                            android:background="@drawable/white_round_curve_background"
+                            android:padding="10dp"
+                            android:src="@drawable/calories_burn_icons8" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homeImgCalories"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/homeCalories"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/allerta"
+                                android:text="220"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/homeCaloriesTV1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/homeSteps"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/allerta"
+                                android:text="Calories"
+                                android:textColor="@color/black_normal_text"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/homeStats3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/red_card_background_lite"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/homeImgDistance"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/white_round_curve_background"
+                            android:padding="10dp"
+                            android:src="@drawable/distance_icons8" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homeImgDistance"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/homeDist"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/allerta"
+                                android:text="101 km"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/homeDistTV1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/homeSteps"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/allerta"
+                                android:text="Distance"
+                                android:textColor="@color/black_normal_text"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 
-            </RelativeLayout>
+                <com.majorik.sparklinelibrary.SparkLineLayout
+                    android:id="@+id/sparkLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    app:s_line_thickness="4dp"
+                    app:s_split_left_color="#F9BE59"
+                    app:s_split_line="true"
+                    app:s_split_right_color="#E95B4D" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/homeImgDistance"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/red_curve_background"
-                    android:padding="10dp"
-                    android:src="@drawable/distance_icons8" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/homeImgDistance"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/homeDist"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/allerta"
-                        android:text="101 km"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/homeDistTV1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/homeSteps"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/allerta"
-                        android:text="Distance"
-                        android:textColor="@color/black_normal_text"
-                        android:textSize="10sp" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp">
-
-                <ImageView
-                    android:id="@+id/homeImgCalories"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="7dp"
-                    android:background="@drawable/orange_curve_background"
-                    android:padding="10dp"
-                    android:src="@drawable/calories_burn_icons8" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/homeImgCalories"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/homeCalories"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/allerta"
-                        android:text="220"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/homeCaloriesTV1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/homeSteps"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/allerta"
-                        android:text="Calories"
-                        android:textColor="@color/black_normal_text"
-                        android:textSize="10sp" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -393,91 +543,41 @@
             android:layout_marginBottom="13dp"
             android:background="@drawable/card_background"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:orientation="horizontal">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/allerta"
-                    android:text="Last Run"
-                    android:textColor="@color/black_normal_text"
-                    android:textSize="8sp" />
-
-                <TextView
-                    android:id="@+id/homeLastRunDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/allerta"
-                    android:text="WEDNESDAY"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@+id/homeLastRunDate"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/weather_sky_img" />
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/homeLastRunDate"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_margin="15dp">
 
                     <LinearLayout
+                        android:id="@+id/LinearLayoutBB1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_marginRight="5dp"
-                            android:src="@drawable/time_icons8" />
-
-                        <TextView
-                            android:id="@+id/homeLastTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/allerta"
-                            android:text="Last Run"
-                            android:textColor="@color/black_normal_text"
-                            android:textSize="8sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_marginRight="5dp"
-                            android:src="@drawable/distance_icons8" />
+                            android:id="@+id/iosForwardExtra"
+                            android:layout_width="8sp"
+                            android:layout_height="8sp"
+                            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
 
                         <TextView
-                            android:id="@+id/homeLastDist"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@+id/iosForwardExtra"
                             android:fontFamily="@font/allerta"
                             android:text="Last Run"
                             android:textColor="@color/black_normal_text"
@@ -485,59 +585,292 @@
 
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/homeLastRunDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/LinearLayoutBB1"
+
+                        android:fontFamily="@font/allerta"
+                        android:text="WEDNESDAY"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_below="@+id/homeLastRunDate"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_marginRight="5dp"
-                            android:src="@drawable/calories_burn_icons8" />
-
-                        <TextView
-                            android:id="@+id/homeLastCalories"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/allerta"
-                            android:text="Last Run"
-                            android:textColor="@color/black_normal_text"
-                            android:textSize="8sp" />
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/time_icons8" />
+
+                            <TextView
+                                android:id="@+id/homeLastTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/allerta"
+                                android:text="Last Run"
+                                android:textColor="@color/black_normal_text"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/distance_icons8" />
+
+                            <TextView
+                                android:id="@+id/homeLastDist"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/allerta"
+                                android:text="Last Run"
+                                android:textColor="@color/black_normal_text"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/calories_burn_icons8" />
+
+                            <TextView
+                                android:id="@+id/homeLastCalories"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/allerta"
+                                android:text="Last Run"
+                                android:textColor="@color/black_normal_text"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </RelativeLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="80dp"
+                    android:layout_marginRight="15dp"
+                    app:cardCornerRadius="6dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/homeLastRunImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/weather_sky_img" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
 
             <View
                 android:layout_width="1dp"
-                android:layout_height="111dp"
-                android:background="#8A484A49" />
+                android:layout_height="100dp"
+                android:background="#4D484A49" />
 
-            <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/homePieChart"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="10dp"
-                android:padding="8dp"
-                app:egLegendTextSize="8sp"
-                app:egUsePieRotation="true"
-                app:egValueTextSize="22sp" />
+            <app.futured.donut.DonutProgressView
+                android:id="@+id/donut_view"
+                android:layout_width="111dp"
+                android:layout_height="111dp"
+                android:layout_marginLeft="10dp"
+                android:padding="10dp"
+                app:donut_bgLineColor="@color/white"
+                app:donut_gapAngle="90"
+                app:donut_gapWidth="50"
+                app:donut_strokeWidth="10dp" />
+
+            <!--            <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--                android:id="@+id/homePieChart"-->
+            <!--                android:layout_width="150dp"-->
+            <!--                android:layout_height="150dp"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:padding="8dp"-->
+            <!--                app:egLegendTextSize="8sp"-->
+            <!--                app:egUsePieRotation="true"-->
+            <!--                app:egValueTextSize="22sp" />-->
 
         </LinearLayout>
 
-        <org.eazegraph.lib.charts.BarChart
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/allerta"
+                android:text="My Schedule"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/iosForward"
+                android:fontFamily="@font/allerta"
+                android:text="View All"
+                android:textColor="@color/black_normal_text"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:id="@+id/iosForward"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_background_lite"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/homeScheduleStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Running at park"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homeScheduleStatus"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/ic_baseline_access_time_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Tuesday, Aug 22"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text=" | "
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="06:00 PM"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="25dp"
+                android:layout_toLeftOf="@+id/homeReschedule"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Goal set"
+                    android:textColor="#2BCD73"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2 km"
+                    android:textColor="#E95B4D"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/homeReschedule"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/blue_card_background_lite"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Re-Schedule"
+                    android:textColor="@color/white"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <org.eazegraph.lib.charts.BarChart xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/homeBarChart"
             android:layout_width="match_parent"
             android:layout_height="256dp"
-            android:padding="10dp"
-            app:egFixedBarWidth="true"
             app:egBarWidth="20dp"
-            app:egLegendHeight="40dp"/>
+            app:egFixedBarWidth="true"
+            app:egLegendHeight="40dp" />
 
     </LinearLayout>
 

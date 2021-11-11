@@ -1,6 +1,7 @@
 package com.vdcodeassociate.fitme.viewmodel
 
 import androidx.lifecycle.*
+import com.vdcodeassociate.fitme.restapi.weatherapi.model.WeatherResponse
 import com.vdcodeassociate.fitme.room.Run
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.utils.SortsEnum
@@ -15,6 +16,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     val repository: MainRepository
 ): ViewModel(){
+
+    val lastRun = repository.getLastItem()
 
     var sortType = SortsEnum.DATE
 
@@ -52,6 +55,7 @@ class MainViewModel @Inject constructor(
                 result?.let { runs.value = it }
             }
         }
+
     }
 
     fun sortRuns(sortType: SortsEnum) = when(sortType) {

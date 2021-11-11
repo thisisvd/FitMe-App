@@ -53,4 +53,8 @@ interface RunDao {
     @Query("SELECT SUM(distanceInMeters) FROM running_table")
     fun getTotalDistanceInMeters(): LiveData<Int>
 
+    // get last Item from db
+    @Query("SELECT * FROM running_table ORDER BY timestamp DESC LIMIT 1")
+    fun getLastItem(): LiveData<List<Run>>
+
 }

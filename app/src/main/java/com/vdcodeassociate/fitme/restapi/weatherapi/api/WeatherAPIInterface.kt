@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface WeatherAPIInterface {
 
     // weather update
-    @GET("v1/current.json")
+    @GET("current.json")
     suspend fun getWeather(
         @Query("q")
         searchLatLng: String,

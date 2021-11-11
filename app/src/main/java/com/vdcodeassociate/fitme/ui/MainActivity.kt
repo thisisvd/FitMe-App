@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     // navHostFragment
-    private lateinit var navHostFragment: View
+    lateinit var navHostFragment: View
 
     // drawer layout
     private lateinit var drawerLayout : DrawerLayout

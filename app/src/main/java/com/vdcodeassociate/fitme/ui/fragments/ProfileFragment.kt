@@ -57,6 +57,36 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         list.add(ProfileItemsClass(R.drawable.aboutus_icons8,"About us!"))
         list.add(ProfileItemsClass(R.drawable.logout_icons8,"Logout!"))
 
+        val lineView = view.findViewById<LineView>(R.id.lineView)
+        lineView.setDrawDotLine(false) //optional
+
+        lineView.setShowPopup(LineView.SHOW_POPUPS_MAXMIN_ONLY) //optional
+
+        val arrayList = ArrayList<String>()//Creating an empty arraylist
+        arrayList.add("Ajay")//Adding object in arraylist
+        arrayList.add("Vijay")
+        arrayList.add("Prakash")
+        arrayList.add("Rohan")
+        arrayList.add("Vijay")
+
+        lineView.setBottomTextList(arrayList)
+        lineView.setColorArray(intArrayOf(Color.BLACK, Color.GREEN, Color.GRAY, Color.CYAN))
+
+        var datalist = java.util.ArrayList<java.util.ArrayList<Int>>()
+
+        var arraylistInt = java.util.ArrayList<Int>(3)
+        arraylistInt.add(2)
+        arraylistInt.add(3)
+        arraylistInt.add(3)
+        datalist.add(arraylistInt)
+        arraylistInt = java.util.ArrayList<Int>(3)
+        arraylistInt.add(1)
+        arraylistInt.add(4)
+        arraylistInt.add(2)
+        datalist.add(arraylistInt)
+
+        lineView.setDataList(datalist) // or lineView.setFloatDataList(floatDataLists)
+
     }
 
 //    // Recycler view setup

@@ -12,9 +12,13 @@ import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
 import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
 import com.vdcodeassociate.fitme.constants.Constants.RUNNING_DATABASE_NAME
 import com.vdcodeassociate.fitme.constants.Constants.SHARED_PREFERENCES_NAME
+import com.vdcodeassociate.fitme.constants.Constants.WEATHER_URL
 import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIHelper
 import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIHelperImpl
 import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIInterface
+import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIHelper
+import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIHelperImpl
+import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIInterface
 import com.vdcodeassociate.fitme.room.RunDatabase
 import dagger.Module
 import dagger.Provides
@@ -25,6 +29,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 // AppModule object will provide required instances as a dependency
@@ -85,6 +90,7 @@ object AppModule {
 
     @Singleton
     @Provides
+    @Named("News")
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BASE_URL)
@@ -92,10 +98,28 @@ object AppModule {
         .build()
 
     @Provides
-    fun provideApiInterface(retrofit: Retrofit) = retrofit.create(NewsAPIInterface::class.java)
+    fun provideApiInterface(@Named("News") retrofit: Retrofit) = retrofit.create(NewsAPIInterface::class.java)
 
     @Provides
     @Singleton
     fun provideApiHelper(apiHelper: NewsAPIHelperImpl): NewsAPIHelper = apiHelper
+
+    // weather update
+    @Singleton
+    @Provides
+    @Named("Weather")
+    fun provideRetrofitWeather(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(WEATHER_URL)
+        .client(okHttpClient)
+        .build()
+
+    @Provides
+    fun provideApiInterfaceWeather(@Named("Weather") retrofit: Retrofit) = retrofit.create(WeatherAPIInterface::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApiHelperWeather(apiHelper: WeatherAPIHelperImpl): WeatherAPIHelper = apiHelper
+
 
 }

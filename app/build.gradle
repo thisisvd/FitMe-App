@@ -110,7 +110,7 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0'
 
     // MP Android chart
-//    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
     // Arch lifecycles
     implementation 'android.arch.lifecycle:extensions:1.1.1'
@@ -133,4 +133,9 @@ dependencies {
     implementation 'com.nineoldandroids:library:2.4.0'
 
     implementation 'im.dacer:AndroidCharts:1.0.4'
+
+    implementation("app.futured.donut:donut:2.2.0")
+
+    implementation 'com.github.majorkik:SparkLineLayout:1.0.1'
+
 }

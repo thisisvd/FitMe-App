@@ -5,7 +5,7 @@ import android.graphics.Color
 object Constants {
 
         // Weather URL
-        const val WEATHER_URL = "http://api.weatherapi.com/"
+        const val WEATHER_URL = "http://api.weatherapi.com/v1/"
         const val WEATHER_API_KEY = "002e410db6ef45eaae3174227210511"
 
         // News URL

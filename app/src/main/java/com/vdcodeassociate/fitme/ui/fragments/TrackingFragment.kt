@@ -2,10 +2,7 @@ package com.vdcodeassociate.runningtrackerapp.ui.Fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Toast
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -14,31 +11,24 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import com.vdcodeassociate.fitme.R
-import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_PAUSE_SERVICE
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_STOP_SERVICE
-import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
 import com.vdcodeassociate.fitme.constants.Constants.MAP_ZOOM
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_COLOR
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_WIDTH
 import com.vdcodeassociate.fitme.databinding.FragmentTrackingBinding
-import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIClient
 import com.vdcodeassociate.fitme.room.Run
 import com.vdcodeassociate.fitme.services.Polyline
-import com.vdcodeassociate.fitme.services.Polylines
 import com.vdcodeassociate.fitme.services.TrackingService
 import com.vdcodeassociate.fitme.ui.fragments.Dialog
-import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.utils.TrackingUtility
 import com.vdcodeassociate.fitme.viewmodel.MainViewModel
 import java.lang.Math.round
 import java.util.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 const val CANCEL_TRACKING_DIALOG_TAG = "Cancel Dialog"

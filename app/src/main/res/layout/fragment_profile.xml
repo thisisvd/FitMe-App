@@ -206,9 +206,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="13dp"
                 android:weightSum="3">
 
                 <RelativeLayout
@@ -355,9 +355,9 @@
             <view
                 android:id="@+id/lineView"
                 class="im.dacer.androidcharts.LineView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/card_back_light"/>
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"/>
 
         </LinearLayout>
 
