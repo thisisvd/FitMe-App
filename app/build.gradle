@@ -138,4 +138,7 @@ dependencies {
 
     implementation 'com.github.majorkik:SparkLineLayout:1.0.1'
 
+    // arc graph
+    implementation 'devlight.io:arcprogressstackview:1.0.4'
+
 }

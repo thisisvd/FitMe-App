@@ -12,12 +12,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.vdcodeassociate.fitme.databinding.ItemRunBinding
 import com.vdcodeassociate.fitme.room.Run
 import com.vdcodeassociate.fitme.utils.TrackingUtility
+import com.vdcodeassociate.fitme.utils.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 
 class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
-
-    var globalPosition = 0
 
     inner class RunViewHolder(val binding: ItemRunBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -52,13 +51,12 @@ class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(ivRunImage)
 
-            val calendar = Calendar.getInstance().apply {
-                timeInMillis = run.timestamp
-            }
+            tvDate.text = Utils().DateFormatRuns(run,true)
 
-            val dateFormat = SimpleDateFormat("dd.MM.yy",Locale.getDefault())
-
-            tvDate.text = dateFormat.format(calendar.time)
+            // show week stats
+            val cal = Calendar.getInstance()
+            cal.add(Calendar.DAY_OF_YEAR, -6)
+            val fiveDaysAgo = cal.timeInMillis
 
             val avgSpeed = "${run.avgSpeedInKMH} km/h"
             tvAvgSpeed.text = avgSpeed
@@ -66,7 +64,7 @@ class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
             val distanceInKm = "${run.distanceInMeters / 1000f} km"
             tvDistance.text = distanceInKm
 
-            tvTime.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)
+            tvTime.text = Utils().getTimeInWords(run.timeInMillis)
 
             val caloriesBurned = "${run.caloriesBurned} kcal"
             tvCalories.text = caloriesBurned

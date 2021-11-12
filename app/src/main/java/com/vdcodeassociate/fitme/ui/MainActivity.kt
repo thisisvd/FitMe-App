@@ -94,9 +94,14 @@ class MainActivity : AppCompatActivity() {
 
                 when(destination.id){
                     R.id.profileFragment, R.id.runFragment, R.id.statisticsFragment,
-                    R.id.homeFragment2 ->
+                    R.id.homeFragment2 ->{
                         binding.bottomNavigationView.visibility = View.VISIBLE
-                    else -> binding.bottomNavigationView.visibility = View.GONE
+                        binding.toolbar.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        binding.bottomNavigationView.visibility = View.GONE
+                        binding.toolbar.visibility = View.GONE
+                    }
                 }
 
             }
@@ -166,6 +171,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.editProfile -> {
                 Toast.makeText(this,"Edit Profile!",Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.homeLastRunLayout -> {
+                binding.bottomNavigationView.setItemSelected(R.id.runFragment)
                 true
             }
             else -> false

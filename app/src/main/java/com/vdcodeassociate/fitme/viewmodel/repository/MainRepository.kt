@@ -38,6 +38,10 @@ class MainRepository @Inject constructor(
 
     fun getTotalItemCount() = runDao.getItemCount()
 
+    // get Last Week items
+    fun getLastWeekItems() = runDao.getLastWeekItems()
+
+    // last run Item
     fun getLastItem() = runDao.getLastItem()
 
     // News functions

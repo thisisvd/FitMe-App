@@ -1,8 +1,6 @@
 package com.vdcodeassociate.fitme.ui.fragments
 
 import android.graphics.Color
-import android.graphics.drawable.Animatable
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -17,20 +15,10 @@ import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.databinding.FragmentHomeBinding
 import com.vdcodeassociate.fitme.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.WithFragmentBindings
 import java.sql.Timestamp
-import org.eazegraph.lib.models.ValueLinePoint
 
-import org.eazegraph.lib.models.ValueLineSeries
-import org.eazegraph.lib.models.PieModel
 import org.eazegraph.lib.models.BarModel
-import android.view.animation.DecelerateInterpolator
 
-import android.view.animation.AlphaAnimation
-
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -42,6 +30,12 @@ import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
 import com.vdcodeassociate.fitme.viewmodel.MainViewModel
 import java.net.URL
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import devlight.io.library.ArcProgressStackView
+import java.lang.Math.round
+import kotlin.math.roundToInt
 
 
 @AndroidEntryPoint
@@ -70,11 +64,17 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             text = Utils().DateFormat(Timestamp(System.currentTimeMillis()).toString())
         }
 
+        // recycler view
+        setUpRecyclerView()
+
         // init viewModel
         viewModelsObservers()
 
         // init change fragments
         openOtherFragments()
+
+        binding.homeLastRunLayout.setOnClickListener {
+        }
 
 //        // pieChart
 //        val pieChart = binding.homePieChart
@@ -95,28 +95,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         barChart.addBar(BarModel("Sat",2f, -0xa9480f))
         barChart.startAnimation()
 
-        val donut_view = binding.donutView
-        val section1 = DonutSection(
-            name = "section_1",
-            color = Color.parseColor("#416DDF"),
-            amount = 10f
-        )
-
-        val section2 = DonutSection(
-            name = "section_2",
-            color = Color.parseColor("#E95B4D"),
-            amount = 5f
-        )
-
-        val section3 = DonutSection(
-            name = "section_3",
-            color = Color.parseColor("#F9BE59"),
-            amount = 15f
-        )
-
-        donut_view.cap = 30f
-        donut_view.animationDurationMs = 2000
-        donut_view.submitData(listOf(section1, section2, section3))
 
         val sparkLine = binding.sparkLine
         sparkLine.markerBorderColor = Color.parseColor("#fed32c")
@@ -134,6 +112,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     // viewModel observers
     private fun viewModelsObservers(){
 
+        // weather viewModel Observer
         viewModel.getWeatherUpdate.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
@@ -176,17 +155,72 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             }
         })
 
-        viewModelRuns.lastRun.observe(viewLifecycleOwner, Observer {
-            binding.homeLastCalories.text = "${it[0].caloriesBurned} kcal"
-            binding.homeLastDist.text = "${it[0].distanceInMeters} km"
-            binding.homeLastTime.text = "${it[0].timeInMillis}"
-            binding.homeLastRunDate.text = "${it[0].timestamp}"
+        // last run viewModel Observer
+        viewModelRuns.lastRun.observe(viewLifecycleOwner, Observer { run ->
+            binding.homeLastCalories.text = "${run.caloriesBurned} kcal"
+            binding.homeLastDist.text = "${run.distanceInMeters / 1000f} km"
+            binding.homeLastTime.text = Utils().getTimeInWords(run.timeInMillis)
+            binding.homeLastRunDate.text = SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(run.timestamp)
+            binding.homeLastSpeed.text = "${run.avgSpeedInKMH} km/h"
             Glide.with(requireView())
-                .load(it[0].img)
+                .load(run.img)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.homeLastRunImage)
+
+            setUpDonutGraph(run.avgSpeedInKMH,(run.distanceInMeters.toFloat() / 1000f),(run.caloriesBurned.toFloat() / 10f))
+
         })
 
+        viewModel.sortedWeeklyRuns.observe(viewLifecycleOwner, Observer { runs ->
+
+            var calories = 0
+            var distance = 0F
+
+            for(run in runs){
+                calories += run.caloriesBurned
+                distance += run.distanceInMeters
+            }
+
+            distance /= 1000f
+
+            binding.homeCalories.text = "$calories kcal"
+            binding.homeDist.text = "$distance km"
+            binding.homeSteps.text = "${(distance * 1312).roundToInt()}"
+
+        })
+
+
+    }
+
+    // view last run donut graph
+    private fun setUpDonutGraph(speed: Float, distance: Float, calories: Float){
+//        val speed = DonutSection(
+//            name = "speed",
+//            color = Color.parseColor("#61D893"),
+//            amount = speed
+//        )
+//
+//        val distance = DonutSection(
+//            name = "distance",
+//            color = Color.parseColor("#E95B4D"),
+//            amount = distance
+//        )
+//
+//        val calories = DonutSection(
+//            name = "calories",
+//            color = Color.parseColor("#F9BE59"),
+//            amount = calories
+//        )
+//
+//        binding.donutView.animationDurationMs = 2000
+//        binding.donutView.submitData(listOf(speed, distance, calories))
+
+        val models: ArrayList<ArcProgressStackView.Model> = ArrayList()
+        models.add(ArcProgressStackView.Model("Circle", 25f,  Color.parseColor("#61D893"),  Color.parseColor("#61D893")))
+        models.add(ArcProgressStackView.Model("Progress", 50f,  Color.parseColor("#F9BE59"),  Color.parseColor("#F9BE59")))
+        models.add(ArcProgressStackView.Model("Stack", 75f, Color.parseColor("#F9BE59"), Color.parseColor("#F9BE59")))
+//        models.add(ArcProgressStackView.Model("View", 100f, bgColors.get(3), mStartColors.get(3)))
+        binding.arcGraph.models = models
     }
 
     // open other fragments
@@ -206,6 +240,17 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             }
 
         }
+    }
+
+    // set up recycler view
+    private fun setUpRecyclerView() {
+//        homeNewsAdapter = HomeNewsAdapter()
+//        binding.recyclerView.apply {
+//            adapter = homeNewsAdapter
+//            layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
+//        }
+//        homeNewsAdapter.makeList()
+//        homeNewsAdapter.notifyDataSetChanged()
     }
 
     // change fragment

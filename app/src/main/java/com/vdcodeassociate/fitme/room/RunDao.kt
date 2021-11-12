@@ -55,6 +55,10 @@ interface RunDao {
 
     // get last Item from db
     @Query("SELECT * FROM running_table ORDER BY timestamp DESC LIMIT 1")
-    fun getLastItem(): LiveData<List<Run>>
+    fun getLastItem(): LiveData<Run>
+
+    // get total calories for last week
+    @Query("SELECT COUNT() FROM running_table")
+    fun getLastWeekItems(): LiveData<Int>
 
 }

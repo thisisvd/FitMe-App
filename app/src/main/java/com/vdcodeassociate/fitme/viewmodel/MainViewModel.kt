@@ -17,7 +17,10 @@ class MainViewModel @Inject constructor(
     val repository: MainRepository
 ): ViewModel(){
 
+    // last Run
     val lastRun = repository.getLastItem()
+
+    val lastWeekItems = repository.getLastWeekItems()
 
     var sortType = SortsEnum.DATE
 
