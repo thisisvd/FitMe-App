@@ -15,6 +15,7 @@
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/drawable/dark_black_background.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/drawable/green_card_curve_background.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/drawable/green_card_round_background.xml" value="0.18020833333333333" />
+        <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/drawable/heart_round_curve_background.xml" value="0.2703125" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/drawable/ic_baseline_timer_24.xml" value="0.18020833333333333" />
@@ -33,7 +34,7 @@
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/drawable/yellow_card_curve_background.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/font/bookmanoldstyle.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/layout/activity_main.xml" value="0.16" />
-        <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/layout/fragment_home.xml" value="0.31729518855656696" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/layout/fragment_news.xml" value="0.16944444444444445" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/layout/fragment_news_all.xml" value="0.16" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/app/src/main/res/layout/fragment_news_diet.xml" value="0.16944444444444445" />

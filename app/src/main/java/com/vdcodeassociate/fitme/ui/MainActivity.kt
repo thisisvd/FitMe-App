@@ -11,11 +11,13 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.vdcodeassociate.fitme.R
@@ -23,6 +25,7 @@ import com.vdcodeassociate.fitme.constants.Constants.ACTION_SHOW_TRACKING_FRAGME
 import com.vdcodeassociate.fitme.databinding.ActivityMainBinding
 import com.vdcodeassociate.fitme.room.RunDao
 import com.vdcodeassociate.fitme.ui.fragments.NewsFragment
+import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
 import com.vdcodeassociate.runningtrackerapp.ui.Fragments.RunFragment
 import com.vdcodeassociate.runningtrackerapp.ui.Fragments.StatisticsFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +45,9 @@ class MainActivity : AppCompatActivity() {
 
     // drawer layout
     private lateinit var drawerLayout : DrawerLayout
+
+    // homeViewModel
+     val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

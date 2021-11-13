@@ -11,17 +11,6 @@ import java.util.concurrent.TimeUnit
 
 class Utils {
 
-    var vibrantLightColorList = arrayOf(
-        ColorDrawable(Color.parseColor("#ffeead")),
-        ColorDrawable(Color.parseColor("#93cfb3")),
-        ColorDrawable(Color.parseColor("#fd7a7a")),
-        ColorDrawable(Color.parseColor("#faca5f")),
-        ColorDrawable(Color.parseColor("#1ba798")),
-        ColorDrawable(Color.parseColor("#6aa9ae")),
-        ColorDrawable(Color.parseColor("#ffbf27")),
-        ColorDrawable(Color.parseColor("#d93947"))
-    )
-
     fun getTimeInWords(ms: Long): String{
         var milliseconds = ms
         val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
@@ -96,6 +85,22 @@ class Utils {
         val locale: Locale = Locale.getDefault()
         val country: String = locale.country
         return country.toLowerCase()
+    }
+
+    fun getMinutes(ms: Long): Int{
+        var milliseconds = ms
+        val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
+        milliseconds -= TimeUnit.HOURS.toMillis(hours)
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
+        milliseconds -= TimeUnit.MINUTES.toMillis(minutes)
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
+        if(hours != 0L){
+            return (hours*60).toInt()
+        }else if(minutes != 0L){
+            return minutes.toInt()
+        }else {
+            return 0
+        }
     }
 
 }

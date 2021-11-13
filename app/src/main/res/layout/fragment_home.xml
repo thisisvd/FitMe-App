@@ -473,6 +473,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/homeStats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -482,7 +483,6 @@
             android:layout_marginRight="10dp">
 
             <LinearLayout
-                android:id="@+id/homeStats1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/card_background_lite"
@@ -525,9 +525,9 @@
                         android:layout_height="40dp"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/curve_background"
+                        android:background="@drawable/heart_round_curve_background"
                         android:padding="10dp"
-                        android:src="@drawable/steps_icons8" />
+                        android:src="@drawable/white_heart_points_icons8" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -538,11 +538,10 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/homeSteps"
+                            android:id="@+id/homeWeeksHeartPts"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/allerta"
-                            android:text="5660"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -553,7 +552,7 @@
                             android:layout_below="@+id/homeSteps"
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/allerta"
-                            android:text="Total Steps"
+                            android:text="Heart Pts"
                             android:textColor="@color/black_normal_text"
                             android:textSize="10sp" />
 
@@ -574,7 +573,6 @@
                     android:orientation="horizontal">
 
                     <RelativeLayout
-                        android:id="@+id/homeStats2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -628,7 +626,6 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/homeStats3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -682,17 +679,86 @@
 
                 </LinearLayout>
 
-                <com.majorik.sparklinelibrary.SparkLineLayout
-                    android:id="@+id/sparkLine"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    app:s_line_thickness="4dp"
-                    app:s_split_left_color="#F9BE59"
-                    app:s_split_line="true"
-                    app:s_split_right_color="#E95B4D" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:background="@drawable/curve_background">
+
+                    <ImageView
+                        android:id="@+id/homeImgSteps1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/white_round_curve_background"
+                        android:padding="10dp"
+                        android:src="@drawable/steps_icons8" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/homeImgSteps1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/homeSteps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
+                            android:text="5660"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homeSteps"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/allerta"
+                            android:text="Total Steps"
+                            android:textColor="@color/black_normal_text"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <!--                <view-->
+<!--                    android:id="@+id/lineView1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    class="im.dacer.androidcharts.LineView"-->
+<!--                    android:background="@color/white"-->
+<!--                    />-->
+
+<!--                <org.eazegraph.lib.charts.ValueLineChart-->
+<!--                    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                    android:id="@+id/cubiclinechart"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    app:egUseCubic="true"-->
+<!--                    android:layout_weight="1"-->
+<!--                    app:egUseOverlapFill="true"-->
+<!--                    app:egCurveSmoothness="0.4"-->
+<!--                    app:egLegendHeight="20dp"-->
+<!--                    app:egShowStandardValue="true"/>-->
+
+<!--                <com.majorik.sparklinelibrary.SparkLineLayout-->
+<!--                    android:id="@+id/sparkLine"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@color/white"-->
+<!--                    app:s_line_thickness="4dp"-->
+<!--                    app:s_split_left_color="#F9BE59"-->
+<!--                    app:s_split_line="true"-->
+<!--                    app:s_split_right_color="#E95B4D" />-->
 
             </LinearLayout>
 
@@ -704,7 +770,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="13dp"
             android:background="@drawable/card_background"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="horizontal">
@@ -713,16 +780,16 @@
                 android:id="@+id/homeLastRunLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
+                android:layout_weight="5"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="99dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_margin="15dp"
                     android:layout_weight="1"
-                    android:layout_margin="15dp">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:id="@+id/LinearLayoutBB1"
@@ -768,7 +835,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/LinearLayoutBB1"
-
                         android:fontFamily="@font/allerta"
                         android:text="WEDNESDAY"
                         android:textColor="@color/black"
@@ -881,26 +947,21 @@
                 android:id="@+id/arcGraph"
                 android:layout_width="111dp"
                 android:layout_height="111dp"
-                app:apsv_rounded="true"
-                app:apsv_shadowed="true"
+                android:layout_margin="6dp"
+                app:apsv_rounded="false"
+                app:apsv_shadowed="false"
                 app:apsv_animated="true"
+                android:layout_weight="1"
                 app:apsv_dragged="true"
-                app:apsv_leveled="true"
+                app:apsv_leveled="false"
                 app:apsv_typeface="fonts/agency.ttf"
                 app:apsv_text_color="#fff"
-                app:apsv_shadow_distance="5dp"
-                app:apsv_shadow_angle="90"
-                app:apsv_shadow_radius="10dp"
-                app:apsv_shadow_color="#000"
                 app:apsv_animation_duration="1000"
                 app:apsv_interpolator="@android:anim/bounce_interpolator"
-                app:apsv_draw_width="75%"
-                app:apsv_model_offset="5dp"
+                app:apsv_draw_width="40%"
+                app:apsv_model_offset="-4dp"
                 app:apsv_model_bg_enabled="true"
-                app:apsv_start_angle="270"
-                app:apsv_sweep_angle="360"
                 app:apsv_indicator_orientation="vertical"
-                app:apsv_preview_colors="@array/default_preview"
                 app:apsv_preview_bg="#ccc"/>
 
 <!--            <app.futured.donut.DonutProgressView-->

@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.vdcodeassociate.fitme.ui.MainActivity
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
 import com.vdcodeassociate.fitme.viewmodel.MainViewModel
@@ -36,16 +37,20 @@ import kotlin.collections.ArrayList
 import devlight.io.library.ArcProgressStackView
 import java.lang.Math.round
 import kotlin.math.roundToInt
+import org.eazegraph.lib.models.ValueLinePoint
 
+import org.eazegraph.lib.models.ValueLineSeries
+import im.dacer.androidcharts.LineView
 
 @AndroidEntryPoint
-class HomeFragment: Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    //
+    // TAG
     private val TAG = "HomeFragment"
 
     // viewModel
-    private val viewModel: HomeViewModel by viewModels()
+//    private val viewModel: HomeViewModel by viewModels()
+    lateinit var viewModel: HomeViewModel
     private val viewModelRuns: MainViewModel by viewModels()
 
     // viewBinding
@@ -60,140 +65,151 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
+        // Home viewModel Implementation from activity
+        viewModel = (activity as MainActivity).viewModel
+
         binding.homeDate.apply {
             text = Utils().DateFormat(Timestamp(System.currentTimeMillis()).toString())
         }
 
-        // recycler view
-        setUpRecyclerView()
-
         // init viewModel
         viewModelsObservers()
 
-        // init change fragments
-        openOtherFragments()
+        binding.apply {
+            homeStats.setOnClickListener {
+                findNavController().navigate(R.id.statisticsFragment)
+            }
 
-        binding.homeLastRunLayout.setOnClickListener {
+            homeLastRunLayout.setOnClickListener {
+
+            }
         }
-
-//        // pieChart
-//        val pieChart = binding.homePieChart
-//        pieChart.addPieSlice(PieModel("Distance", 15F, Color.parseColor("#E75344")))
-//        pieChart.addPieSlice(PieModel("Time", 25F, Color.parseColor("#436DDD")))
-//        pieChart.addPieSlice(PieModel("Calories", 35F, Color.parseColor("#F8BD5B")))
-//        pieChart.addPieSlice(PieModel("Speed", 9F, Color.parseColor("#2BCD73")))
-//        pieChart.startAnimation()
 
         // barChart
         val barChart = binding.homeBarChart
-        barChart.addBar(BarModel("Sun",0.0f, -0xa9480f))
-        barChart.addBar(BarModel("Mon",0.0f, -0xa9480f))
-        barChart.addBar(BarModel("Tue",2f, -0xa9480f))
-        barChart.addBar(BarModel("Wed",2.7f, -0xa9480f))
-        barChart.addBar(BarModel("Thu",1f, -0xa9480f))
-        barChart.addBar(BarModel("Fri",0f, -0xa9480f))
-        barChart.addBar(BarModel("Sat",2f, -0xa9480f))
+        barChart.addBar(BarModel("Sun", 0.0f, -0xa9480f))
+        barChart.addBar(BarModel("Mon", 0.0f, -0xa9480f))
+        barChart.addBar(BarModel("Tue", 2f, -0xa9480f))
+        barChart.addBar(BarModel("Wed", 2.7f, -0xa9480f))
+        barChart.addBar(BarModel("Thu", 1f, -0xa9480f))
+        barChart.addBar(BarModel("Fri", 0f, -0xa9480f))
+        barChart.addBar(BarModel("Sat", 2f, -0xa9480f))
         barChart.startAnimation()
-
-
-        val sparkLine = binding.sparkLine
-        sparkLine.markerBorderColor = Color.parseColor("#fed32c")
-        sparkLine.sparkLineThickness = 4f
-        var aList = ArrayList<Int>()
-        aList.add(2)
-        aList.add(4)
-        aList.add(2)
-        aList.add(5)
-        aList.add(1)
-        sparkLine.setData(aList)
 
     }
 
     // viewModel observers
-    private fun viewModelsObservers(){
+    private fun viewModelsObservers() {
 
-        // weather viewModel Observer
-        viewModel.getWeatherUpdate.observe(viewLifecycleOwner, Observer { response ->
-            when (response) {
-                is Resource.Success -> {
+        viewModel.apply {
+
+            // weather viewModel Observer
+            getWeatherUpdate.observe(viewLifecycleOwner, Observer { response ->
+                when (response) {
+                    is Resource.Success -> {
 //                    binding.progress.visibility = View.GONE
 //                    binding.recyclerView.visibility = View.VISIBLE
-                    response.data?.let { weatherResponse ->
-                        binding.apply {
-                            weatherResponse.apply {
-                                current.apply {
-                                    weatherCelcius.text = temp_c.toString()
-                                    weatherStatus.text = condition.text
-                                    weatherCelciusFeelsLike.text = feelslike_c.toString()
-                                    weatherHumidity.text = humidity.toString()
-                                    weatherWind.text = wind_mph.toString()
-                                    weatherPressure.text = pressure_mb.toString()
-                                    Glide.with(root)
-                                        .load(URL("https:${condition.icon}"))
-                                        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
-                                        .transition(DrawableTransitionOptions.withCrossFade())
-                                        .into(weatherIcon)
+                        response.data?.let { weatherResponse ->
+                            binding.apply {
+                                weatherResponse.apply {
+                                    current.apply {
+                                        weatherCelcius.text = temp_c.toString()
+                                        weatherStatus.text = condition.text
+                                        weatherCelciusFeelsLike.text = feelslike_c.toString()
+                                        weatherHumidity.text = humidity.toString()
+                                        weatherWind.text = wind_mph.toString()
+                                        weatherPressure.text = pressure_mb.toString()
+                                        Glide.with(root)
+                                            .load(URL("https:${condition.icon}"))
+                                            .apply(
+                                                RequestOptions.diskCacheStrategyOf(
+                                                    DiskCacheStrategy.ALL
+                                                )
+                                            )
+                                            .transition(DrawableTransitionOptions.withCrossFade())
+                                            .into(weatherIcon)
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        Log.e(TAG, "AN error occurred : $message")
-                        binding.apply {
-                            weatherNumbers.visibility = View.GONE
-                            weatherCondition.visibility = View.GONE
-                            weatherNoLocation.visibility = View.VISIBLE
+                    is Resource.Error -> {
+                        response.message?.let { message ->
+                            Log.e(TAG, "AN error occurred : $message")
+                            binding.apply {
+                                weatherNumbers.visibility = View.GONE
+                                weatherCondition.visibility = View.GONE
+                                weatherNoLocation.visibility = View.VISIBLE
+                            }
                         }
                     }
-                }
-                is Resource.Loading -> {
+                    is Resource.Loading -> {
 //                    binding.progress.visibility = View.VISIBLE
 //                    binding.recyclerView.visibility = View.GONE
+                    }
                 }
-            }
-        })
+            })
+
+            // weekly runs viewModel
+            sortedWeeklyStats.observe(viewLifecycleOwner, Observer { stats ->
+
+                binding.homeCalories.text = "${stats.calories} kcal"
+                binding.homeDist.text = "${stats.distance} km"
+                binding.homeSteps.text = "${stats.steps}"
+                binding.homeWeeksHeartPts.text = "${stats.heartPoints}"
+
+            })
+        }
 
         // last run viewModel Observer
         viewModelRuns.lastRun.observe(viewLifecycleOwner, Observer { run ->
             binding.homeLastCalories.text = "${run.caloriesBurned} kcal"
             binding.homeLastDist.text = "${run.distanceInMeters / 1000f} km"
             binding.homeLastTime.text = Utils().getTimeInWords(run.timeInMillis)
-            binding.homeLastRunDate.text = SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(run.timestamp)
+            binding.homeLastRunDate.text =
+                SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(run.timestamp)
             binding.homeLastSpeed.text = "${run.avgSpeedInKMH} km/h"
             Glide.with(requireView())
                 .load(run.img)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.homeLastRunImage)
 
-            setUpDonutGraph(run.avgSpeedInKMH,(run.distanceInMeters.toFloat() / 1000f),(run.caloriesBurned.toFloat() / 10f))
+            setUpLastRun(77f, 80f)
 
         })
 
-        viewModel.sortedWeeklyRuns.observe(viewLifecycleOwner, Observer { runs ->
+    }
 
-            var calories = 0
-            var distance = 0F
+    // set Up Spark Graph
+    private fun setUpSparkGraph(calories: List<Int>, distance: List<Int>) {
 
-            for(run in runs){
-                calories += run.caloriesBurned
-                distance += run.distanceInMeters
-            }
+    }
 
-            distance /= 1000f
-
-            binding.homeCalories.text = "$calories kcal"
-            binding.homeDist.text = "$distance km"
-            binding.homeSteps.text = "${(distance * 1312).roundToInt()}"
-
-        })
-
+    private fun setUpLastRun(distance: Float, calories: Float) {
+        val models: ArrayList<ArcProgressStackView.Model> = ArrayList()
+        models.add(
+            ArcProgressStackView.Model(
+                "Distance",
+                distance,
+                Color.parseColor("#E9EAEA"),
+                Color.parseColor("#EE7D72")
+            )
+        )
+        models.add(
+            ArcProgressStackView.Model(
+                "Calories",
+                calories,
+                Color.parseColor("#E9EAEA"),
+                Color.parseColor("#F9BE59")
+            )
+        )
+        binding.arcGraph.models = models
+        binding.arcGraph.animate()
 
     }
 
     // view last run donut graph
-    private fun setUpDonutGraph(speed: Float, distance: Float, calories: Float){
+    private fun setUpDonutGraph(speed: Float, distance: Float, calories: Float) {
 //        val speed = DonutSection(
 //            name = "speed",
 //            color = Color.parseColor("#61D893"),
@@ -215,47 +231,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 //        binding.donutView.animationDurationMs = 2000
 //        binding.donutView.submitData(listOf(speed, distance, calories))
 
-        val models: ArrayList<ArcProgressStackView.Model> = ArrayList()
-        models.add(ArcProgressStackView.Model("Circle", 25f,  Color.parseColor("#61D893"),  Color.parseColor("#61D893")))
-        models.add(ArcProgressStackView.Model("Progress", 50f,  Color.parseColor("#F9BE59"),  Color.parseColor("#F9BE59")))
-        models.add(ArcProgressStackView.Model("Stack", 75f, Color.parseColor("#F9BE59"), Color.parseColor("#F9BE59")))
-//        models.add(ArcProgressStackView.Model("View", 100f, bgColors.get(3), mStartColors.get(3)))
-        binding.arcGraph.models = models
-    }
-
-    // open other fragments
-    private fun openOtherFragments(){
-        binding.apply {
-
-            homeStats1.setOnClickListener {
-                changeFragment()
-            }
-
-            homeStats2.setOnClickListener {
-                changeFragment()
-            }
-
-            homeStats3.setOnClickListener {
-                changeFragment()
-            }
-
-        }
-    }
-
-    // set up recycler view
-    private fun setUpRecyclerView() {
-//        homeNewsAdapter = HomeNewsAdapter()
-//        binding.recyclerView.apply {
-//            adapter = homeNewsAdapter
-//            layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
-//        }
-//        homeNewsAdapter.makeList()
-//        homeNewsAdapter.notifyDataSetChanged()
-    }
-
-    // change fragment
-    private fun changeFragment(){
-        findNavController().navigate(R.id.statisticsFragment)
     }
 
     // onPrepareOptionsMenu for Circle layout profile menu
@@ -270,9 +245,9 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     // option selector for Circle layout profile menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.profileFragmentIcon -> {
-                Toast.makeText(requireContext(),"Profile Icon", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Profile Icon", Toast.LENGTH_SHORT).show()
                 true
             }
         }
