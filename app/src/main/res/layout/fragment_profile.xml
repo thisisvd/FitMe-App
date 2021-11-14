@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/nav_profile_image"
@@ -35,8 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="35dp"
                     android:gravity="center"
+                    android:layout_margin="10dp"
                     android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView
@@ -186,6 +186,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/card_background"
             android:orientation="vertical">
@@ -196,7 +197,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/allerta"
-                android:text="All Days Stats -"
+                android:text="Heart Points -"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -205,8 +206,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="3">
@@ -214,7 +215,8 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:gravity="center">
 
                     <ImageView
                         android:id="@+id/profileImgDistance"
@@ -222,9 +224,9 @@
                         android:layout_height="40dp"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/red_curve_background"
+                        android:background="@drawable/heart_round_curve_background"
                         android:padding="10dp"
-                        android:src="@drawable/distance_icons8" />
+                        android:src="@drawable/white_heart_points_icons8" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -235,11 +237,10 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/profileDist"
+                            android:id="@+id/profileHeartPts"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/allerta"
-                            android:text="101 km"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -249,7 +250,7 @@
                             android:layout_below="@+id/homeSteps"
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/allerta"
-                            android:text="Distance"
+                            android:text="Total Heart Points"
                             android:textColor="@color/black_normal_text"
                             android:textSize="10sp" />
 
@@ -260,7 +261,9 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp">
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
 
                     <ImageView
                         android:id="@+id/profileImgCalories"
@@ -286,7 +289,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/allerta"
-                            android:text="220"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -304,382 +306,75 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/allerta"
+                android:text="Set Daily Goal -"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_marginBottom="10dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profileStepsGoalLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:errorEnabled="true"
+                    android:layout_weight="1"
+                    app:errorTextColor="#B1001A"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
 
-                    <ImageView
-                        android:id="@+id/profileImgPace"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/green_card_round_background"
-                        android:padding="10dp"
-                        android:src="@drawable/speed_icons8" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/profileStepsGoal"
+                        android:layout_width="match_parent"
+                        android:drawablePadding="10dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/profileImgPace"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:hint="Steps"
+                        android:textSize="15sp"
+                        android:ems="10"
+                        android:inputType="number"/>
 
-                        <TextView
-                            android:id="@+id/profilePace"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/allerta"
-                            android:text="10 km/h"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/homeSteps"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/allerta"
-                            android:text="Pace"
-                            android:textColor="@color/black_normal_text"
-                            android:textSize="10sp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profileDistanceGoalLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:errorEnabled="true"
+                    android:layout_weight="1"
+                    app:errorTextColor="#B1001A"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/signinTextView2"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
 
-                    </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/profileDistanceGoal"
+                        android:layout_width="match_parent"
+                        android:drawablePadding="10dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Distance"
+                        android:textSize="15sp"
+                        android:ems="10"
+                        android:inputType="number"/>
 
-                </RelativeLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
-            <view
-                android:id="@+id/lineView"
-                class="im.dacer.androidcharts.LineView"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"/>
-
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/card_background"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/profileItemsIcon2"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/save_icons8" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/profileItems2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_toRightOf="@+id/profileItemsIcon2"
-                    android:maxLines="1"
-                    android:text="Saved Articles"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/profileItemsForward2"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:transitionName="transaction_image" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="9dp"
-                android:layout_marginRight="9dp"
-                android:background="@color/card_back_light" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/profileItemsIcon3"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/task_icons8" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/profileItems3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_toRightOf="@+id/profileItemsIcon3"
-                    android:maxLines="1"
-                    android:text="Scheduled Runs"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/profileItemsForward3"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:transitionName="transaction_image" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="9dp"
-                android:layout_marginRight="9dp"
-                android:background="@color/card_back_light" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/profileItemsIcon4"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/invite_friends_icons8"
-                    android:transitionName="transaction_image" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/profileItems4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_toRightOf="@+id/profileItemsIcon4"
-                    android:maxLines="1"
-                    android:text="Invite Friends"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/profileItemsForward4"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:transitionName="transaction_image" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="9dp"
-                android:layout_marginRight="9dp"
-                android:background="@color/card_back_light" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/profileItemsIcon5"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/get_help_icons8" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/profileItems5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_toRightOf="@+id/profileItemsIcon5"
-                    android:maxLines="1"
-                    android:text="Get Help!"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/profileItemsForward5"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:transitionName="transaction_image" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="9dp"
-                android:layout_marginRight="9dp"
-                android:background="@color/card_back_light" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/profileItemsIcon6"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/feedback_icons8" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/profileItems"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_toRightOf="@+id/profileItemsIcon6"
-                    android:maxLines="1"
-                    android:text="Give us Feedback"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/profileItemsForward6"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:transitionName="transaction_image" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="9dp"
-                android:layout_marginRight="9dp"
-                android:background="@color/card_back_light" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/profileItemsIcon7"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/aboutus_icons8" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/profileItems7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_toRightOf="@+id/profileItemsIcon7"
-                    android:maxLines="1"
-                    android:text="About us!"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/profileItemsForward7"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:transitionName="transaction_image" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="9dp"
-                android:layout_marginRight="9dp"
-                android:background="@color/card_back_light" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/profileItemsIcon8"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/logout_icons8" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/profileItems8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_toRightOf="@+id/profileItemsIcon8"
-                    android:maxLines="1"
-                    android:text="Logout!"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/profileItemsForward8"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:transitionName="transaction_image" />
-
-            </RelativeLayout>
-
-            <!--        <androidx.recyclerview.widget.RecyclerView-->
-            <!--            android:id="@+id/profileRecyclerView"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="match_parent"-->
-            <!--            android:layout_marginTop="10dp"-->
-            <!--            android:background="@drawable/card_background"-->
-            <!--            android:padding="8dp" />-->
-
-        </LinearLayout>
 
     </LinearLayout>
 

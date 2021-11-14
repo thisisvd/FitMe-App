@@ -8,6 +8,11 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import android.content.Intent
+import androidx.core.content.ContextCompat
+
+import androidx.core.content.ContextCompat.startActivity
+import okhttp3.internal.format
 
 class Utils {
 
@@ -81,7 +86,7 @@ class Utils {
         return newDate
     }
 
-    fun getCountry(): String? {
+    private fun getCountry(): String? {
         val locale: Locale = Locale.getDefault()
         val country: String = locale.country
         return country.toLowerCase()
@@ -94,12 +99,37 @@ class Utils {
         val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
         milliseconds -= TimeUnit.MINUTES.toMillis(minutes)
         val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
-        if(hours != 0L){
-            return (hours*60).toInt()
-        }else if(minutes != 0L){
-            return minutes.toInt()
-        }else {
-            return 0
+        return when {
+            hours != 0L -> {
+                (hours*60).toInt()
+            }
+            minutes != 0L -> {
+                minutes.toInt()
+            }
+            else -> {
+                0
+            }
+        }
+    }
+
+    // morning - afternoon - evening
+    fun timeRunName(time: Long): String {
+        val timeFormat = SimpleDateFormat("H")
+
+        // solve
+        return when (timeFormat.format(time).toInt()) {
+            in 4..11 -> {
+                "Morning Run"
+            }
+            in 12..16 -> {
+                "Afternoon Run"
+            }
+            in 17..21 -> {
+                "Evening Run"
+            }
+            else -> {
+                "Night walk"
+            }
         }
     }
 

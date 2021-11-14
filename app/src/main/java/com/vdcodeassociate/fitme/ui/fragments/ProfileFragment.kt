@@ -1,41 +1,33 @@
 package com.vdcodeassociate.runningtrackerapp.ui.Fragments
 
+import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayoutMediator
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.vdcodeassociate.fitme.R
-import com.vdcodeassociate.fitme.adapters.ProfileAdapter
-import com.vdcodeassociate.fitme.adapters.ProfileFragmentAdapter
-import com.vdcodeassociate.fitme.adapters.RunAdapter
-import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
-import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
 import com.vdcodeassociate.fitme.databinding.FragmentProfileBinding
-import com.vdcodeassociate.fitme.model.profilemodel.ProfileItemsClass
+import com.vdcodeassociate.fitme.viewmodel.StatisticsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import im.dacer.androidcharts.LineView
-
-
-
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile){
 
+    // viewBinding
     private lateinit var binding: FragmentProfileBinding
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    // adapter
-    private lateinit var profileAdapter: ProfileAdapter
+    // viewModel
+    private val viewModelStatistics: StatisticsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,59 +38,39 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
 
-//        setupRecyclerView()
+        viewModelObservers()
 
-        val list = ArrayList<ProfileItemsClass>()
-        list.add(ProfileItemsClass(R.drawable.save_icons8,"Saved Articles"))
-        list.add(ProfileItemsClass(R.drawable.task_icons8,"Scheduled Runs"))
-        list.add(ProfileItemsClass(R.drawable.invite_friends_icons8,"Invite Friends"))
-        list.add(ProfileItemsClass(R.drawable.get_help_icons8,"Get Help!"))
-        list.add(ProfileItemsClass(R.drawable.feedback_icons8,"Give us Feedback"))
-        list.add(ProfileItemsClass(R.drawable.aboutus_icons8,"About us!"))
-        list.add(ProfileItemsClass(R.drawable.logout_icons8,"Logout!"))
+        binding.apply {
 
-        val lineView = view.findViewById<LineView>(R.id.lineView)
-        lineView.setDrawDotLine(false) //optional
 
-        lineView.setShowPopup(LineView.SHOW_POPUPS_MAXMIN_ONLY) //optional
 
-        val arrayList = ArrayList<String>()//Creating an empty arraylist
-        arrayList.add("Ajay")//Adding object in arraylist
-        arrayList.add("Vijay")
-        arrayList.add("Prakash")
-        arrayList.add("Rohan")
-        arrayList.add("Vijay")
-
-        lineView.setBottomTextList(arrayList)
-        lineView.setColorArray(intArrayOf(Color.BLACK, Color.GREEN, Color.GRAY, Color.CYAN))
-
-        var datalist = java.util.ArrayList<java.util.ArrayList<Int>>()
-
-        var arraylistInt = java.util.ArrayList<Int>(3)
-        arraylistInt.add(2)
-        arraylistInt.add(3)
-        arraylistInt.add(3)
-        datalist.add(arraylistInt)
-        arraylistInt = java.util.ArrayList<Int>(3)
-        arraylistInt.add(1)
-        arraylistInt.add(4)
-        arraylistInt.add(2)
-        datalist.add(arraylistInt)
-
-        lineView.setDataList(datalist) // or lineView.setFloatDataList(floatDataLists)
+        }
 
     }
 
-//    // Recycler view setup
-//    private fun setupRecyclerView(){
-//        profileAdapter = ProfileAdapter()
-//        binding.profileRecyclerView.apply {
-//            adapter = profileAdapter
-//            layoutManager = LinearLayoutManager(requireContext())
-//            // decorator line
-//            addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
-//        }
-//    }
+    private fun viewModelObservers(){
+
+        binding.apply {
+            viewModelStatistics.apply {
+                totalCaloriesBurned.observe(viewLifecycleOwner, Observer {
+                    profileCalories.text = "$it kcal"
+                })
+                heartPoints.observe(viewLifecycleOwner, Observer {
+                    profileHeartPts.text = it.toString()
+                })
+            }
+        }
+    }
+
+    // invite Friend
+    private fun inviteFriend(){
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = "text/plain"
+        val shareBody = "Download this app - FitMe 2021"
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+        startActivity(sharingIntent)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.profile_menu, menu)

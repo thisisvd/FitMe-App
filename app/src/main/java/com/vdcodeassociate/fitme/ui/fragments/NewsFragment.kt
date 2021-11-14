@@ -3,6 +3,7 @@ package com.vdcodeassociate.fitme.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -35,6 +36,9 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNewsBinding.bind(view)
 
+        // get args
+        val getArgs = arguments?.getInt("amount")
+
         // init recyclerView
         setUpRecyclerView()
 
@@ -42,11 +46,13 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
         binding.apply {
 
             // Adding news tabs
-            newsTabLayout.addTab(newsTabLayout.newTab().setText("ALL"))
             newsTabLayout.addTab(newsTabLayout.newTab().setText("TIPS"))
             newsTabLayout.addTab(newsTabLayout.newTab().setText("DIET"))
-            newsTabLayout.addTab(newsTabLayout.newTab().setText("EXERCISE"))
-            newsTabLayout.addTab(newsTabLayout.newTab().setText("MEDITATION"))
+            newsTabLayout.addTab(newsTabLayout.newTab().setText("EXERCISE & MEDITATION"))
+
+            if(getArgs != null) {
+                newsTabLayout.getTabAt(getArgs.toInt())?.select()
+            }
 
             // on tab select listener
             newsTabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
@@ -58,12 +64,12 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
                     when(tab?.position) {
                         1 -> queryPosition = 1
                         2 -> queryPosition = 2
-                        3 -> queryPosition = 3
-                        4 -> queryPosition = 4
                     }
 
+                    viewModel.isDataAdded = false
+
                     viewModel.tabLatestNews(queryPosition)
-//                    binding.recyclerView.visibility = View.GONE
+                    binding.recyclerView.visibility = View.GONE
                     newsAdapter.notifyDataSetChanged()
 
                 }
@@ -77,6 +83,11 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
                 }
 
             })
+
+            // on click listener
+            backNews.setOnClickListener {
+                requireActivity().onBackPressed()
+            }
         }
 
         viewModelObserver()
@@ -89,10 +100,13 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
         viewModel.getLatestNews.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
-//                    binding.progress.visibility = View.GONE
-//                    binding.recyclerView.visibility = View.VISIBLE
                     response.data?.let { newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.articles)
+                        newsAdapter.notifyDataSetChanged()
+                        if (viewModel.isDataAdded) {
+                            binding.progress.visibility = View.GONE
+                            binding.recyclerView.visibility = View.VISIBLE
+                        }
                     }
                 }
                 is Resource.Error -> {
@@ -101,8 +115,8 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
                     }
                 }
                 is Resource.Loading -> {
-//                    binding.progress.visibility = View.VISIBLE
-//                    binding.recyclerView.visibility = View.GONE
+                    binding.progress.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
                 }
             }
         })

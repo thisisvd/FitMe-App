@@ -60,10 +60,13 @@ class HomeViewModel @Inject constructor(
         var distance = 0F
         var steps = 0
         var heartPoints = 0
-        // show week stats
+
+        // calender set up 6 days ago value in timestamp
         val cal = Calendar.getInstance()
         cal.add(Calendar.DAY_OF_YEAR, -6)
         val sixDaysAgo = cal.timeInMillis
+
+        // show week stats
         sortedWeeklyStats.addSource(runSortedByDate) { runs ->
             for (run in runs) {
                 if (run.timestamp > sixDaysAgo) {

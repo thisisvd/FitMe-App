@@ -938,42 +938,15 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="100dp"
-                android:background="#4D484A49" />
-
-            <devlight.io.library.ArcProgressStackView
-                android:id="@+id/arcGraph"
+            <app.futured.donut.DonutProgressView
+                android:id="@+id/donut_view"
                 android:layout_width="111dp"
                 android:layout_height="111dp"
-                android:layout_margin="6dp"
-                app:apsv_rounded="false"
-                app:apsv_shadowed="false"
-                app:apsv_animated="true"
-                android:layout_weight="1"
-                app:apsv_dragged="true"
-                app:apsv_leveled="false"
-                app:apsv_typeface="fonts/agency.ttf"
-                app:apsv_text_color="#fff"
-                app:apsv_animation_duration="1000"
-                app:apsv_interpolator="@android:anim/bounce_interpolator"
-                app:apsv_draw_width="40%"
-                app:apsv_model_offset="-4dp"
-                app:apsv_model_bg_enabled="true"
-                app:apsv_indicator_orientation="vertical"
-                app:apsv_preview_bg="#ccc"/>
-
-<!--            <app.futured.donut.DonutProgressView-->
-<!--                android:id="@+id/donut_view"-->
-<!--                android:layout_width="111dp"-->
-<!--                android:layout_height="111dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:padding="10dp"-->
-<!--                app:donut_bgLineColor="@color/white"-->
-<!--                app:donut_gapAngle="90"-->
-<!--                app:donut_gapWidth="50"-->
-<!--                app:donut_strokeWidth="10dp" />-->
+                android:padding="10dp"
+                app:donut_bgLineColor="@color/white"
+                app:donut_gapAngle="90"
+                app:donut_gapWidth="100"
+                app:donut_strokeWidth="10dp" />
 
             <!--            <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"-->
             <!--                android:id="@+id/homePieChart"-->
@@ -1128,13 +1101,24 @@
 
         </RelativeLayout>
 
-        <org.eazegraph.lib.charts.BarChart xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/homeBarChart"
-            android:layout_width="match_parent"
-            android:layout_height="256dp"
-            app:egBarWidth="20dp"
-            app:egFixedBarWidth="true"
-            app:egLegendHeight="40dp" />
+<!--        <app.futured.donut.DonutProgressView-->
+<!--            android:id="@+id/donut_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="256dp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:padding="10dp"-->
+<!--            app:donut_bgLineColor="@color/white"-->
+<!--            app:donut_gapAngle="90"-->
+<!--            app:donut_gapWidth="50"-->
+<!--            app:donut_strokeWidth="10dp" />-->
+
+<!--        <org.eazegraph.lib.charts.BarChart xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--            android:id="@+id/homeBarChart"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="256dp"-->
+<!--            app:egBarWidth="20dp"-->
+<!--            app:egFixedBarWidth="true"-->
+<!--            app:egLegendHeight="40dp" />-->
 
     </LinearLayout>
 

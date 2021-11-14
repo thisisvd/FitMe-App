@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
                 when(destination.id){
                     R.id.profileFragment, R.id.runFragment, R.id.statisticsFragment,
-                    R.id.homeFragment2 ->{
+                    R.id.homeFragment2,R.id.setupFragment ->{
                         binding.bottomNavigationView.visibility = View.VISIBLE
                         binding.toolbar.visibility = View.VISIBLE
                     }
@@ -140,10 +140,10 @@ class MainActivity : AppCompatActivity() {
 
             when(item.itemId) {
                 R.id.homeFragment2 -> {
-                    Toast.makeText(applicationContext, "Home Fragments!", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.runFragment -> {
+                    navHostFragment.findNavController().navigate(R.id.setupFragment)
                     Toast.makeText(applicationContext, "Run Fragments!", Toast.LENGTH_SHORT).show()
                     true
                 }
@@ -169,10 +169,6 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.schedulesItems -> {
                 Toast.makeText(this,"Schedule Icon",Toast.LENGTH_SHORT).show()
-                true
-            }
-            R.id.logoutProfile -> {
-                Toast.makeText(this,"Logging out!",Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.editProfile -> {

@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import app.futured.donut.DonutSection
 import com.vdcodeassociate.fitme.R
@@ -75,6 +76,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         // init viewModel
         viewModelsObservers()
 
+        setUpDonutGraph(10f,20f,15f)
+
         binding.apply {
             homeStats.setOnClickListener {
                 findNavController().navigate(R.id.statisticsFragment)
@@ -83,18 +86,34 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             homeLastRunLayout.setOnClickListener {
 
             }
+
+            // fitness articles -
+            homeNewsButton1.setOnClickListener {
+                findNavController().navigate(R.id.newsFragment)
+            }
+
+            homeNewsButton2.setOnClickListener {
+                val bundle = bundleOf("amount" to 2)
+                findNavController().navigate(R.id.newsFragment,bundle)
+            }
+
+            homeNewsButton3.setOnClickListener {
+                val bundle = bundleOf("amount" to 1)
+                findNavController().navigate(R.id.newsFragment,bundle)
+            }
+
         }
 
         // barChart
-        val barChart = binding.homeBarChart
-        barChart.addBar(BarModel("Sun", 0.0f, -0xa9480f))
-        barChart.addBar(BarModel("Mon", 0.0f, -0xa9480f))
-        barChart.addBar(BarModel("Tue", 2f, -0xa9480f))
-        barChart.addBar(BarModel("Wed", 2.7f, -0xa9480f))
-        barChart.addBar(BarModel("Thu", 1f, -0xa9480f))
-        barChart.addBar(BarModel("Fri", 0f, -0xa9480f))
-        barChart.addBar(BarModel("Sat", 2f, -0xa9480f))
-        barChart.startAnimation()
+//        val barChart = binding.homeBarChart
+//        barChart.addBar(BarModel("Sun", 0.0f, -0xa9480f))
+//        barChart.addBar(BarModel("Mon", 0.0f, -0xa9480f))
+//        barChart.addBar(BarModel("Tue", 2f, -0xa9480f))
+//        barChart.addBar(BarModel("Wed", 2.7f, -0xa9480f))
+//        barChart.addBar(BarModel("Thu", 1f, -0xa9480f))
+//        barChart.addBar(BarModel("Fri", 0f, -0xa9480f))
+//        barChart.addBar(BarModel("Sat", 2f, -0xa9480f))
+//        barChart.startAnimation()
 
     }
 
@@ -174,7 +193,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.homeLastRunImage)
 
-            setUpLastRun(77f, 80f)
+//            setUpLastRun(77f, 80f)
 
         })
 
@@ -185,51 +204,51 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    private fun setUpLastRun(distance: Float, calories: Float) {
-        val models: ArrayList<ArcProgressStackView.Model> = ArrayList()
-        models.add(
-            ArcProgressStackView.Model(
-                "Distance",
-                distance,
-                Color.parseColor("#E9EAEA"),
-                Color.parseColor("#EE7D72")
-            )
-        )
-        models.add(
-            ArcProgressStackView.Model(
-                "Calories",
-                calories,
-                Color.parseColor("#E9EAEA"),
-                Color.parseColor("#F9BE59")
-            )
-        )
-        binding.arcGraph.models = models
-        binding.arcGraph.animate()
-
-    }
+//    private fun setUpLastRun(distance: Float, calories: Float) {
+//        val models: ArrayList<ArcProgressStackView.Model> = ArrayList()
+//        models.add(
+//            ArcProgressStackView.Model(
+//                "Distance",
+//                distance,
+//                Color.parseColor("#E9EAEA"),
+//                Color.parseColor("#EE7D72")
+//            )
+//        )
+//        models.add(
+//            ArcProgressStackView.Model(
+//                "Calories",
+//                calories,
+//                Color.parseColor("#E9EAEA"),
+//                Color.parseColor("#F9BE59")
+//            )
+//        )
+//        binding.arcGraph.models = models
+//        binding.arcGraph.animate()
+//
+//    }
 
     // view last run donut graph
-    private fun setUpDonutGraph(speed: Float, distance: Float, calories: Float) {
-//        val speed = DonutSection(
-//            name = "speed",
-//            color = Color.parseColor("#61D893"),
-//            amount = speed
-//        )
-//
-//        val distance = DonutSection(
-//            name = "distance",
-//            color = Color.parseColor("#E95B4D"),
-//            amount = distance
-//        )
-//
-//        val calories = DonutSection(
-//            name = "calories",
-//            color = Color.parseColor("#F9BE59"),
-//            amount = calories
-//        )
-//
-//        binding.donutView.animationDurationMs = 2000
-//        binding.donutView.submitData(listOf(speed, distance, calories))
+    private fun setUpDonutGraph(steps: Float, distance: Float, total: Float) {
+        val steps = DonutSection(
+            name = "steps",
+            color = Color.parseColor("#61D893"),
+            amount = steps
+        )
+
+        val distance = DonutSection(
+            name = "distance",
+            color = Color.parseColor("#E95B4D"),
+            amount = distance
+        )
+
+        val total = DonutSection(
+            name = "calories",
+            color = Color.parseColor("#F0F0F0"),
+            amount = total
+        )
+
+        binding.donutView.animationDurationMs = 2000
+        binding.donutView.submitData(listOf(steps, distance, total))
 
     }
 

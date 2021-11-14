@@ -7,7 +7,10 @@ import androidx.room.Room
 import androidx.viewbinding.BuildConfig
 import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.BASE_URL
+import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_FIRST_TIME_TOGGLE
+import com.vdcodeassociate.fitme.constants.Constants.KEY_GENDER
+import com.vdcodeassociate.fitme.constants.Constants.KEY_HEIGHT
 import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
 import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
 import com.vdcodeassociate.fitme.constants.Constants.RUNNING_DATABASE_NAME
@@ -42,6 +45,7 @@ object AppModule {
     // only single instance of that particular class will be available throughout
     // the application and will be passed whenever and wherever needed as a dependency.
 
+    // Room database
     @Singleton
     @Provides
     fun provideRunningDatabase(
@@ -56,6 +60,7 @@ object AppModule {
     @Provides
     fun provideRunDao(db: RunDatabase) = db.getRunDao()
 
+    // Shared Preferences Database
     @Singleton
     @Provides
     fun provideSharedPreferences(@ApplicationContext app: Context) =
@@ -64,6 +69,18 @@ object AppModule {
     @Singleton
     @Provides
     fun providesName(sharedPreference: SharedPreferences) = sharedPreference.getString((KEY_NAME),"") ?: ""
+
+    @Singleton
+    @Provides
+    fun providesAge(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_AGE),18)
+
+    @Singleton
+    @Provides
+    fun providesGender(sharedPreference: SharedPreferences) = sharedPreference.getString((KEY_GENDER),"") ?: ""
+
+    @Singleton
+    @Provides
+    fun providesHeight(sharedPreference: SharedPreferences) = sharedPreference.getFloat((KEY_HEIGHT),173f)
 
     @Singleton
     @Provides

@@ -23,7 +23,6 @@ import org.eazegraph.lib.models.StackedBarModel
 class StatisticsFragment : Fragment(R.layout.fragment_statistics){
 
     // viewModels
-
     private val viewModelStatistics: StatisticsViewModel by viewModels()
     private val viewModelRuns: MainViewModel by viewModels()
 

@@ -18,6 +18,8 @@ class NewsViewModel @Inject constructor(
     private val repository: MainRepository
 ): ViewModel() {
 
+    var isDataAdded = false
+
     private val latestNews = MutableLiveData<Resource<ResponseModel>>()
 
     val getLatestNews: LiveData<Resource<ResponseModel>> get() = latestNews
@@ -30,7 +32,7 @@ class NewsViewModel @Inject constructor(
         latestNews.postValue(Resource.Loading())
         val response = repository.getLatestNews(query)
         latestNews.postValue(handleLatestNewsResponse(response))
-
+        isDataAdded = true
     }
 
     // handle Response for LatestNews()
@@ -45,14 +47,12 @@ class NewsViewModel @Inject constructor(
 
     fun tabLatestNews(tabValue: Int){
         // local variable
-        var query = "fitness"
+        var query = "fitness tips"
 
         // select query wrt to selected tab
         when(tabValue) {
-            1 -> query = "fitness tips"
-            2 -> query = "diet"
-            3 -> query = "exercise"
-            4 -> query = "meditation"
+            1 -> query = "diet"
+            2 -> query = "meditation"
         }
 
         getLatestNews(query)

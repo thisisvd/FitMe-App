@@ -5,7 +5,4 @@
     <item android:id="@+id/editProfile"
         android:title="Edit Profile" />
 
-    <item android:id="@+id/logoutProfile"
-        android:title="Logout" />
-
 </menu>

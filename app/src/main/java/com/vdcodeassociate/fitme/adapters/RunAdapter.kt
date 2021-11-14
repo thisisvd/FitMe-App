@@ -9,12 +9,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.util.Util
 import com.vdcodeassociate.fitme.databinding.ItemRunBinding
 import com.vdcodeassociate.fitme.room.Run
 import com.vdcodeassociate.fitme.utils.TrackingUtility
 import com.vdcodeassociate.fitme.utils.Utils
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
@@ -53,11 +55,6 @@ class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
             tvDate.text = Utils().DateFormatRuns(run,true)
 
-            // show week stats
-            val cal = Calendar.getInstance()
-            cal.add(Calendar.DAY_OF_YEAR, -6)
-            val fiveDaysAgo = cal.timeInMillis
-
             val avgSpeed = "${run.avgSpeedInKMH} km/h"
             tvAvgSpeed.text = avgSpeed
 
@@ -68,6 +65,15 @@ class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
             val caloriesBurned = "${run.caloriesBurned} kcal"
             tvCalories.text = caloriesBurned
+
+            // top time run
+            var format = SimpleDateFormat("hh:mm a")
+            var startTime = format.format(run.timestamp)
+            runCurrentTime.text = startTime
+
+            runTimeStats.text = Utils().timeRunName(run.timestamp)
+
+            tvSteps.text = ((run.distanceInMeters/1000f) * 1312).roundToInt().toString()
 
             runWeatherStatus.text = run.weatherStatus
             runWeatherCelcius.text = "${run.weatherCelsius} \u00B0C"
