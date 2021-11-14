@@ -182,18 +182,28 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         // last run viewModel Observer
         viewModelRuns.lastRun.observe(viewLifecycleOwner, Observer { run ->
-            binding.homeLastCalories.text = "${run.caloriesBurned} kcal"
-            binding.homeLastDist.text = "${run.distanceInMeters / 1000f} km"
-            binding.homeLastTime.text = Utils().getTimeInWords(run.timeInMillis)
-            binding.homeLastRunDate.text =
-                SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(run.timestamp)
-            binding.homeLastSpeed.text = "${run.avgSpeedInKMH} km/h"
-            Glide.with(requireView())
-                .load(run.img)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.homeLastRunImage)
+            binding.apply {
+                if (run == null) {
+                    homeLastRunLayout.visibility = View.GONE
+                    donutView.visibility = View.GONE
+                    homeNoLastRun.visibility = View.VISIBLE
+                } else {
+                    homeNoLastRun.visibility = View.GONE
+                    binding.homeLastCalories.text = "${run.caloriesBurned} kcal"
+                    binding.homeLastDist.text = "${run.distanceInMeters / 1000f} km"
+                    binding.homeLastTime.text = Utils().getTimeInWords(run.timeInMillis)
+                    binding.homeLastRunDate.text =
+                        SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(run.timestamp)
+                    binding.homeLastSpeed.text = "${run.avgSpeedInKMH} km/h"
+                    Glide.with(requireView())
+                        .load(run.img)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(binding.homeLastRunImage)
 
-//            setUpLastRun(77f, 80f)
+//                setUpLastRun(77f, 80f)
+
+                }
+            }
 
         })
 

@@ -14,8 +14,8 @@
         android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.SetupFragment"
         android:label="SetupFragment" >
         <action
-            android:id="@+id/action_setupFragment_to_runFragment"
-            app:destination="@id/runFragment" />
+            android:id="@+id/action_setupFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
     </fragment>
     <fragment
         android:id="@+id/runFragment"

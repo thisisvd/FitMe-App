@@ -124,7 +124,12 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -182,6 +187,8 @@
                                 android:textStyle="bold" />
 
                         </LinearLayout>
+
+                    </LinearLayout>
 
                     </LinearLayout>
 
@@ -432,7 +439,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_margin="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/light_orange_card_curve_background"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -441,6 +451,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/allerta"
                             android:text="Click to view diet articles"
                             android:textColor="@color/black_normal_text"
                             android:textSize="8sp" />
@@ -775,6 +786,20 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/homeNoLastRun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/allerta"
+                android:text="No last run data available!"
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:id="@+id/homeLastRunLayout"

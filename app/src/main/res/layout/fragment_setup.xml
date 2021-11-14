@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Name"
-                android:inputType="text"
+                android:inputType="textCapWords"
                 android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="Age"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -118,6 +118,9 @@
                     android:layout_height="match_parent"
                     android:ems="10"
                     android:hint="Gender"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:cursorVisible="false"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:textSize="15sp" />

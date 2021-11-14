@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
         setUpNavigationDrawer()
 
-        navHostFragment.findNavController().navigate(R.id.homeFragment2)
+        navHostFragment.findNavController().navigate(R.id.setupFragment)
         binding.bottomNavigationView.setItemSelected(R.id.homeFragment2)
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it) {
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
                 when(destination.id){
                     R.id.profileFragment, R.id.runFragment, R.id.statisticsFragment,
-                    R.id.homeFragment2,R.id.setupFragment ->{
+                    R.id.homeFragment2->{
                         binding.bottomNavigationView.visibility = View.VISIBLE
                         binding.toolbar.visibility = View.VISIBLE
                     }
@@ -143,7 +143,6 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.runFragment -> {
-                    navHostFragment.findNavController().navigate(R.id.setupFragment)
                     Toast.makeText(applicationContext, "Run Fragments!", Toast.LENGTH_SHORT).show()
                     true
                 }
