@@ -1,5 +1,7 @@
 package com.vdcodeassociate.fitme.ui.fragments
 
+import android.app.Activity
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import app.futured.donut.DonutSection
@@ -27,6 +30,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.ui.MainActivity
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
@@ -42,6 +47,7 @@ import org.eazegraph.lib.models.ValueLinePoint
 
 import org.eazegraph.lib.models.ValueLineSeries
 import im.dacer.androidcharts.LineView
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -57,6 +63,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     // viewBinding
     private lateinit var binding: FragmentHomeBinding
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -69,8 +78,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         // Home viewModel Implementation from activity
         viewModel = (activity as MainActivity).viewModel
 
+        // handling onBack pressed
+//        activity?.supportFragmentManager?.popBackStack()
+
         binding.homeDate.apply {
-            text = Utils().DateFormat(Timestamp(System.currentTimeMillis()).toString())
         }
 
         // init viewModel
@@ -79,15 +90,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setUpDonutGraph(10f,20f,15f)
 
         binding.apply {
+
+            // topmost home date setup
+            homeDate.text = Utils().DateFormat(Timestamp(System.currentTimeMillis()).toString())
+
+            // top most name setup
+            var name = sharedPreferences.getString(Constants.KEY_NAME, "User")!!.split(" ")
+            homeUserName.text = name[0]
+
+            // Home stats to Statistics fragment
             homeStats.setOnClickListener {
-                findNavController().navigate(R.id.statisticsFragment)
+                (activity as MainActivity)!!.navigateToFragment(R.id.statisticsFragment)
             }
 
+            // Last run to run fragment
             homeLastRunLayout.setOnClickListener {
-
+                (activity as MainActivity)!!.navigateToFragment(R.id.runFragment)
             }
 
-            // fitness articles -
+            // Fitness Articles -
             homeNewsButton1.setOnClickListener {
                 findNavController().navigate(R.id.newsFragment)
             }
@@ -209,34 +230,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    // set Up Spark Graph
-    private fun setUpSparkGraph(calories: List<Int>, distance: List<Int>) {
-
-    }
-
-//    private fun setUpLastRun(distance: Float, calories: Float) {
-//        val models: ArrayList<ArcProgressStackView.Model> = ArrayList()
-//        models.add(
-//            ArcProgressStackView.Model(
-//                "Distance",
-//                distance,
-//                Color.parseColor("#E9EAEA"),
-//                Color.parseColor("#EE7D72")
-//            )
-//        )
-//        models.add(
-//            ArcProgressStackView.Model(
-//                "Calories",
-//                calories,
-//                Color.parseColor("#E9EAEA"),
-//                Color.parseColor("#F9BE59")
-//            )
-//        )
-//        binding.arcGraph.models = models
-//        binding.arcGraph.animate()
-//
-//    }
-
     // view last run donut graph
     private fun setUpDonutGraph(steps: Float, distance: Float, total: Float) {
         val steps = DonutSection(
@@ -259,7 +252,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.donutView.animationDurationMs = 2000
         binding.donutView.submitData(listOf(steps, distance, total))
-
     }
 
     // onPrepareOptionsMenu for Circle layout profile menu
@@ -276,7 +268,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.profileFragmentIcon -> {
-                Toast.makeText(requireContext(), "Profile Icon", Toast.LENGTH_SHORT).show()
+                (activity as MainActivity)!!.navigateToFragment(R.id.profileFragment)
                 true
             }
         }

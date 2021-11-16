@@ -33,6 +33,7 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
     // TAG
     private val TAG = "SetupFragment"
 
+    // viewBinding
     private lateinit var binding: FragmentSetupBinding
 
     @Inject

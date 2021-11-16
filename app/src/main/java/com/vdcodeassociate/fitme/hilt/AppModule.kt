@@ -5,13 +5,17 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import androidx.room.Room
 import androidx.viewbinding.BuildConfig
+import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.BASE_URL
 import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
+import com.vdcodeassociate.fitme.constants.Constants.KEY_DISTANCE_GOAL
 import com.vdcodeassociate.fitme.constants.Constants.KEY_FIRST_TIME_TOGGLE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_GENDER
 import com.vdcodeassociate.fitme.constants.Constants.KEY_HEIGHT
+import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
+import com.vdcodeassociate.fitme.constants.Constants.KEY_STEP_GOAL
 import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
 import com.vdcodeassociate.fitme.constants.Constants.RUNNING_DATABASE_NAME
 import com.vdcodeassociate.fitme.constants.Constants.SHARED_PREFERENCES_NAME
@@ -85,6 +89,18 @@ object AppModule {
     @Singleton
     @Provides
     fun providesWeight(sharedPreference: SharedPreferences) = sharedPreference.getFloat((KEY_WEIGHT),80f)
+
+    @Singleton
+    @Provides
+    fun providesImage(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_IMAGE), R.drawable.profile_other_image)
+
+    @Singleton
+    @Provides
+    fun providesStepsGoal(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_STEP_GOAL), 0)
+
+    @Singleton
+    @Provides
+    fun providesDistanceGoal(sharedPreference: SharedPreferences) = sharedPreference.getFloat((KEY_DISTANCE_GOAL), 0f)
 
     @Singleton
     @Provides

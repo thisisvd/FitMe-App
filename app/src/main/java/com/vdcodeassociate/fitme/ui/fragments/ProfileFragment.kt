@@ -12,12 +12,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.vdcodeassociate.fitme.R
+import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
 import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_GENDER
 import com.vdcodeassociate.fitme.constants.Constants.KEY_HEIGHT
+import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
 import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
 import com.vdcodeassociate.fitme.databinding.FragmentProfileBinding
+import com.vdcodeassociate.fitme.viewmodel.ProfileViewModel
 import com.vdcodeassociate.fitme.viewmodel.StatisticsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -33,6 +36,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
 
     // viewModel
     private val viewModelStatistics: StatisticsViewModel by viewModels()
+    private val profileViewModel: ProfileViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,21 +47,24 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
 
+        // handling onBack pressed
+//        activity?.supportFragmentManager?.popBackStack()
+
         viewModelObservers()
 
-        loadFieldsFromSharedPreferences()
+//        loadFieldsFromSharedPreferences()
 
         binding.apply {
-
-
 
         }
 
     }
 
+    // viewModel Observers
     private fun viewModelObservers(){
 
         binding.apply {
+
             viewModelStatistics.apply {
                 totalCaloriesBurned.observe(viewLifecycleOwner, Observer {
                     profileCalories.text = "$it kcal"
@@ -66,6 +73,16 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
                     profileHeartPts.text = it.toString()
                 })
             }
+
+            profileViewModel.userData.observe(viewLifecycleOwner, Observer { user ->
+                profileName.text = user.name
+                profileGender.text = user.gender
+                profileAge.text = "${user.age} years"
+                profileWeight.text = "${user.weight} kg"
+                profileHeight.text = "${user.height} cm"
+                navProfileImage.setImageResource(user.image)
+            })
+
         }
     }
 
@@ -82,22 +99,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.profile_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    private fun loadFieldsFromSharedPreferences() {
-        val name = sharedPreferences.getString(KEY_NAME, "")
-        val age = sharedPreferences.getInt(KEY_AGE, 18)
-        val gender = sharedPreferences.getString(KEY_GENDER, "")
-        val weight = sharedPreferences.getFloat(KEY_WEIGHT, 80f)
-        val height = sharedPreferences.getFloat(KEY_HEIGHT, 80f)
-        binding.profileName.text = "$name-$age-$gender-$weight-$height"
-        binding.apply {
-            profileName.text = name
-            profileGender.text = gender
-            profileAge.text = "$age years"
-            profileWeight.text = "$weight kg"
-            profileHeight.text = "$height cm"
-        }
     }
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

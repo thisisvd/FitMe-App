@@ -47,7 +47,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout : DrawerLayout
 
     // homeViewModel
-     val viewModel: HomeViewModel by viewModels()
+    val viewModel: HomeViewModel by viewModels()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,6 +121,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun navigateToFragment(id: Int){
+        navHostFragment.findNavController().navigate(id)
+        binding.bottomNavigationView.setItemSelected(id)
+    }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         navigateToTrackingFragment(intent)
@@ -171,7 +178,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.editProfile -> {
-                Toast.makeText(this,"Edit Profile!",Toast.LENGTH_SHORT).show()
+                navHostFragment.findNavController().navigate(R.id.editProfileFragment)
                 true
             }
             R.id.homeLastRunLayout -> {

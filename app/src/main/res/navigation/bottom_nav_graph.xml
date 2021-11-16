@@ -49,4 +49,12 @@
         android:id="@+id/homeFragment2"
         android:name="com.vdcodeassociate.fitme.ui.fragments.HomeFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.vdcodeassociate.fitme.ui.fragments.EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

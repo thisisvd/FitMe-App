@@ -36,17 +36,44 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/allerta"
-            android:text="Hello, Christina 👋"
+            android:text="Hello, "
             android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/homeUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/allerta"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/allerta"
+                android:text=" 👋"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginRight="10dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

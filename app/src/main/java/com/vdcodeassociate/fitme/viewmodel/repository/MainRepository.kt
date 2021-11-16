@@ -50,4 +50,7 @@ class MainRepository @Inject constructor(
     // Current Weather functions -
     suspend fun getWeatherUpdate(query: String) = weatherAPIHelper.getWeatherUpdate(query)
 
+    // Profile Shared Preferences data
+
+
 }
