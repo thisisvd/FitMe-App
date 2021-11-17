@@ -1,8 +1,12 @@
 package com.vdcodeassociate.fitme.constants
 
 import android.graphics.Color
+import com.vdcodeassociate.fitme.R
 
 object Constants {
+
+        // Changeable avatar id
+        var AVATAR_ID = R.drawable.question_mark5
 
         // Weather URL
         const val WEATHER_URL = "http://api.weatherapi.com/v1/"
@@ -23,10 +27,13 @@ object Constants {
         const val KEY_HEIGHT = "KEY_HEIGHT"
         const val KEY_AGE = "KEY_AGE"
         const val KEY_GENDER = "KEY_GENDER"
-
+        const val KEY_IMAGE = "KEY_IMAGE"
+        const val KEY_STEP_GOAL = "KEY_STEP_GOAL"
+        const val KEY_DISTANCE_GOAL = "KEY_DISTANCE_GOAL"
 
         // Location Permission Constant
         const val REQUEST_CODE_LOCATION_PERMISSION = 0
+        const val PERMISSION_LOCATION_REQUEST_CODE = 1
 
         // Tracking Service Constants
         const val ACTION_START_OR_RESUME_SERVICE = "ACTION_START_OR_RESUME_SERVICE"

@@ -1,7 +1,9 @@
 package com.vdcodeassociate.fitme.ui
 
+import android.Manifest
 import android.content.Intent
 import android.graphics.PorterDuff
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -21,18 +23,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.vdcodeassociate.fitme.R
+import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.vdcodeassociate.fitme.databinding.ActivityMainBinding
 import com.vdcodeassociate.fitme.room.RunDao
 import com.vdcodeassociate.fitme.ui.fragments.NewsFragment
+import com.vdcodeassociate.fitme.utils.Permissions
+import com.vdcodeassociate.fitme.utils.TrackingUtility
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
 import com.vdcodeassociate.runningtrackerapp.ui.Fragments.RunFragment
 import com.vdcodeassociate.runningtrackerapp.ui.Fragments.StatisticsFragment
 import dagger.hilt.android.AndroidEntryPoint
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     @Inject
     lateinit var runDao: RunDao
@@ -47,7 +54,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout : DrawerLayout
 
     // homeViewModel
-     val viewModel: HomeViewModel by viewModels()
+    val viewModel: HomeViewModel by viewModels()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,6 +128,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun navigateToFragment(id: Int){
+        navHostFragment.findNavController().navigate(id)
+        binding.bottomNavigationView.setItemSelected(id)
+    }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         navigateToTrackingFragment(intent)
@@ -171,7 +185,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.editProfile -> {
-                Toast.makeText(this,"Edit Profile!",Toast.LENGTH_SHORT).show()
+                navHostFragment.findNavController().navigate(R.id.editProfileFragment)
                 true
             }
             R.id.homeLastRunLayout -> {

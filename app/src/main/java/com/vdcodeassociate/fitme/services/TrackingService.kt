@@ -39,6 +39,7 @@ import com.vdcodeassociate.fitme.constants.Constants.NOTIFICATION_CHANNEL_NAME
 import com.vdcodeassociate.fitme.constants.Constants.NOTIFICATION_ID
 import com.vdcodeassociate.fitme.constants.Constants.TIMER_UPDATE_INTERVAL
 import com.vdcodeassociate.fitme.ui.MainActivity
+import com.vdcodeassociate.fitme.utils.Permissions
 import com.vdcodeassociate.fitme.utils.TrackingUtility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -220,7 +221,7 @@ class TrackingService: LifecycleService() {
 
     private fun updateLocationTracking(isTracking: Boolean) {
         if(isTracking){
-            if(TrackingUtility.hasLocationPermissions(this)){
+            if(Permissions.hasLocationPermission(this)){
                 val request = LocationRequest().apply {
                     interval = LOCATION_UPDATE_INTERVAL
                     fastestInterval = FASTEST_LOCATION_INTERVAL

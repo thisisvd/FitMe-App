@@ -1,57 +1,49 @@
-package com.vdcodeassociate.runningtrackerapp.ui.Fragments
+package com.vdcodeassociate.fitme.ui.fragments
 
+import android.app.AlertDialog
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavOptions
-import androidx.navigation.NavOptionsBuilder
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textview.MaterialTextView
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
-import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
-import com.vdcodeassociate.fitme.constants.Constants.KEY_DISTANCE_GOAL
-import com.vdcodeassociate.fitme.constants.Constants.KEY_FIRST_TIME_TOGGLE
-import com.vdcodeassociate.fitme.constants.Constants.KEY_GENDER
-import com.vdcodeassociate.fitme.constants.Constants.KEY_HEIGHT
-import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
-import com.vdcodeassociate.fitme.constants.Constants.KEY_STEP_GOAL
-import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
-import com.vdcodeassociate.fitme.databinding.FragmentSetupBinding
-import com.vdcodeassociate.fitme.ui.fragments.AvatarDialog
+import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
+import com.vdcodeassociate.fitme.databinding.FragmentEditProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.prefs.AbstractPreferences
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SetupFragment : Fragment(R.layout.fragment_setup){
+class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
 
     // TAG
-    private val TAG = "SetupFragment"
+    private val TAG = "EditProfileFragment"
 
-    // viewBinding
-    private lateinit var binding: FragmentSetupBinding
+    // binding
+    private lateinit var binding: FragmentEditProfileBinding
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    @set:Inject    // to inject primitives
-    var isAppFirstOpen = true
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSetupBinding.bind(view)
+        binding = FragmentEditProfileBinding.bind(view)
+
+        // load files
+//        loadFieldsFromSharedPreferences()
+
+        // viewModel
+//        viewModelObservers()
+
+        loadFieldsFromSharedPreferences()
 
         binding.apply {
 
@@ -64,19 +56,25 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
             }
 
             gender.apply {
-                setAdapter(ArrayAdapter(requireContext() , android.R.layout.simple_dropdown_item_1line , listOf("Male", "Female" , "Others")))
+                setAdapter(
+                    ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_dropdown_item_1line,
+                        listOf("Male", "Female", "Others")
+                    )
+                )
             }
 
-            continueButton.setOnClickListener {
-                if(!isTextEmpty()){
-                    val success = writeDataToSharedPreference()
+            saveButton.setOnClickListener {
+                if (!isTextEmpty()) {
+                    val success = applyChangesToSharedPreference()
                     if (success) {
-                        findNavController().navigate(R.id.action_setupFragment_to_permissionRequiredFragment)
+                        findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
                     } else {
-                        Log.i(TAG,"Error at saving data to share preferences.")
+                        Log.i(TAG, "Error at saving data to share preferences.")
                     }
-                }else {
-                    Log.i(TAG,"Error at Text Not Empty.")
+                } else {
+                    Log.i(TAG, "Error at Text Not Empty.")
                     Snackbar.make(
                         requireView(),
                         "Error occurred, Please try after some time!",
@@ -85,34 +83,10 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
                 }
             }
 
-        }
+            back.setOnClickListener {
+                activity?.onBackPressed()
+            }
 
-        if(!isAppFirstOpen){
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.setupFragment,true)
-                .build()
-            findNavController().navigate(R.id.action_setupFragment_to_permissionRequiredFragment,savedInstanceState,navOptions)
-        }
-
-//        binding.tvContinue.setOnClickListener {
-//            val success = writeDataToSharedPreference()
-//            if (success) {
-//                findNavController().navigate(R.id.action_setupFragment_to_runFragment)
-//            }else {
-//                Snackbar.make(requireView(), "Please enter all the fields", Snackbar.LENGTH_SHORT).show()
-//            }
-//        }
-    }
-
-    private fun allLayoutNull(){
-        binding.apply {
-            nameLayout.error = null
-            ageLayout.error = null
-            genderLayout.error = null
-            weightLayout.error = null
-            heightLayout.error = null
-            avatar.borderColor = Color.parseColor("#FF000000")
-            changeAvatarTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black_normal_text))
         }
     }
 
@@ -173,22 +147,18 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
         return result
     }
 
-    // Save user data to Shared Preference
-    private fun writeDataToSharedPreference(): Boolean {
-
+    private fun applyChangesToSharedPreference() : Boolean {
         binding.apply {
 
             // all data set into shared preferences
             sharedPreferences.edit()
-                .putString(KEY_NAME, name.text.toString())
-                .putInt(KEY_AGE, age.text.toString().toInt())
-                .putString(KEY_GENDER, gender.text.toString())
-                .putFloat(KEY_WEIGHT, weight.text.toString().toFloat())
-                .putFloat(KEY_HEIGHT, height.text.toString().toFloat())
-                .putInt(Constants.KEY_IMAGE, AVATAR_ID)
-                .putBoolean(KEY_FIRST_TIME_TOGGLE, false)
-                .putInt(KEY_STEP_GOAL,1000)
-                .putFloat(KEY_DISTANCE_GOAL,1.0f)
+                .putString(Constants.KEY_NAME, name.text.toString())
+                .putInt(Constants.KEY_AGE, age.text.toString().toInt())
+                .putString(Constants.KEY_GENDER, gender.text.toString())
+                .putFloat(Constants.KEY_WEIGHT, weight.text.toString().toFloat())
+                .putFloat(Constants.KEY_HEIGHT, height.text.toString().toFloat())
+                .putInt(KEY_IMAGE, AVATAR_ID)
+                .putBoolean(Constants.KEY_FIRST_TIME_TOGGLE, false)
                 .apply()
 
         }
@@ -196,7 +166,36 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
 //        val toolbarText = "Let's go, $name!"
 //        requireActivity().findViewById<TextView>(R.id.tvToolbarTitle).text = toolbarText
         return true
+    }
 
+    private fun loadFieldsFromSharedPreferences() {
+        val pName = sharedPreferences.getString(Constants.KEY_NAME, "")
+        val pAge = sharedPreferences.getInt(Constants.KEY_AGE, 18)
+        val pGender = sharedPreferences.getString(Constants.KEY_GENDER, "")
+        val pWeight = sharedPreferences.getFloat(Constants.KEY_WEIGHT, 80f)
+        val pHeight = sharedPreferences.getFloat(Constants.KEY_HEIGHT, 80f)
+        val pImage = sharedPreferences.getInt(Constants.KEY_IMAGE, R.drawable.question_mark5)
+        AVATAR_ID = pImage
+        binding.apply {
+            name.setText(pName)
+            gender.setText(pGender)
+            age.setText(pAge.toString())
+            weight.setText(pWeight.toString())
+            height.setText(pHeight.toString())
+            avatar.setImageResource(AVATAR_ID)
+        }
+    }
+
+    private fun allLayoutNull(){
+        binding.apply {
+            nameLayout.error = null
+            ageLayout.error = null
+            genderLayout.error = null
+            weightLayout.error = null
+            heightLayout.error = null
+            avatar.borderColor = Color.parseColor("#FF000000")
+            changeAvatarTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black_normal_text))
+        }
     }
 
 }

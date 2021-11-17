@@ -35,13 +35,6 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <View
-            android:layout_width="111dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:background="@color/black_normal_text" />
-
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,6 +48,44 @@
             android:textAlignment="center"
             android:textColor="@color/black_normal_text"
             android:textSize="15sp" />
+
+        <View
+            android:layout_width="111dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@color/black_normal_text" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/question_mark5"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="1dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/changeAvatarTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="7dp"
+            android:fontFamily="@font/allerta"
+            android:text="Change Avatar"
+            android:textAlignment="center"
+            android:textColor="@color/black_normal_text"
+            android:textSize="11sp" />
+
+        <View
+            android:layout_width="111dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@color/black_normal_text" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameLayout"

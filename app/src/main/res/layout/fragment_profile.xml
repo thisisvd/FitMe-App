@@ -27,9 +27,8 @@
                     android:id="@+id/nav_profile_image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/profile_boy1_icons8"
                     app:civ_border_color="#FF000000"
-                    app:civ_border_width="1dp" />
+                    app:civ_border_width="1dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -367,6 +366,18 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveChanges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="save"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/black"
+                android:layout_gravity="end"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

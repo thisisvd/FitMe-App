@@ -14,8 +14,8 @@
         android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.SetupFragment"
         android:label="SetupFragment" >
         <action
-            android:id="@+id/action_setupFragment_to_homeFragment2"
-            app:destination="@id/homeFragment2" />
+            android:id="@+id/action_setupFragment_to_permissionRequiredFragment"
+            app:destination="@id/permissionRequiredFragment" />
     </fragment>
     <fragment
         android:id="@+id/runFragment"
@@ -49,4 +49,20 @@
         android:id="@+id/homeFragment2"
         android:name="com.vdcodeassociate.fitme.ui.fragments.HomeFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.vdcodeassociate.fitme.ui.fragments.EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/permissionRequiredFragment"
+        android:name="com.vdcodeassociate.fitme.ui.fragments.PermissionRequiredFragment"
+        android:label="PermissionRequiredFragment" >
+        <action
+            android:id="@+id/action_permissionRequiredFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
 </navigation>
