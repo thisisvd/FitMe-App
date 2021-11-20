@@ -36,12 +36,12 @@ class HomeViewModel @Inject constructor(
 
     // init
     init {
-        getWeatherUpdate("Jabalpur")
+//        getWeatherUpdate("Jabalpur")
         sortWeeklyDate()
     }
 
     // getting data from repos
-    private fun getWeatherUpdate(query: String) = viewModelScope.launch {
+    fun getWeatherUpdate(query: String) = viewModelScope.launch {
         weatherUpdate.postValue(Resource.Loading())
         val response = repository.getWeatherUpdate(query)
         weatherUpdate.postValue(handleWeatherUpdateResponse(response))

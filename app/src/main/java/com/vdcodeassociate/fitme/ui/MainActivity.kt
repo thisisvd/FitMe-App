@@ -1,13 +1,16 @@
 package com.vdcodeassociate.fitme.ui
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -15,6 +18,7 @@ import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -25,6 +29,7 @@ import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vdcodeassociate.fitme.R
+import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
 import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
@@ -32,6 +37,8 @@ import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
 import com.vdcodeassociate.fitme.databinding.ActivityMainBinding
 import com.vdcodeassociate.fitme.room.RunDao
+import com.vdcodeassociate.fitme.services.TrackingService
+import com.vdcodeassociate.fitme.utils.Permissions
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.w3c.dom.Text
@@ -39,6 +46,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(){
+
+    // TAG
+    private val TAG = "MainActivity"
+
+    // temp int
+    private var locationCounter = 0
 
     // Injected runDao instance / object
     @Inject
@@ -63,6 +76,9 @@ class MainActivity : AppCompatActivity(){
     // maps init
     private lateinit var googleApiClient: GoogleApiClient
     private val REQUEST_LOCATION = 199
+
+    // location request
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +111,8 @@ class MainActivity : AppCompatActivity(){
 
         // Navigation Drawer init
         setUpNavigationDrawer()
+
+        locationUpdate()
 
         // setting nav host fragments
         navHostFragment.findNavController().navigate(R.id.setupFragment)
@@ -270,6 +288,65 @@ class MainActivity : AppCompatActivity(){
                 } catch (e: IntentSender.SendIntentException) {
                 }
             }
+        }
+    }
+
+    // location update
+    private fun locationUpdate(){
+
+        fusedLocationProviderClient = FusedLocationProviderClient(this)
+
+        if(Permissions.hasLocationPermission(this)){
+            val request = LocationRequest().apply {
+                interval = Constants.LOCATION_UPDATE_INTERVAL
+                fastestInterval = Constants.FASTEST_LOCATION_INTERVAL
+                priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            }
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            fusedLocationProviderClient.requestLocationUpdates(
+                request,
+                locationCallback,
+                Looper.getMainLooper()
+            )
+        }
+    }
+
+    // location callback
+    val locationCallback = object : LocationCallback(){
+        override fun onLocationResult(p0: LocationResult?) {
+            super.onLocationResult(p0)
+            p0?.locations?.let { locations ->
+                for (location in locations) {
+                    Log.d(
+                        TAG,
+                        "New Counter : $locationCounter"
+                    )
+
+                    if ((locationCounter%30 == 0)) {
+                        Log.d(
+                            TAG,
+                            "New Location : ${location.latitude}, ${location.longitude} $location"
+                        )
+                        viewModel.getWeatherUpdate("${location.latitude},${location.latitude}")
+                        if(locationCounter == 60){
+                            locationCounter = 0
+                        }
+                    }
+                    locationCounter++
+
+                }
+
+            }
+
         }
     }
 

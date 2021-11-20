@@ -171,6 +171,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                             )
                                             .transition(DrawableTransitionOptions.withCrossFade())
                                             .into(weatherIcon)
+//                                        (activity as MainActivity).stopLocationUpdate()
                                     }
                                 }
                             }

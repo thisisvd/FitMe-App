@@ -65,9 +65,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     // Time Format
     private var currentTimeInMillis = 0L
 
-    // menu
-    private var menu: Menu? = null
-
     @set:Inject
     private var weight = 80f
 
@@ -143,19 +140,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
             currentTimeInMillis = it
             val formattedTime = TrackingUtility.getFormattedStopWatchTime(currentTimeInMillis,true)
             binding.tvTimer.text = formattedTime
-//            if(TimeUnit.MILLISECONDS.toMinutes(currentTimeInmillis) % 10 == 0L){
-//                calDistanceRough()
-//            }
         })
     }
-
-//    fun calDistanceRough() {
-//        var distanceInMeters = 0
-//        for(polyline in pathPoints){
-//            distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
-//        }
-//        binding.tvLetsGo.text = distanceInMeters.toString()
-//    }
 
     // toggle run button services
     private fun toggleRun(){
@@ -316,13 +302,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
             it.action = action
             requireContext().startService(it)
         }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        if(currentTimeInMillis > 0){
-            this.menu?.getItem(0)?.isVisible = true
-        }
-    }
 
     private fun showCancelDialog(){
         Dialog().apply {
