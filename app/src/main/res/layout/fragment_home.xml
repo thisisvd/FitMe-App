@@ -136,6 +136,7 @@
                                 android:id="@+id/weatherIcon"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
+                                android:scaleType="centerCrop"
                                 android:background="@drawable/white_curve_background_lite" />
 
                             <TextView
@@ -154,7 +155,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="center">
 
                     <LinearLayout
                             android:layout_width="wrap_content"
@@ -360,62 +362,71 @@
 
                 <RelativeLayout
                     android:layout_width="288dp"
-                    android:layout_height="111dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/white_curve_background">
-
-                    <TextView
-                        android:id="@+id/homeNewsUpperText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/allerta"
-                        android:text="Fitness tips, tricks,\nexercise and diet articles"
-                        android:textColor="@color/black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/homeNewsLowerText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/homeNewsUpperText"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="6dp"
-                        android:fontFamily="@font/allerta"
-                        android:text="Shape your body, Train like a beast"
-                        android:textColor="@color/black_normal_text"
-                        android:textSize="7sp" />
+                    android:layout_height="123dp"
+                    android:layout_weight="1">
 
                     <LinearLayout
-                        android:id="@+id/homeNewsButton1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/light_orange_card_curve_background"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
+                        android:layout_weight="1"
+                        android:background="@drawable/white_curve_background"
+                        android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/homeNewsUpperText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
                             android:fontFamily="@font/allerta"
-                            android:text="Click to view articles"
+                            android:text="Fitness tips, exercise\nand diet articles"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/homeNewsLowerText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/homeNewsUpperText"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/allerta"
+                            android:text="Shape your body, Train like a beast"
                             android:textColor="@color/black_normal_text"
-                            android:textSize="8sp" />
+                            android:textSize="7sp" />
+
+                        <LinearLayout
+                            android:id="@+id/homeNewsButton1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/light_orange_card_curve_background"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/allerta"
+                                android:text="Click to view articles"
+                                android:textColor="@color/black_normal_text"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                     <ImageView
                         android:id="@+id/homeNewsImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="123dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/homeNewsUpperText"
                         android:scaleType="fitEnd"
                         android:src="@drawable/ball_girl_img" />
 
@@ -423,8 +434,8 @@
 
                 <ImageView
                     android:id="@+id/homeNewsButton2"
-                    android:layout_width="200dp"
-                    android:layout_height="111dp"
+                    android:layout_width="211dp"
+                    android:layout_height="123dp"
                     android:background="#ECE3DB"
                     android:scaleType="fitCenter"
                     android:layout_marginLeft="10dp"
@@ -433,66 +444,75 @@
 
                 <RelativeLayout
                     android:layout_width="288dp"
-                    android:layout_height="111dp"
-                    android:background="@drawable/white_curve_background"
+                    android:layout_height="123dp"
                     android:layout_marginRight="10dp">
 
-                    <TextView
-                        android:id="@+id/homeNewsUpperText3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/allerta"
-                        android:text="Healthy body comes\nwith good nutrients"
-                        android:textColor="@color/black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/homeNewsLowerText3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/homeNewsUpperText3"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="6dp"
-                        android:fontFamily="@font/allerta"
-                        android:text="Articles for a healthy diet!"
-                        android:textColor="@color/black_normal_text"
-                        android:textSize="7sp" />
-
                     <LinearLayout
-                        android:id="@+id/homeNewsButton3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/light_orange_card_curve_background"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
+                        android:layout_weight="1"
+                        android:background="@drawable/white_curve_background"
+                        android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/homeNewsUpperText3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
                             android:fontFamily="@font/allerta"
-                            android:text="Click to view diet articles"
+                            android:text="Healthy body comes\nwith good nutrients"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/homeNewsLowerText3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/homeNewsUpperText3"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/allerta"
+                            android:text="Articles for a healthy diet!"
                             android:textColor="@color/black_normal_text"
-                            android:textSize="8sp" />
+                            android:textSize="7sp" />
+
+                        <LinearLayout
+                            android:id="@+id/homeNewsButton3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/light_orange_card_curve_background"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/allerta"
+                                android:text="Click to view diet articles"
+                                android:textColor="@color/black_normal_text"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="211dp"
-                        android:layout_height="211dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_width="125dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_toRightOf="@id/homeNewsUpperText3"
-                        android:scaleType="fitEnd"
-                        android:src="@drawable/fruit_diet" />
+                        android:layout_marginLeft="10dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/diet_healthy_icons8" />
 
                 </RelativeLayout>
 
@@ -644,7 +664,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/allerta"
-                                android:text="220"
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
 
@@ -696,7 +715,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/allerta"
-                                android:text="101 km"
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
 
@@ -748,7 +766,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/allerta"
-                            android:text="5660"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -888,7 +905,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/LinearLayoutBB1"
                         android:fontFamily="@font/allerta"
-                        android:text="WEDNESDAY"
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -983,8 +999,7 @@
                         android:id="@+id/homeLastRunImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/weather_sky_img" />
+                        android:scaleType="centerCrop" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -999,16 +1014,6 @@
                 app:donut_gapAngle="90"
                 app:donut_gapWidth="100"
                 app:donut_strokeWidth="10dp" />
-
-            <!--            <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"-->
-            <!--                android:id="@+id/homePieChart"-->
-            <!--                android:layout_width="150dp"-->
-            <!--                android:layout_height="150dp"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:padding="8dp"-->
-            <!--                app:egLegendTextSize="8sp"-->
-            <!--                app:egUsePieRotation="true"-->
-            <!--                app:egValueTextSize="22sp" />-->
 
         </LinearLayout>
 

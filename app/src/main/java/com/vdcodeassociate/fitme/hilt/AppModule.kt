@@ -12,6 +12,7 @@ import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_DISTANCE_GOAL
 import com.vdcodeassociate.fitme.constants.Constants.KEY_FIRST_TIME_TOGGLE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_GENDER
+import com.vdcodeassociate.fitme.constants.Constants.KEY_HEART_POINTS
 import com.vdcodeassociate.fitme.constants.Constants.KEY_HEIGHT
 import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
@@ -58,7 +59,8 @@ object AppModule {
         app,
         RunDatabase::class.java,
         RUNNING_DATABASE_NAME
-    ).build()
+    ).fallbackToDestructiveMigration()
+        .build()
 
     @Singleton
     @Provides
@@ -92,11 +94,19 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun providesImage(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_IMAGE), R.drawable.question_mark5)
+
+    @Singleton
+    @Provides
     fun providesStepsGoal(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_STEP_GOAL), 0)
 
     @Singleton
     @Provides
     fun providesDistanceGoal(sharedPreference: SharedPreferences) = sharedPreference.getFloat((KEY_DISTANCE_GOAL), 0f)
+
+    @Singleton
+    @Provides
+    fun providesHeartPoints(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_HEART_POINTS), 0)
 
     @Singleton
     @Provides

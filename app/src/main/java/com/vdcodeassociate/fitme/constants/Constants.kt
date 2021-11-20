@@ -30,6 +30,7 @@ object Constants {
         const val KEY_IMAGE = "KEY_IMAGE"
         const val KEY_STEP_GOAL = "KEY_STEP_GOAL"
         const val KEY_DISTANCE_GOAL = "KEY_DISTANCE_GOAL"
+        const val KEY_HEART_POINTS = "KEY_HEART_POINTS"
 
         // Location Permission Constant
         const val REQUEST_CODE_LOCATION_PERMISSION = 0

@@ -10,6 +10,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.util.Util
+import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.databinding.ItemRunBinding
 import com.vdcodeassociate.fitme.room.Run
 import com.vdcodeassociate.fitme.utils.TrackingUtility
@@ -78,6 +79,18 @@ class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
             runWeatherStatus.text = run.weatherStatus
             runWeatherCelcius.text = "${run.weatherCelsius} \u00B0C"
             runWindSpeed.text = "${run.windSpeed} km/h"
+
+            if(run.isStepGoalCheck){
+                tvStep.setImageResource(R.drawable.check_icons8)
+            }else {
+                tvStep.setImageResource(R.drawable.cancel_not_icons8)
+            }
+
+            if(run.isDistGoalCheck){
+                tvDist.setImageResource(R.drawable.check_icons8)
+            }else {
+                tvDist.setImageResource(R.drawable.cancel_not_icons8)
+            }
 
             removeRun.setOnClickListener {
                 onItemClickListener?.let { it(run) }

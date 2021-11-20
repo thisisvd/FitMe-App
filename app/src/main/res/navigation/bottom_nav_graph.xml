@@ -43,8 +43,12 @@
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.vdcodeassociate.fitme.ui.fragments.NewsFragment"
-        android:label="NewsFragment" />
+        android:name="com.vdcodeassociate.fitme.ui.fragments.ArticleFragment"
+        android:label="NewsFragment" >
+        <action
+            android:id="@+id/action_newsFragment_to_articleWebPage"
+            app:destination="@id/articleWebPage" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment2"
         android:name="com.vdcodeassociate.fitme.ui.fragments.HomeFragment"
@@ -64,5 +68,28 @@
         <action
             android:id="@+id/action_permissionRequiredFragment_to_homeFragment2"
             app:destination="@id/homeFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.vdcodeassociate.fitme.ui.fragments.ScheduleFragment"
+        android:label="fragment_schedule"
+        tools:layout="@layout/fragment_schedule" >
+    </fragment>
+    <fragment
+        android:id="@+id/supportFragment"
+        android:name="com.vdcodeassociate.fitme.ui.fragments.SupportFragment"
+        android:label="fragment_support"
+        tools:layout="@layout/fragment_support" >
+        <argument
+            android:name="myArgs"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleWebPage"
+        android:name="com.vdcodeassociate.fitme.ui.fragments.ArticleWebPage"
+        android:label="ArticleWebPage" >
+        <argument
+            android:name="article"
+            app:argType="com.vdcodeassociate.newsheadlines.kotlin.model.Article" />
     </fragment>
 </navigation>

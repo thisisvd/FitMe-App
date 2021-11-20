@@ -63,21 +63,6 @@
             android:padding="6dp"
             app:cnb_menuResource="@menu/bottom_nav_menu" />
 
-        <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-        <!--        android:id="@+id/bottomNavigationView"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="?attr/actionBarSize"-->
-        <!--        app:menu="@menu/bottom_nav_menu"-->
-        <!--        app:labelVisibilityMode="unlabeled"-->
-        <!--        app:itemHorizontalTranslationEnabled="false"-->
-        <!--        android:background="@color/black"-->
-        <!--        app:itemIconTint="@drawable/bottom_nav_selector"-->
-        <!--        app:itemTextColor="@drawable/bottom_nav_selector"-->
-        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintHorizontal_bias="0.5"-->
-        <!--        app:layout_constraintStart_toStartOf="parent" />-->
-
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -87,6 +72,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_drawer_header"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/nav_drawer_items" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -24,7 +24,9 @@ import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_DISTANCE_GOAL
 import com.vdcodeassociate.fitme.constants.Constants.KEY_FIRST_TIME_TOGGLE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_GENDER
+import com.vdcodeassociate.fitme.constants.Constants.KEY_HEART_POINTS
 import com.vdcodeassociate.fitme.constants.Constants.KEY_HEIGHT
+import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
 import com.vdcodeassociate.fitme.constants.Constants.KEY_STEP_GOAL
 import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
@@ -77,11 +79,6 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
                     }
                 }else {
                     Log.i(TAG,"Error at Text Not Empty.")
-                    Snackbar.make(
-                        requireView(),
-                        "Error occurred, Please try after some time!",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
                 }
             }
 
@@ -185,10 +182,11 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
                 .putString(KEY_GENDER, gender.text.toString())
                 .putFloat(KEY_WEIGHT, weight.text.toString().toFloat())
                 .putFloat(KEY_HEIGHT, height.text.toString().toFloat())
-                .putInt(Constants.KEY_IMAGE, AVATAR_ID)
+                .putInt(KEY_IMAGE, AVATAR_ID)
                 .putBoolean(KEY_FIRST_TIME_TOGGLE, false)
                 .putInt(KEY_STEP_GOAL,1000)
                 .putFloat(KEY_DISTANCE_GOAL,1.0f)
+                .putInt(KEY_HEART_POINTS,0)
                 .apply()
 
         }

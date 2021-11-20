@@ -38,9 +38,6 @@ class MainRepository @Inject constructor(
 
     fun getTotalItemCount() = runDao.getItemCount()
 
-    // get Last Week items
-    fun getLastWeekItems() = runDao.getLastWeekItems()
-
     // last run Item
     fun getLastItem() = runDao.getLastItem()
 
@@ -49,8 +46,5 @@ class MainRepository @Inject constructor(
 
     // Current Weather functions -
     suspend fun getWeatherUpdate(query: String) = weatherAPIHelper.getWeatherUpdate(query)
-
-    // Profile Shared Preferences data
-
 
 }

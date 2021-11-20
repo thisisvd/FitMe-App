@@ -10,7 +10,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -32,6 +34,10 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vdcodeassociate.fitme.constants.Constants
+import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
+import com.vdcodeassociate.fitme.constants.Constants.KEY_HEART_POINTS
+import com.vdcodeassociate.fitme.constants.Constants.KEY_HEIGHT
+import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.ui.MainActivity
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
@@ -56,16 +62,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val TAG = "HomeFragment"
 
     // viewModel
-//    private val viewModel: HomeViewModel by viewModels()
     lateinit var viewModel: HomeViewModel
     private val viewModelRuns: MainViewModel by viewModels()
 
     // viewBinding
     private lateinit var binding: FragmentHomeBinding
 
+    // Injected Shared preferences
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
+    // enable the options menu in activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -78,11 +85,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         // Home viewModel Implementation from activity
         viewModel = (activity as MainActivity).viewModel
 
-        // handling onBack pressed
-//        activity?.supportFragmentManager?.popBackStack()
-
-        binding.homeDate.apply {
-        }
+        // GPS Enable
+        (activity as MainActivity).enableGPS()
 
         // init viewModel
         viewModelsObservers()
@@ -98,6 +102,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             var name = sharedPreferences.getString(Constants.KEY_NAME, "User")!!.split(" ")
             homeUserName.text = name[0]
 
+            // Heart point injection
+            homeWeeksHeartPts.text = sharedPreferences.getInt(KEY_HEART_POINTS,0).toString()
+
             // Home stats to Statistics fragment
             homeStats.setOnClickListener {
                 (activity as MainActivity)!!.navigateToFragment(R.id.statisticsFragment)
@@ -108,16 +115,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 (activity as MainActivity)!!.navigateToFragment(R.id.runFragment)
             }
 
-            // Fitness Articles -
+            // Fitness Articles Buttons -
             homeNewsButton1.setOnClickListener {
                 findNavController().navigate(R.id.newsFragment)
             }
-
             homeNewsButton2.setOnClickListener {
                 val bundle = bundleOf("amount" to 2)
                 findNavController().navigate(R.id.newsFragment,bundle)
             }
-
             homeNewsButton3.setOnClickListener {
                 val bundle = bundleOf("amount" to 1)
                 findNavController().navigate(R.id.newsFragment,bundle)
@@ -147,8 +152,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             getWeatherUpdate.observe(viewLifecycleOwner, Observer { response ->
                 when (response) {
                     is Resource.Success -> {
-//                    binding.progress.visibility = View.GONE
-//                    binding.recyclerView.visibility = View.VISIBLE
                         response.data?.let { weatherResponse ->
                             binding.apply {
                                 weatherResponse.apply {
@@ -183,10 +186,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             }
                         }
                     }
-                    is Resource.Loading -> {
-//                    binding.progress.visibility = View.VISIBLE
-//                    binding.recyclerView.visibility = View.GONE
-                    }
+                    is Resource.Loading -> { }
                 }
             })
 
@@ -196,7 +196,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 binding.homeCalories.text = "${stats.calories} kcal"
                 binding.homeDist.text = "${stats.distance} km"
                 binding.homeSteps.text = "${stats.steps}"
-                binding.homeWeeksHeartPts.text = "${stats.heartPoints}"
 
             })
         }
@@ -258,6 +257,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onPrepareOptionsMenu(menu: Menu) {
         val alertMenuItem = menu!!.findItem(R.id.profileFragmentIcon)
         val rootView = alertMenuItem.actionView as FrameLayout
+        rootView.findViewById<ImageView>(R.id.nav_profile_image).setImageResource(AVATAR_ID)
         rootView.setOnClickListener {
             onOptionsItemSelected(alertMenuItem)
         }

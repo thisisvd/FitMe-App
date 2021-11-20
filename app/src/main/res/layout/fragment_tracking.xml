@@ -4,28 +4,58 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvLetsGo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/allerta"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/allerta"
+            android:text="CANCEL"
+            android:layout_margin="10dp"
+            android:textColor="#F50057"
+            android:textSize="15sp"
+            android:visibility="gone"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="15dp"
-        android:layout_margin="10dp"
         android:layout_above="@+id/clInnerLayout"
+        android:layout_below="@+id/toolbarLayout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:outlineAmbientShadowColor="@color/white"
-        android:outlineSpotShadowColor="@color/white">
+        android:outlineSpotShadowColor="@color/white"
+        app:cardCornerRadius="10dp">
 
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/mapView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvLetsGo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Let's go, USERNAME!"
-                android:textAlignment="center"
-                android:textSize="30sp"
-                android:visibility="visible" />
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </androidx.cardview.widget.CardView>
 
@@ -93,15 +123,17 @@
                 android:id="@+id/btnToggleRun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start" />
+                android:text="Start"
+                android:drawableRight="@drawable/ic_baseline_play_arrow_24"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnFinishRun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:text="Finish Run"
-                android:visibility="gone" />
+                android:text="Finish"
+                android:visibility="gone"
+                android:drawableRight="@drawable/ic_baseline_stop_circle_24" />
 
         </LinearLayout>
 

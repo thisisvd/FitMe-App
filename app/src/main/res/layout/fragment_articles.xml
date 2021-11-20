@@ -25,6 +25,7 @@
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="Fitness Articles"
+            android:layout_gravity="center"
             android:textColor="@android:color/black"
             android:textSize="22sp" />
 

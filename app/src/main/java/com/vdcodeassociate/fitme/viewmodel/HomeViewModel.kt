@@ -22,8 +22,10 @@ class HomeViewModel @Inject constructor(
     val repository: MainRepository
 ): ViewModel() {
 
+    // weather private value
     private val weatherUpdate = MutableLiveData<Resource<WeatherResponse>>()
 
+    // save data for observers
     val getWeatherUpdate: LiveData<Resource<WeatherResponse>> get() = weatherUpdate
 
     // room weekly stats
@@ -32,11 +34,13 @@ class HomeViewModel @Inject constructor(
     // mediator live Data for sorted runs
     var sortedWeeklyStats = MediatorLiveData<WeekStatsHome>()
 
+    // init
     init {
         getWeatherUpdate("Jabalpur")
         sortWeeklyDate()
     }
 
+    // getting data from repos
     private fun getWeatherUpdate(query: String) = viewModelScope.launch {
         weatherUpdate.postValue(Resource.Loading())
         val response = repository.getWeatherUpdate(query)
@@ -53,7 +57,7 @@ class HomeViewModel @Inject constructor(
         return Resource.Error(response.message())
     }
 
-    // selecting run happened in week
+    // selecting run's happened in week
     private fun sortWeeklyDate(){
         var tempList = mutableListOf<Run>()
         var calories = 0

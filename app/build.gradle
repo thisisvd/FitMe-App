@@ -143,4 +143,7 @@ dependencies {
     // arc graph
     implementation 'devlight.io:arcprogressstackview:1.0.4'
 
+    // smile rating bar
+    implementation 'com.github.sujithkanna:smileyrating:2.0.0'
+
 }

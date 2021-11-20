@@ -184,11 +184,10 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/tvTick"
+                    android:id="@+id/tvStep"
                     android:layout_width="11sp"
                     android:layout_height="11sp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/check_icons8" />
+                    android:layout_marginLeft="5dp" />
 
             </LinearLayout>
 
@@ -306,31 +305,48 @@
             android:layout_marginBottom="12dp">
 
             <LinearLayout
-                android:id="@+id/cardViewDistLL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:background="@drawable/red_card_curve_background"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/white_curve_background"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingLeft="5dp"
-                android:paddingTop="3dp"
-                android:paddingRight="5dp"
-                android:paddingBottom="3dp">
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="15sp"
-                    android:layout_height="15sp"
-                    android:src="@drawable/distance_icons8" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvDistance"
+                <LinearLayout
+                    android:id="@+id/cardViewDistLL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="@font/segoeui"
-                    android:text="DISTANCE"
-                    android:textStyle="bold" />
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/red_card_curve_background"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="3dp">
+
+                    <ImageView
+                        android:layout_width="15sp"
+                        android:layout_height="15sp"
+                        android:src="@drawable/distance_icons8" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:fontFamily="@font/segoeui"
+                        android:text="DISTANCE"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/tvDist"
+                    android:layout_width="11sp"
+                    android:layout_height="11sp"
+                    android:layout_marginLeft="5dp" />
 
             </LinearLayout>
 

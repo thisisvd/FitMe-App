@@ -3,38 +3,38 @@ package com.vdcodeassociate.fitme.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.vdcodeassociate.fitme.R
-import com.vdcodeassociate.fitme.adapters.NewsAdapter
-import com.vdcodeassociate.fitme.databinding.FragmentNewsBinding
+import com.vdcodeassociate.fitme.adapters.ArticleAdapter
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.viewmodel.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.vdcodeassociate.fitme.databinding.FragmentArticlesBinding
 
 @AndroidEntryPoint
-class NewsFragment: Fragment(R.layout.fragment_news) {
+class ArticleFragment: Fragment(R.layout.fragment_articles) {
 
     // TAG
-    private var TAG = "NewsFragment"
+    private var TAG = "ArticleFragment"
 
     // viewBinding
-    private lateinit var binding: FragmentNewsBinding
+    private lateinit var binding: FragmentArticlesBinding
 
     // Recycler adapter
-    private lateinit var newsAdapter: NewsAdapter
+    private lateinit var articleAdapter: ArticleAdapter
 
     // viewModel
     private val viewModel: NewsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentNewsBinding.bind(view)
+        binding = FragmentArticlesBinding.bind(view)
 
         // get args
         val getArgs = arguments?.getInt("amount")
@@ -70,7 +70,7 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
 
                     viewModel.tabLatestNews(queryPosition)
                     binding.recyclerView.visibility = View.GONE
-                    newsAdapter.notifyDataSetChanged()
+                    articleAdapter.notifyDataSetChanged()
 
                 }
 
@@ -83,6 +83,17 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
                 }
 
             })
+
+            // Set Up adapter
+            articleAdapter.setOnItemClickListener {
+                val bundle = Bundle().apply {
+                    putSerializable("article",it)
+                }
+                findNavController().navigate(
+                    R.id.action_newsFragment_to_articleWebPage,
+                    bundle
+                )
+            }
 
             // on click listener
             backNews.setOnClickListener {
@@ -101,8 +112,8 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
             when (response) {
                 is Resource.Success -> {
                     response.data?.let { newsResponse ->
-                        newsAdapter.differ.submitList(newsResponse.articles)
-                        newsAdapter.notifyDataSetChanged()
+                        articleAdapter.differ.submitList(newsResponse.articles)
+                        articleAdapter.notifyDataSetChanged()
                         if (viewModel.isDataAdded) {
                             binding.progress.visibility = View.GONE
                             binding.recyclerView.visibility = View.VISIBLE
@@ -124,9 +135,9 @@ class NewsFragment: Fragment(R.layout.fragment_news) {
 
     // set up recycler view
     private fun setUpRecyclerView() {
-        newsAdapter = NewsAdapter()
+        articleAdapter = ArticleAdapter()
         binding.recyclerView.apply {
-            adapter = newsAdapter
+            adapter = articleAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }

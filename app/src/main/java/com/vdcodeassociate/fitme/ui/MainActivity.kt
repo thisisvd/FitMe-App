@@ -1,48 +1,52 @@
 package com.vdcodeassociate.fitme.ui
 
-import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.IntentSender
+import android.content.SharedPreferences
+import android.content.pm.ActivityInfo
 import android.graphics.PorterDuff
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.PendingResult
+import com.google.android.gms.common.api.Status
+import com.google.android.gms.location.*
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vdcodeassociate.fitme.R
-import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_SHOW_TRACKING_FRAGMENT
+import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
+import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
+import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
+import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
 import com.vdcodeassociate.fitme.databinding.ActivityMainBinding
 import com.vdcodeassociate.fitme.room.RunDao
-import com.vdcodeassociate.fitme.ui.fragments.NewsFragment
-import com.vdcodeassociate.fitme.utils.Permissions
-import com.vdcodeassociate.fitme.utils.TrackingUtility
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
-import com.vdcodeassociate.runningtrackerapp.ui.Fragments.RunFragment
-import com.vdcodeassociate.runningtrackerapp.ui.Fragments.StatisticsFragment
 import dagger.hilt.android.AndroidEntryPoint
-import pub.devrel.easypermissions.AppSettingsDialog
-import pub.devrel.easypermissions.EasyPermissions
+import org.w3c.dom.Text
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(){
 
+    // Injected runDao instance / object
     @Inject
     lateinit var runDao: RunDao
+
+    // Injected Shared preferences
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     // viewBinding
     private lateinit var binding: ActivityMainBinding
@@ -56,12 +60,20 @@ class MainActivity : AppCompatActivity(){
     // homeViewModel
     val viewModel: HomeViewModel by viewModels()
 
-
+    // maps init
+    private lateinit var googleApiClient: GoogleApiClient
+    private val REQUEST_LOCATION = 199
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Force No Night mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        //Screen orientation
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         // Toolbar setup
         setSupportActionBar(binding.toolbar)
@@ -72,19 +84,19 @@ class MainActivity : AppCompatActivity(){
             PorterDuff.Mode.SRC_ATOP
         )
 
+        // Load and save avatar ID from sharedPref to constant
+        loadAvatarID()
+
         // Setting up bottom nav controller
         navHostFragment = findViewById(R.id.navHostFragment)
 
         // check for notification (tracking) fragment
         navigateToTrackingFragment(intent)
 
-//        binding.bottomNavigationView.setupWithNavController(navHostFragment!!.findNavController())
-//        binding.bottomNavigationView.setOnNavigationItemReselectedListener {
-//            // not to be implemented
-//        }
-
+        // Navigation Drawer init
         setUpNavigationDrawer()
 
+        // setting nav host fragments
         navHostFragment.findNavController().navigate(R.id.setupFragment)
         binding.bottomNavigationView.setItemSelected(R.id.homeFragment2)
         binding.bottomNavigationView.setOnItemSelectedListener {
@@ -104,6 +116,7 @@ class MainActivity : AppCompatActivity(){
             }
         }
 
+        // setting bottom nav and toolbar for fragment changes
         navHostFragment.findNavController()
             .addOnDestinationChangedListener { _, destination, _ ->
 
@@ -122,12 +135,14 @@ class MainActivity : AppCompatActivity(){
             }
     }
 
+    // navigate to tracking fragment
     private fun navigateToTrackingFragment(intent: Intent?) {
         if(intent?.action == ACTION_SHOW_TRACKING_FRAGMENT) {
             navHostFragment.findNavController().navigate(R.id.action_global_tracking_fragment)
         }
     }
 
+    // navigate to any other fragments
     fun navigateToFragment(id: Int){
         navHostFragment.findNavController().navigate(id)
         binding.bottomNavigationView.setItemSelected(id)
@@ -144,33 +159,59 @@ class MainActivity : AppCompatActivity(){
         drawerLayout = binding.mainRootView
         val toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
         drawerLayout.addDrawerListener(toggle)
-        toggle.drawerArrowDrawable.color = resources.getColor(R.color.black_normal_text)
+        setUpHeader()
+        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this,R.color.black_normal_text)
         toggle.syncState()
 
         // nav Drawer set Item Listener
         binding.mainNavView.setNavigationItemSelectedListener { item ->
-            item.isChecked = true
             drawerLayout.closeDrawer(GravityCompat.START)
 
             when(item.itemId) {
-                R.id.homeFragment2 -> {
+                R.id.profileDrawer -> {
+                    navigateToFragment(R.id.profileFragment)
                     true
                 }
-                R.id.runFragment -> {
-                    Toast.makeText(applicationContext, "Run Fragments!", Toast.LENGTH_SHORT).show()
+                R.id.scheduleRuns -> {
+                    navHostFragment.findNavController().navigate(R.id.scheduleFragment)
                     true
                 }
-                R.id.statisticsFragment -> {
-                    Toast.makeText(applicationContext, "Statistics Fragments!", Toast.LENGTH_SHORT).show()
+                R.id.savedTips -> {
+                    navHostFragment.findNavController().navigate(R.id.newsFragment)
                     true
                 }
-                R.id.profileFragment -> {
-                    Toast.makeText(applicationContext, "Profile Fragment!", Toast.LENGTH_SHORT).show()
+                R.id.inviteFriends -> {
+                    inviteFriend()
                     true
                 }
-            }
+                R.id.getHelp -> {
+                    val bundle = Bundle().apply {
+                        putString("myArgs","Get Help!")
+                    }
+                    navHostFragment.findNavController().navigate(R.id.supportFragment,bundle)
+                    true
+                }
+                R.id.giveFeedback -> {
+                    val bundle = Bundle().apply {
+                        putString("myArgs","Feedback!")
+                    }
+                    navHostFragment.findNavController().navigate(R.id.supportFragment,bundle)
+                    true
+                }
+                R.id.aboutUs -> {
+                    Toast.makeText(applicationContext, "About Us!", Toast.LENGTH_SHORT).show()
+                    true
+                }}
             true
         }
+    }
+
+    // setting up nav drawer header
+    fun setUpHeader(){
+        val header = binding.mainNavView.getHeaderView(0)
+        header.findViewById<TextView>(R.id.nav_name).text = sharedPreferences.getString(KEY_NAME,"")
+        header.findViewById<TextView>(R.id.nav_age).text = "${sharedPreferences.getInt(KEY_AGE,0)} Years"
+        header.findViewById<ImageView>(R.id.nav_profile_image).setImageResource(AVATAR_ID)
     }
 
     // All Toolbar's Menu Item selected
@@ -181,7 +222,7 @@ class MainActivity : AppCompatActivity(){
                 true
             }
             R.id.schedulesItems -> {
-                Toast.makeText(this,"Schedule Icon",Toast.LENGTH_SHORT).show()
+                navHostFragment.findNavController().navigate(R.id.scheduleFragment)
                 true
             }
             R.id.editProfile -> {
@@ -196,6 +237,68 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
+    // GPS On / Off Observer
+    fun enableGPS() {
+        googleApiClient = GoogleApiClient.Builder(this)
+            .addApi(LocationServices.API)
+            .addConnectionCallbacks(object : GoogleApiClient.ConnectionCallbacks {
+                override fun onConnected(bundle: Bundle?) {}
+                override fun onConnectionSuspended(i: Int) {
+                    googleApiClient?.connect()
+                }
+            })
+            .addOnConnectionFailedListener {
+            }.build()
+        googleApiClient?.connect()
+        val locationRequest = LocationRequest.create()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 30 * 1000.toLong()
+        locationRequest.fastestInterval = 5 * 1000.toLong()
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
+        builder.setAlwaysShow(true)
+        val result: PendingResult<LocationSettingsResult> =
+            LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build())
+        result.setResultCallback { result ->
+            val status: Status = result.status
+            when (status.statusCode) {
+                LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
+                    status.startResolutionForResult(
+                        this@MainActivity,
+                        REQUEST_LOCATION
+                    )
+                } catch (e: IntentSender.SendIntentException) {
+                }
+            }
+        }
+    }
+
+    // GPS activity results
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            REQUEST_LOCATION -> when (resultCode) {
+                Activity.RESULT_OK -> Log.d("abc","OK")
+                Activity.RESULT_CANCELED -> {
+                    val dialog = MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+                        .setTitle("GPS Required!")
+                        .setMessage("Without GPS this app will not work properly!")
+                        .setCancelable(false)
+                        .setIcon(R.drawable.gps_icons8)
+                        .setPositiveButton("OK"){ _, _ ->
+                            enableGPS()
+                        }
+                        .create()
+                    dialog.show()
+                }
+            }
+        }
+    }
+
     // Handle On Back pressing
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -203,6 +306,21 @@ class MainActivity : AppCompatActivity(){
         } else {
             super.onBackPressed()
         }
+    }
+
+    // invite Friend
+    private fun inviteFriend(){
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = "text/plain"
+        val shareBody = getString(R.string.inviteFriends)
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+        startActivity(sharingIntent)
+    }
+
+    // Load Avatar ID For all
+    private fun loadAvatarID(){
+        AVATAR_ID = sharedPreferences.getInt(KEY_IMAGE,R.drawable.question_mark5)
     }
 
 }

@@ -14,7 +14,9 @@ data class Run(
     var caloriesBurned: Int = 0,
     var weatherCelsius: Int = 0,
     var windSpeed: Float = 0f,
-    var weatherStatus: String = ""
+    var weatherStatus: String = "",
+    var isStepGoalCheck: Boolean = false,
+    var isDistGoalCheck: Boolean = false,
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null

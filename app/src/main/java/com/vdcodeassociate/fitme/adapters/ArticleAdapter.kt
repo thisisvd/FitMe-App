@@ -13,7 +13,7 @@ import com.vdcodeassociate.fitme.databinding.NewsItemsBinding
 import com.vdcodeassociate.fitme.utils.Utils
 import com.vdcodeassociate.newsheadlines.kotlin.model.Article
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.NewsViewHolder>() {
 
     // ViewHolder inner class
     inner class NewsViewHolder(val binding: NewsItemsBinding): RecyclerView.ViewHolder(binding.root)

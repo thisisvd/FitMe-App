@@ -20,8 +20,6 @@ class MainViewModel @Inject constructor(
     // last Run
     val lastRun = repository.getLastItem()
 
-    val lastWeekItems = repository.getLastWeekItems()
-
     var sortType = SortsEnum.DATE
 
     val runs = MediatorLiveData<List<Run>>()

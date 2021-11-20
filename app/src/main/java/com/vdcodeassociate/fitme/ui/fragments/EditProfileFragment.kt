@@ -18,6 +18,7 @@ import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
 import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.databinding.FragmentEditProfileBinding
+import com.vdcodeassociate.fitme.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -30,6 +31,7 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
     // binding
     private lateinit var binding: FragmentEditProfileBinding
 
+    // injecting shared prefs.
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
@@ -37,16 +39,12 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
 
-        // load files
-//        loadFieldsFromSharedPreferences()
-
-        // viewModel
-//        viewModelObservers()
-
+        // load data from shared preferences
         loadFieldsFromSharedPreferences()
 
         binding.apply {
 
+            // avatar call back from AvatarDialog
             avatar.setOnClickListener{
                 var dialog = AvatarDialog()
                 dialog.show(parentFragmentManager,"Avatar Fragment")
@@ -55,6 +53,7 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
                 }
             }
 
+            // Select gender from AutoCompleteTextView
             gender.apply {
                 setAdapter(
                     ArrayAdapter(
@@ -65,10 +64,12 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
                 )
             }
 
+            // Save button listener
             saveButton.setOnClickListener {
                 if (!isTextEmpty()) {
                     val success = applyChangesToSharedPreference()
                     if (success) {
+                        (activity as MainActivity).setUpHeader()  // callback to update navigation drawer header
                         findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
                     } else {
                         Log.i(TAG, "Error at saving data to share preferences.")
@@ -83,6 +84,7 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
                 }
             }
 
+            // onBack handle
             back.setOnClickListener {
                 activity?.onBackPressed()
             }
@@ -90,6 +92,7 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
         }
     }
 
+    // check for empty texts
     private fun isTextEmpty(): Boolean {
         var result = false
         allLayoutNull()
@@ -147,6 +150,7 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
         return result
     }
 
+    // Update user data in shared prefs.
     private fun applyChangesToSharedPreference() : Boolean {
         binding.apply {
 
@@ -163,18 +167,17 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
 
         }
 
-//        val toolbarText = "Let's go, $name!"
-//        requireActivity().findViewById<TextView>(R.id.tvToolbarTitle).text = toolbarText
         return true
     }
 
+    // load data from shared pref.
     private fun loadFieldsFromSharedPreferences() {
         val pName = sharedPreferences.getString(Constants.KEY_NAME, "")
         val pAge = sharedPreferences.getInt(Constants.KEY_AGE, 18)
         val pGender = sharedPreferences.getString(Constants.KEY_GENDER, "")
         val pWeight = sharedPreferences.getFloat(Constants.KEY_WEIGHT, 80f)
         val pHeight = sharedPreferences.getFloat(Constants.KEY_HEIGHT, 80f)
-        val pImage = sharedPreferences.getInt(Constants.KEY_IMAGE, R.drawable.question_mark5)
+        val pImage = sharedPreferences.getInt(KEY_IMAGE, R.drawable.question_mark5)
         AVATAR_ID = pImage
         binding.apply {
             name.setText(pName)
@@ -186,6 +189,7 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
         }
     }
 
+    // reset null layouts
     private fun allLayoutNull(){
         binding.apply {
             nameLayout.error = null

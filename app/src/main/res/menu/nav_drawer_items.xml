@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <group android:id="@+id/nav_drawer_group_1" >
+            <item android:title="Profile">
+                <menu>
+                    <item android:id="@+id/profileDrawer" android:title="Profile" android:icon="@drawable/profile_icons8"/>
+                </menu>
+            </item>
+    </group>
+
+    <group android:id="@+id/nav_drawer_group_2" >
+        <item android:title="Manage">
+            <menu>
+                <item android:id="@+id/scheduleRuns" android:title="Schedule Runs" android:icon="@drawable/schedule_icons8"/>
+                <item android:id="@+id/savedTips" android:title="Fitness Articles" android:icon="@drawable/articles_icons8"/>
+              </menu>
+        </item>
+    </group>
+
+    <group android:id="@+id/nav_drawer_group_3">
+        <item android:title="Others">
+            <menu>
+                <item android:id="@+id/inviteFriends" android:title="Invite Friends" android:icon="@drawable/invite_friends_icons8"/>
+                <item android:id="@+id/getHelp" android:title="Get Help!" android:icon="@drawable/get_help_icons8"/>
+                <item android:id="@+id/giveFeedback" android:title="Give us feedback" android:icon="@drawable/feedback_icons8"/>
+                <item android:id="@+id/aboutUs" android:title="About Us!" android:icon="@drawable/aboutus_icons8"/>
+            </menu>
+        </item>
+    </group>
+
+</menu>
