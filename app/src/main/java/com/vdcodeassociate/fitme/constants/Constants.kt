@@ -18,6 +18,7 @@ object Constants {
 
         // Database Constant
         const val RUNNING_DATABASE_NAME = "running_db"
+        const val SCHEDULE_DATABASE_NAME = "schedule_db"
 
         // Shared Preferences
         const val SHARED_PREFERENCES_NAME = "Shared_preferences"
@@ -31,6 +32,7 @@ object Constants {
         const val KEY_STEP_GOAL = "KEY_STEP_GOAL"
         const val KEY_DISTANCE_GOAL = "KEY_DISTANCE_GOAL"
         const val KEY_HEART_POINTS = "KEY_HEART_POINTS"
+        const val KEY_BROADCASTID = "KEY_BROADCASTID"
 
         // Location Permission Constant
         const val REQUEST_CODE_LOCATION_PERMISSION = 0

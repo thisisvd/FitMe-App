@@ -1,17 +1,12 @@
 package com.vdcodeassociate.fitme.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vdcodeassociate.fitme.model.homemodel.WeekStatsHome
-import com.vdcodeassociate.fitme.room.Run
+import com.vdcodeassociate.fitme.room.runs.Run
 import com.vdcodeassociate.fitme.utils.Utils
 import com.vdcodeassociate.fitme.viewmodel.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.*
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
 @HiltViewModel
 class StatisticsViewModel @Inject constructor(

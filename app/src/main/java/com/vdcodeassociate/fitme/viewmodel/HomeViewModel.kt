@@ -1,20 +1,17 @@
 package com.vdcodeassociate.fitme.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.vdcodeassociate.fitme.model.homemodel.WeekStatsHome
 import com.vdcodeassociate.fitme.restapi.weatherapi.model.WeatherResponse
-import com.vdcodeassociate.fitme.room.Run
+import com.vdcodeassociate.fitme.room.runs.Run
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.utils.Utils
 import com.vdcodeassociate.fitme.viewmodel.repository.MainRepository
-import com.vdcodeassociate.newsheadlines.kotlin.model.ResponseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 @HiltViewModel

@@ -358,7 +358,7 @@
                         android:layout_width="match_parent"
                         android:drawablePadding="10dp"
                         android:layout_height="wrap_content"
-                        android:hint="Distance"
+                        android:hint="Distance in km"
                         android:textSize="15sp"
                         android:ems="10"
                         android:inputType="number"/>

@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import androidx.viewbinding.BuildConfig
 import com.vdcodeassociate.fitme.R
-import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.BASE_URL
 import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_DISTANCE_GOAL
@@ -19,6 +18,7 @@ import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
 import com.vdcodeassociate.fitme.constants.Constants.KEY_STEP_GOAL
 import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
 import com.vdcodeassociate.fitme.constants.Constants.RUNNING_DATABASE_NAME
+import com.vdcodeassociate.fitme.constants.Constants.SCHEDULE_DATABASE_NAME
 import com.vdcodeassociate.fitme.constants.Constants.SHARED_PREFERENCES_NAME
 import com.vdcodeassociate.fitme.constants.Constants.WEATHER_URL
 import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIHelper
@@ -27,7 +27,8 @@ import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIInterface
 import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIHelper
 import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIHelperImpl
 import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIInterface
-import com.vdcodeassociate.fitme.room.RunDatabase
+import com.vdcodeassociate.fitme.room.runs.RunDatabase
+import com.vdcodeassociate.fitme.room.schedules.ScheduleDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,7 +51,7 @@ object AppModule {
     // only single instance of that particular class will be available throughout
     // the application and will be passed whenever and wherever needed as a dependency.
 
-    // Room database
+    // Runs Room database
     @Singleton
     @Provides
     fun provideRunningDatabase(
@@ -65,6 +66,21 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRunDao(db: RunDatabase) = db.getRunDao()
+
+    // Runs Room database
+    @Singleton
+    @Provides
+    fun provideScheduleDatabase(
+        @ApplicationContext app: Context
+    ) = Room.databaseBuilder(
+        app,
+        ScheduleDatabase::class.java,
+        SCHEDULE_DATABASE_NAME
+    ).fallbackToDestructiveMigration().build()
+
+    @Singleton
+    @Provides
+    fun provideScheduleDao(scheduleDatabase: ScheduleDatabase) = scheduleDatabase.scheduleDao()
 
     // Shared Preferences Database
     @Singleton

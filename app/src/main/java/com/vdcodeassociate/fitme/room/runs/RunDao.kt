@@ -1,4 +1,4 @@
-package com.vdcodeassociate.fitme.room
+package com.vdcodeassociate.fitme.room.runs
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

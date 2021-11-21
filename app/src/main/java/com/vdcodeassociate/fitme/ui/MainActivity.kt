@@ -36,12 +36,10 @@ import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
 import com.vdcodeassociate.fitme.databinding.ActivityMainBinding
-import com.vdcodeassociate.fitme.room.RunDao
-import com.vdcodeassociate.fitme.services.TrackingService
+import com.vdcodeassociate.fitme.room.runs.RunDao
 import com.vdcodeassociate.fitme.utils.Permissions
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import org.w3c.dom.Text
 import javax.inject.Inject
 
 @AndroidEntryPoint

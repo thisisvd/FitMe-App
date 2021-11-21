@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background_lite"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/layoutGoalSet"
+            android:layout_alignParentLeft="true"
+            android:text="Running at park"
+            android:maxLines="2"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@drawable/ic_baseline_access_time_24" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Tuesday, Aug 22"
+                android:textSize="8sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text=" | "
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="06:00 PM"
+                android:textSize="8sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutGoalSet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:layout_toLeftOf="@+id/cancel"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Goal set"
+                android:textColor="#2BCD73"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:src="@drawable/steps_icons8" />
+
+                <TextView
+                    android:id="@+id/goalSteps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="2000 Steps"
+                    android:textColor="#5A75FF"
+                    android:textSize="8sp" />
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_marginLeft="7dp"
+                    android:src="@drawable/distance_icons8" />
+
+                <TextView
+                    android:id="@+id/goalDist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="2 km"
+                    android:textColor="#E95B4D"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:background="@drawable/red_card_curve_background"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cancel"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="8sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

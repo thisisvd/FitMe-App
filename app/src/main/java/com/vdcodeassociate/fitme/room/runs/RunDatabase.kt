@@ -1,4 +1,4 @@
-package com.vdcodeassociate.fitme.room
+package com.vdcodeassociate.fitme.room.runs
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -1,18 +1,11 @@
 package com.vdcodeassociate.fitme.utils
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.text.format.DateUtils
-import com.vdcodeassociate.fitme.room.Run
+import com.vdcodeassociate.fitme.room.runs.Run
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
-import android.content.Intent
-import androidx.core.content.ContextCompat
-
-import androidx.core.content.ContextCompat.startActivity
-import okhttp3.internal.format
 
 class Utils {
 

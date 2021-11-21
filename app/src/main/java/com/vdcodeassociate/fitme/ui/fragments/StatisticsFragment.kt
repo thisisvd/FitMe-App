@@ -3,14 +3,12 @@ package com.vdcodeassociate.runningtrackerapp.ui.Fragments
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.databinding.FragmentStatisticsBinding
-import com.vdcodeassociate.fitme.room.Run
-import com.vdcodeassociate.fitme.ui.MainActivity
+import com.vdcodeassociate.fitme.room.runs.Run
 import com.vdcodeassociate.fitme.utils.TrackingUtility
 import com.vdcodeassociate.fitme.utils.Utils
 import com.vdcodeassociate.fitme.viewmodel.StatisticsViewModel

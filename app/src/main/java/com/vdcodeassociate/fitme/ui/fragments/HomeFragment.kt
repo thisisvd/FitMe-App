@@ -42,6 +42,7 @@ import com.vdcodeassociate.fitme.ui.MainActivity
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
 import com.vdcodeassociate.fitme.viewmodel.MainViewModel
+import com.vdcodeassociate.fitme.viewmodel.ScheduleViewModel
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
@@ -64,6 +65,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     // viewModel
     lateinit var viewModel: HomeViewModel
     private val viewModelRuns: MainViewModel by viewModels()
+    private val viewModelSchedule: ScheduleViewModel by viewModels()
 
     // viewBinding
     private lateinit var binding: FragmentHomeBinding
@@ -126,6 +128,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             homeNewsButton3.setOnClickListener {
                 val bundle = bundleOf("amount" to 1)
                 findNavController().navigate(R.id.newsFragment,bundle)
+            }
+
+            // schedules open
+            viewAllSchedules.setOnClickListener{
+                findNavController().navigate(R.id.scheduleFragment)
             }
 
         }
@@ -223,6 +230,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 //                setUpLastRun(77f, 80f)
 
+                }
+            }
+
+        })
+
+        viewModelSchedule.getLastScheduledItem().observe(viewLifecycleOwner, Observer { schedule ->
+
+            binding.apply {
+
+                if(schedule != null) {
+                    title.text = schedule.title
+
+                    date.text = Utils().DateFormat(Timestamp(System.currentTimeMillis()).toString())
+
+                    var format = SimpleDateFormat("hh:mm a")
+                    var startTime = format.format(schedule.timeStamp)
+                    time.text = startTime
+
+                    goalSteps.text = schedule.goalStep.toString()
+
+                    goalDist.text = schedule.goalDistance.toString()
+
+                }else {
+                    noScheduleRuns.visibility = View.VISIBLE
+                    scheduleRuns.visibility = View.GONE
                 }
             }
 

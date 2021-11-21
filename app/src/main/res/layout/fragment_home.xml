@@ -1035,6 +1035,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/viewAllSchedules"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -1057,6 +1058,28 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/noScheduleRuns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/card_background_lite"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="No recent Schedule's"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/scheduleRuns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/card_background_lite"
@@ -1065,10 +1088,13 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/homeScheduleStatus"
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/layoutGoalSet"
+                android:layout_alignParentLeft="true"
                 android:text="Running at park"
+                android:maxLines="2"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -1076,7 +1102,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/homeScheduleStatus"
+                android:layout_below="@+id/title"
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -1088,6 +1114,7 @@
                     android:src="@drawable/ic_baseline_access_time_24" />
 
                 <TextView
+                    android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -1103,6 +1130,7 @@
                     android:textSize="8sp" />
 
                 <TextView
+                    android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="06:00 PM"
@@ -1111,11 +1139,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutGoalSet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="25dp"
-                android:layout_toLeftOf="@+id/homeReschedule"
+                android:layout_alignParentRight="true"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -1124,41 +1153,51 @@
                     android:layout_height="wrap_content"
                     android:text="Goal set"
                     android:textColor="#2BCD73"
-                    android:textSize="8sp" />
+                    android:textSize="10sp" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2 km"
-                    android:textColor="#E95B4D"
-                    android:textSize="8sp" />
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:src="@drawable/steps_icons8" />
 
-            <LinearLayout
-                android:id="@+id/homeReschedule"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/blue_card_background_lite"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
-                android:gravity="center"
-                android:padding="5dp"
-                android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/goalSteps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="2000 Steps"
+                        android:textColor="#5A75FF"
+                        android:textSize="8sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Re-Schedule"
-                    android:textColor="@color/white"
-                    android:textSize="8sp" />
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginLeft="7dp"
+                        android:src="@drawable/distance_icons8" />
+
+                    <TextView
+                        android:id="@+id/goalDist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="2 km"
+                        android:textColor="#E95B4D"
+                        android:textSize="8sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </RelativeLayout>
 
-<!--        <app.futured.donut.DonutProgressView-->
+        <!--        <app.futured.donut.DonutProgressView-->
 <!--            android:id="@+id/donut_view"-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="256dp"-->

@@ -21,6 +21,7 @@ import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
 import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
+import com.vdcodeassociate.fitme.constants.Constants.KEY_BROADCASTID
 import com.vdcodeassociate.fitme.constants.Constants.KEY_DISTANCE_GOAL
 import com.vdcodeassociate.fitme.constants.Constants.KEY_FIRST_TIME_TOGGLE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_GENDER
@@ -91,14 +92,6 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
             findNavController().navigate(R.id.action_setupFragment_to_permissionRequiredFragment,savedInstanceState,navOptions)
         }
 
-//        binding.tvContinue.setOnClickListener {
-//            val success = writeDataToSharedPreference()
-//            if (success) {
-//                findNavController().navigate(R.id.action_setupFragment_to_runFragment)
-//            }else {
-//                Snackbar.make(requireView(), "Please enter all the fields", Snackbar.LENGTH_SHORT).show()
-//            }
-//        }
     }
 
     private fun allLayoutNull(){
@@ -187,6 +180,7 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
                 .putInt(KEY_STEP_GOAL,1000)
                 .putFloat(KEY_DISTANCE_GOAL,1.0f)
                 .putInt(KEY_HEART_POINTS,0)
+                .putInt(KEY_BROADCASTID,0)
                 .apply()
 
         }

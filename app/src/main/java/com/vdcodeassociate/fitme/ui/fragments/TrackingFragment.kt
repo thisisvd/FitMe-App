@@ -3,7 +3,6 @@ package com.vdcodeassociate.runningtrackerapp.ui.Fragments
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.BoringLayout
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -28,12 +27,11 @@ import com.vdcodeassociate.fitme.constants.Constants.MAP_ZOOM
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_COLOR
 import com.vdcodeassociate.fitme.constants.Constants.POLYLINE_WIDTH
 import com.vdcodeassociate.fitme.databinding.FragmentTrackingBinding
-import com.vdcodeassociate.fitme.room.Run
+import com.vdcodeassociate.fitme.room.runs.Run
 import com.vdcodeassociate.fitme.services.Polyline
 import com.vdcodeassociate.fitme.services.TrackingService
 import com.vdcodeassociate.fitme.ui.fragments.Dialog
 import com.vdcodeassociate.fitme.utils.TrackingUtility
-import com.vdcodeassociate.fitme.utils.Utils
 import com.vdcodeassociate.fitme.viewmodel.MainViewModel
 import java.lang.Math.round
 import java.util.*

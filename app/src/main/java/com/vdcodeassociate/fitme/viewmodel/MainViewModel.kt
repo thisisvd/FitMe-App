@@ -1,15 +1,11 @@
 package com.vdcodeassociate.fitme.viewmodel
 
 import androidx.lifecycle.*
-import com.vdcodeassociate.fitme.restapi.weatherapi.model.WeatherResponse
-import com.vdcodeassociate.fitme.room.Run
-import com.vdcodeassociate.fitme.utils.Resource
+import com.vdcodeassociate.fitme.room.runs.Run
 import com.vdcodeassociate.fitme.utils.SortsEnum
 import com.vdcodeassociate.fitme.viewmodel.repository.MainRepository
-import com.vdcodeassociate.newsheadlines.kotlin.model.ResponseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel  // injection to view model internally

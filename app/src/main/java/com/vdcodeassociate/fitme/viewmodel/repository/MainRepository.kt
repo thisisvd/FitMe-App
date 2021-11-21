@@ -2,15 +2,18 @@ package com.vdcodeassociate.fitme.viewmodel.repository
 
 import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIHelper
 import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIHelper
-import com.vdcodeassociate.fitme.room.Run
-import com.vdcodeassociate.fitme.room.RunDao
+import com.vdcodeassociate.fitme.room.runs.Run
+import com.vdcodeassociate.fitme.room.runs.RunDao
+import com.vdcodeassociate.fitme.room.schedules.Schedule
+import com.vdcodeassociate.fitme.room.schedules.ScheduleDao
 import javax.inject.Inject
 
 // Job of main repo is to collect data from all data sources (i.e, room or retrofit etc...)
 class MainRepository @Inject constructor(
     val runDao: RunDao,
     private val newsAPIHelper: NewsAPIHelper,
-    private val weatherAPIHelper: WeatherAPIHelper
+    private val weatherAPIHelper: WeatherAPIHelper,
+    private val scheduleDao: ScheduleDao
 ) {
 
     // Runs Functions
@@ -46,5 +49,18 @@ class MainRepository @Inject constructor(
 
     // Current Weather functions -
     suspend fun getWeatherUpdate(query: String) = weatherAPIHelper.getWeatherUpdate(query)
+
+    // Schedule Room Database
+    // insert data in schedule db
+    suspend fun insertScheduledRuns(schedule: Schedule) = scheduleDao.insertScheduleRun(schedule)
+
+    // delete data in schedule db
+    suspend fun deleteScheduledRuns(schedule: Schedule) = scheduleDao.deleteScheduleRun(schedule)
+
+    // get data from schedule db
+    fun getScheduledRuns() = scheduleDao.getScheduledRuns()
+
+    // get last scheduled run
+    fun getLastScheduledItem() = scheduleDao.getLastScheduledItem()
 
 }

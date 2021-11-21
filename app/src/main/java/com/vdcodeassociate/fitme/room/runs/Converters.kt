@@ -1,4 +1,4 @@
-package com.vdcodeassociate.fitme.room
+package com.vdcodeassociate.fitme.room.runs
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
