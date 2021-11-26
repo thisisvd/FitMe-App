@@ -46,10 +46,11 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
     // viewBinding
     private lateinit var binding: FragmentSetupBinding
 
+    // shared pref
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    @set:Inject    // to inject primitives
+    @set:Inject       // to inject primitives
     var isAppFirstOpen = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,6 +95,7 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
 
     }
 
+    // error set to nulls
     private fun allLayoutNull(){
         binding.apply {
             nameLayout.error = null
@@ -106,6 +108,7 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
         }
     }
 
+    // check for empty text
     private fun isTextEmpty(): Boolean {
         var result = false
         allLayoutNull()
@@ -185,10 +188,7 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
 
         }
 
-//        val toolbarText = "Let's go, $name!"
-//        requireActivity().findViewById<TextView>(R.id.tvToolbarTitle).text = toolbarText
         return true
-
     }
 
 }

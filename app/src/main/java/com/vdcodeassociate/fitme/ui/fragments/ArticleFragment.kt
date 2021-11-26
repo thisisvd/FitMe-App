@@ -50,6 +50,7 @@ class ArticleFragment: Fragment(R.layout.fragment_articles) {
             newsTabLayout.addTab(newsTabLayout.newTab().setText("DIET"))
             newsTabLayout.addTab(newsTabLayout.newTab().setText("EXERCISE & MEDITATION"))
 
+            // getting tab position
             if(getArgs != null) {
                 newsTabLayout.getTabAt(getArgs.toInt())?.select()
             }
@@ -101,6 +102,7 @@ class ArticleFragment: Fragment(R.layout.fragment_articles) {
             }
         }
 
+        // viewModel Observer
         viewModelObserver()
 
     }

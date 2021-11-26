@@ -2,14 +2,10 @@ package com.vdcodeassociate.fitme.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.vdcodeassociate.fitme.R
-import com.vdcodeassociate.fitme.databinding.FragmentSplashBinding
 import android.content.Intent
 
 import android.os.CountDownTimer
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import com.vdcodeassociate.fitme.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {

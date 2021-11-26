@@ -26,8 +26,10 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics){
     private val viewModelStatistics: StatisticsViewModel by viewModels()
     private val viewModelRuns: MainViewModel by viewModels()
 
+    // view binding
     private lateinit var binding: FragmentStatisticsBinding
 
+    // total items counts for all stats
     private var totalItemCount = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -85,6 +87,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics){
 
     }
 
+    // bar graph sorted list last recent
     private fun submitSortedList(runs: List<Run>) {
 
         val mStackedBarChart = binding.stackedbarchart

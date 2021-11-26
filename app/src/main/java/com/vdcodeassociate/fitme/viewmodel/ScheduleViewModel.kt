@@ -38,23 +38,4 @@ class ScheduleViewModel @Inject constructor(
     // get last scheduled
     fun getLastScheduledItem() = repository.getLastScheduledItem()
 
-    fun resetSchedules(){
-        privateSortedData.addSource(getScheduledRuns()){
-            Log.i("SCHEDULETAG","Deleted")
-
-            for(item in it){
-                Log.i("SCHEDULETAG","Deleted")
-
-                if(item.timeStamp >= Calendar.getInstance().timeInMillis){
-                    Log.i("SCHEDULETAG","Deleted")
-                    deleteSchedule(item)
-                }else {
-                    Log.i("SCHEDULETAG","Not deleted ${item.timeStamp} = ${Calendar.getInstance().timeInMillis}")
-                }
-
-            }
-
-        }
-    }
-
 }

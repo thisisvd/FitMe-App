@@ -93,7 +93,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         // init viewModel
         viewModelsObservers()
 
-        setUpDonutGraph(10f,20f,15f)
+        // rough setup donut graph
+        setUpDonutGraph(10f, 20f, 15f)
 
         binding.apply {
 
@@ -105,7 +106,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             homeUserName.text = name[0]
 
             // Heart point injection
-            homeWeeksHeartPts.text = sharedPreferences.getInt(KEY_HEART_POINTS,0).toString()
+            homeWeeksHeartPts.text = sharedPreferences.getInt(KEY_HEART_POINTS, 0).toString()
 
             // Home stats to Statistics fragment
             homeStats.setOnClickListener {
@@ -123,15 +124,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             homeNewsButton2.setOnClickListener {
                 val bundle = bundleOf("amount" to 2)
-                findNavController().navigate(R.id.newsFragment,bundle)
+                findNavController().navigate(R.id.newsFragment, bundle)
             }
             homeNewsButton3.setOnClickListener {
                 val bundle = bundleOf("amount" to 1)
-                findNavController().navigate(R.id.newsFragment,bundle)
+                findNavController().navigate(R.id.newsFragment, bundle)
             }
 
             // schedules open
-            viewAllSchedules.setOnClickListener{
+            viewAllSchedules.setOnClickListener {
                 findNavController().navigate(R.id.scheduleFragment)
             }
 
@@ -194,7 +195,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             }
                         }
                     }
-                    is Resource.Loading -> { }
+                    is Resource.Loading -> {
+                    }
                 }
             })
 
@@ -239,7 +241,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             binding.apply {
 
-                if(schedule != null) {
+                if (schedule != null) {
                     title.text = schedule.title
 
                     date.text = Utils().DateFormat(Timestamp(System.currentTimeMillis()).toString())
@@ -252,7 +254,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                     goalDist.text = schedule.goalDistance.toString()
 
-                }else {
+                } else {
                     noScheduleRuns.visibility = View.VISIBLE
                     scheduleRuns.visibility = View.GONE
                 }

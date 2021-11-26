@@ -20,6 +20,7 @@ class AvatarDialog: DialogFragment() {
 
         binding.apply {
 
+            // on back pressed handle
             back.setOnClickListener {
                 dialog!!.dismiss()
             }
@@ -64,6 +65,7 @@ class AvatarDialog: DialogFragment() {
 
     }
 
+    // change const avatar id
     private fun changeAvatarID(id: Int){
         AVATAR_ID = id
         dialog!!.dismiss()

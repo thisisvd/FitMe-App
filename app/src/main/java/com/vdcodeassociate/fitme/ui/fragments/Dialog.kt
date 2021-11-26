@@ -8,12 +8,7 @@ import com.vdcodeassociate.fitme.R
 
 class Dialog: DialogFragment() {
 
-    private var yesListener: (() -> Unit)? = null
-
-    fun setListener(listener: () -> Unit){
-        yesListener = listener
-    }
-
+    // create dialog
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle("Cancel the Run?")
@@ -30,6 +25,11 @@ class Dialog: DialogFragment() {
             .create()
     }
 
+    // on click listener -
+    private var yesListener: (() -> Unit)? = null
 
+    fun setListener(listener: () -> Unit){
+        yesListener = listener
+    }
 
 }

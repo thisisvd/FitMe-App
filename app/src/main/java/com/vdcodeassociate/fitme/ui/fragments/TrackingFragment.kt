@@ -63,6 +63,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     // Time Format
     private var currentTimeInMillis = 0L
 
+    // injecting primitive type
     @set:Inject
     private var weight = 80f
 

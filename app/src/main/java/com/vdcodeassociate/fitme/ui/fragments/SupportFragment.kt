@@ -77,6 +77,7 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
 
     }
 
+    // on button pressed
     private fun onButtonPressed(isHelp: String) {
         if (!isTextEmpty()) {
             if (isHelp == "Get Help!") {
@@ -87,6 +88,7 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
         }
     }
 
+    // on complete dialog
     private fun showDialog(title: String, message: String, icon: Int){
         val dialog = MaterialAlertDialogBuilder(requireContext(),R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
             .setTitle(title)

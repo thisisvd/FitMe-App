@@ -46,8 +46,7 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
         // init swapping delete schedule
         deleteSchedule(view)
 
-        viewModel.resetSchedules()
-
+        // on click
         scheduleAdapter.setOnItemClickListener {
             viewModel.deleteSchedule(it)
         }

@@ -51,7 +51,6 @@ class PermissionRequiredFragment: Fragment(R.layout.fragment_permission_required
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         if(EasyPermissions.somePermissionPermanentlyDenied(requireActivity(),perms)){
-//            AppSettingsDialog.Builder(requireActivity()).build().show()
             findNavController().navigate(R.id.action_permissionRequiredFragment_to_homeFragment2)
         }else {
             requestLocationPermission(this)

@@ -110,6 +110,7 @@ class MainActivity : AppCompatActivity(){
         // Navigation Drawer init
         setUpNavigationDrawer()
 
+        // location init
         locationUpdate()
 
         // setting nav host fragments
@@ -164,6 +165,7 @@ class MainActivity : AppCompatActivity(){
         binding.bottomNavigationView.setItemSelected(id)
     }
 
+    // navigate to the tracking fragment
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         navigateToTrackingFragment(intent)
@@ -319,7 +321,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     // location callback
-    val locationCallback = object : LocationCallback(){
+    private val locationCallback = object : LocationCallback(){
         override fun onLocationResult(p0: LocationResult?) {
             super.onLocationResult(p0)
             p0?.locations?.let { locations ->
