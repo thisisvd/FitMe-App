@@ -67,7 +67,7 @@ object AppModule {
     @Provides
     fun provideRunDao(db: RunDatabase) = db.getRunDao()
 
-    // Runs Room database
+    // Runs Schedule database
     @Singleton
     @Provides
     fun provideScheduleDatabase(
