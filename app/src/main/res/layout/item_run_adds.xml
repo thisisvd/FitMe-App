@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         app:adSize="MEDIUM_RECTANGLE"
         android:layout_gravity="center"
-        app:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        app:adUnitId="@string/banner_add_id">
 
     </com.google.android.gms.ads.AdView>
 

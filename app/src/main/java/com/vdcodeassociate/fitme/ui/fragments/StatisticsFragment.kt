@@ -140,7 +140,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics){
     }
 
     private fun loadBanner() {
-        adView.adUnitId = "ca-app-pub-3940256099942544/6300978111" //TODO - change
+        adView.adUnitId = getString(R.string.banner_add_id)
         adView.adSize = adSize
 
         // Create an ad request.
