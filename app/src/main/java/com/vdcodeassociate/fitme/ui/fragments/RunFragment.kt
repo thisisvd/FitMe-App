@@ -107,7 +107,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
 
     // Recycler view setup
     private fun setupRecyclerView(){
-        runAdapter = RunAdapter()
+        runAdapter = RunAdapter(requireContext())
         binding.apply {
             rvRuns.apply {
                 adapter = runAdapter

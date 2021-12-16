@@ -23,6 +23,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
 import com.google.android.gms.common.api.Status
@@ -35,6 +39,7 @@ import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
 import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
+import com.vdcodeassociate.fitme.constants.Constants.MAIN_AD_COUNT
 import com.vdcodeassociate.fitme.databinding.ActivityMainBinding
 import com.vdcodeassociate.fitme.room.runs.RunDao
 import com.vdcodeassociate.fitme.utils.Permissions
@@ -78,6 +83,11 @@ class MainActivity : AppCompatActivity(){
     // location request
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
+    // load InterstitialAd advt.
+    private var mInterstitialAd: InterstitialAd? = null
+    // load RewardedAd advt.
+    private var mRewardedAd: RewardedAd? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -112,6 +122,10 @@ class MainActivity : AppCompatActivity(){
 
         // location init
         locationUpdate()
+
+        // load-advertisement
+        loadBannerAdd()
+        loadInterstitialAd()
 
         // setting nav host fragments
         navHostFragment.findNavController().navigate(R.id.setupFragment)
@@ -149,7 +163,93 @@ class MainActivity : AppCompatActivity(){
                     }
                 }
 
+                // setting up advt.
+                if(MAIN_AD_COUNT == 4){
+                    showInterstitialAd()
+                    MAIN_AD_COUNT = 0
+                }else {
+                    MAIN_AD_COUNT++
+                }
+
             }
+    }
+
+    // load banner adds
+    private fun loadBannerAdd() {
+        MobileAds.initialize(this) {}
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+
+        binding.adView.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                Log.d(TAG,"AdLoaded!")
+            }
+
+            override fun onAdFailedToLoad(adError : LoadAdError) {
+                // Code to be executed when an ad request fails.
+                Toast.makeText(this@MainActivity,"AdFailed!",Toast.LENGTH_SHORT).show()
+                Log.d(TAG,adError.toString())
+            }
+
+            override fun onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            override fun onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        }
+
+    }
+
+    // load interstitialAd
+    private fun loadInterstitialAd(){
+        var adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.d(TAG, adError?.message)
+                mInterstitialAd = null
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                Log.d(TAG, "Ad was loaded.")
+                mInterstitialAd = interstitialAd
+            }
+        })
+    }
+
+    fun showInterstitialAd(){
+        if(mInterstitialAd != null){
+            mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+                override fun onAdDismissedFullScreenContent() {
+                    Log.d(TAG, "Ad was dismissed.")
+                    loadInterstitialAd()
+                }
+
+                override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                    Log.d(TAG, "Ad failed to show.")
+                }
+
+                override fun onAdShowedFullScreenContent() {
+                    Log.d(TAG, "Ad showed fullscreen content.")
+                    mInterstitialAd = null
+                }
+            }
+
+            mInterstitialAd?.show(this)
+
+        }else {
+        }
+
     }
 
     // navigate to tracking fragment
@@ -245,6 +345,7 @@ class MainActivity : AppCompatActivity(){
             }
             R.id.editProfile -> {
                 navHostFragment.findNavController().navigate(R.id.editProfileFragment)
+                showInterstitialAd()
                 true
             }
             R.id.homeLastRunLayout -> {

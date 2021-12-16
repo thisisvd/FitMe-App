@@ -121,7 +121,7 @@ class TrackingService: LifecycleService() {
     }
 
     // starting, resume, stop
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
 
         intent?.let {
             when(it.action){

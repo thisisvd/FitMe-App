@@ -2,10 +2,15 @@ package com.vdcodeassociate.runningtrackerapp.ui.Fragments
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.databinding.FragmentStatisticsBinding
 import com.vdcodeassociate.fitme.room.runs.Run
@@ -32,9 +37,29 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics){
     // total items counts for all stats
     private var totalItemCount = 0
 
+    // add View
+    private lateinit var adView: AdView
+    private val adSize: AdSize
+        get() {
+            val display = activity?.windowManager?.defaultDisplay
+            val outMetrics = DisplayMetrics()
+            display!!.getMetrics(outMetrics)
+
+            val density = outMetrics.density
+
+            val adWidthPixels = outMetrics.widthPixels.toFloat()
+
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(requireContext(), adWidth)
+        }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStatisticsBinding.bind(view)
+
+        // Adaptive advt.
+        initAdaptiveAd()
+        binding.adViewContainer.addView(adView)
 
         // viewModel observers
         viewModelObservers()
@@ -103,6 +128,26 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics){
         mStackedBarChart.animationTime = 1000
         mStackedBarChart.startAnimation()
 
+    }
+
+    // init add
+    private fun initAdaptiveAd(){
+        // Initialize the Mobile Ads SDK.
+        MobileAds.initialize(requireContext()) { }
+
+        adView = AdView(requireContext())
+        loadBanner()
+    }
+
+    private fun loadBanner() {
+        adView.adUnitId = "ca-app-pub-3940256099942544/6300978111" //TODO - change
+        adView.adSize = adSize
+
+        // Create an ad request.
+        val adRequest = AdRequest.Builder().build()
+
+        // Start loading the ad in the background.
+        adView.loadAd(adRequest)
     }
 
 }

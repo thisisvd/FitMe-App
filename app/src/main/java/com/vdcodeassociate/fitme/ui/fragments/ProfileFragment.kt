@@ -5,15 +5,21 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
@@ -34,6 +40,9 @@ import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile){
+
+    // TAG
+    private val TAG = "ProfileFragment"
 
     // viewBinding
     private lateinit var binding: FragmentProfileBinding
@@ -61,6 +70,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
 
         // viewModel observers
         viewModelObservers()
+
+        // load banner advt.
+        loadBannerAdd()
 
         // load user data from shared pref.
         loadFieldsFromSharedPreferences()
@@ -90,6 +102,41 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
                 updateStepDistGoal()
             }
 
+        }
+
+    }
+
+    // load banner adds
+    private fun loadBannerAdd() {
+        MobileAds.initialize(requireContext()) {}
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+
+        binding.adView.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                Log.d(TAG,"AdLoaded!")
+            }
+
+            override fun onAdFailedToLoad(adError : LoadAdError) {
+                // Code to be executed when an ad request fails.
+                Log.d(TAG,adError.toString())
+            }
+
+            override fun onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            override fun onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
         }
 
     }

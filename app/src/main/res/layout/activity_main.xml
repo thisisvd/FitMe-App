@@ -40,7 +40,7 @@
             android:id="@+id/flFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottomNavigationView"
+            android:layout_above="@+id/bottom_Linear_layout_home"
             android:layout_below="@+id/toolbar">
 
             <fragment
@@ -53,15 +53,34 @@
 
         </FrameLayout>
 
+        <LinearLayout
+            android:id="@+id/bottom_Linear_layout_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/bottomNavigationView"
+                android:layout_centerHorizontal="true"
+                app:adSize="SMART_BANNER"
+                app:adUnitId="ca-app-pub-3940256099942544/6300978111">
+
+            </com.google.android.gms.ads.AdView>
+
         <com.ismaeldivita.chipnavigation.ChipNavigationBar
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:background="#ffffff"
             android:elevation="16dp"
             android:padding="6dp"
             app:cnb_menuResource="@menu/bottom_nav_menu" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

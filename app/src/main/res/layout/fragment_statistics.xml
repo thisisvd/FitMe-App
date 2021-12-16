@@ -10,11 +10,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/allerta"
-        android:text="Intermediate\nResults"
+        android:text="Intermediate Results"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:layout_marginLeft="10dp"
         android:textStyle="bold" />
+
+    <FrameLayout
+        android:id="@+id/ad_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"/>
 
     <GridLayout
         android:layout_width="match_parent"

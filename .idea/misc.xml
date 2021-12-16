@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Dell/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_dropdown_item_1line.xml" value="0.16944444444444445" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/drawable-v24/ic_close_white.xml" value="0.17835051546391753" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/drawable-v24/ic_delete.xml" value="0.17835051546391753" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/drawable-v24/ic_pause_black_24dp.xml" value="0.17835051546391753" />
@@ -31,7 +32,8 @@
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/layout/fragment_statistics.xml" value="0.16944444444444445" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/layout/fragment_support.xml" value="0.16944444444444445" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/layout/fragment_tracking.xml" value="0.16944444444444445" />
-        <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/layout/item_run.xml" value="0.4224021592442645" />
+        <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/layout/item_run.xml" value="0.264" />
+        <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/layout/item_run_adds.xml" value="0.16944444444444445" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/layout/nav_drawer_header.xml" value="0.16944444444444445" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/layout/round_image_view.xml" value="0.16944444444444445" />
         <entry key="..\:/Users/Dell/Music/AndroidStudioProjects/CollegeProjects/FitMe/FitMe/app/src/main/res/layout/schedule_items.xml" value="0.264" />
