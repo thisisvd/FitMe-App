@@ -158,6 +158,7 @@ class TrackingService: LifecycleService() {
         isTimeEnable = false
     }
 
+    // update notification
     private fun updateNotificationTrackingState(isTracking: Boolean) {
         val notificationActionText = if(isTracking) "Pause" else "Resume"
         val pendingIntent = if(isTracking) {
@@ -209,6 +210,7 @@ class TrackingService: LifecycleService() {
         }
     }
 
+    // adding new path points to the previous points
     private fun addPathPoints(location: Location?) {
         location?.let {
             val pos = LatLng(location.latitude,location.longitude)
@@ -219,6 +221,7 @@ class TrackingService: LifecycleService() {
         }
     }
 
+    // update location tracking
     private fun updateLocationTracking(isTracking: Boolean) {
         if(isTracking){
             if(Permissions.hasLocationPermission(this)){
@@ -249,7 +252,7 @@ class TrackingService: LifecycleService() {
     }
 
     // location callback
-    val locationCallback = object : LocationCallback(){
+    private val locationCallback = object : LocationCallback(){
         override fun onLocationResult(p0: LocationResult?) {
             super.onLocationResult(p0)
             if(isTracking.value!!){
@@ -264,11 +267,13 @@ class TrackingService: LifecycleService() {
         }
     }
 
+    // adding empty poly-lines
     private fun addEmptyPolyline() = pathPoints.value?.apply {
         add(mutableListOf())
         pathPoints.postValue(this)
     } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
 
+    // Starting a foreground service
     @RequiresApi(Build.VERSION_CODES.ECLAIR)
     private fun startForegroundService() {
         startTimer()
@@ -300,6 +305,7 @@ class TrackingService: LifecycleService() {
 
     }
 
+    // Creating a notification channel
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(notificationManager: NotificationManager){
         val channel = NotificationChannel(
