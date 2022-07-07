@@ -16,8 +16,12 @@ A Running Tracker App which tracks run or walk distance by using maps SDK and pe
 
 ## Screenshots
 
-![](app/src/main/res/drawable/aboutus_icons8.png)
-
+<p float="left">
+<img src="app/src/main/res/drawable/screenshot_001.jpg" width="200">
+<img src="app/src/main/res/drawable/screenshot_002.png" width="200">
+<img src="app/src/main/res/drawable/screenshot_003.jpg" width="200">
+</p>
+ 
 ## Main Tech Stack
 
 **Client:** Kotlin, SQLite(Room), Android Studio
