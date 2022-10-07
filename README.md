@@ -17,9 +17,11 @@ A Running Tracker App which tracks run or walk distance by using maps SDK and pe
 ## Screenshots
 
 <p float="left">
-<img src="app/src/main/res/drawable/screenshot_001.jpg" width="200">
-<img src="app/src/main/res/drawable/screenshot_003.jpg" width="200">
-<img src="app/src/main/res/drawable/screenshot_002.png" width="200">
+<img src="app/src/main/res/drawable/screenshot_001.jpg" width="190">
+<img src="app/src/main/res/drawable/screenshot_003.png" width="190">
+<img src="app/src/main/res/drawable/screenshot_002.png" width="190">
+<img src="app/src/main/res/drawable/screenshot_004.jpg" width="190">
+<img src="app/src/main/res/drawable/screenshot_005.jpg" width="190">
 </p>
  
 ## Main Tech Stack
