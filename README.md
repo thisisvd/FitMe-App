@@ -8,12 +8,6 @@ A Running Tracker App which tracks run or walk distance by using maps SDK and pe
  - [Project Screenshots](https://drive.google.com/drive/folders/1ux5hInwdHCKFBLXxt1ALX_d8Nsd6Sswo?usp=sharing)
  - [Project Prototype](https://drive.google.com/file/d/1v39jWIhYB0mf8neDXWUhti9UclUm3Hvc/view?usp=sharing)
  
-
-## Contributor's 
-
-- [@thisisvd](https://github.com/thisisvd)
-- [@Akash1308](https://github.com/Akash1308)
-
 ## Screenshots
 
 <p float="left">
@@ -50,4 +44,4 @@ Maps, charts and many dependencies
 
 ## Copyright
 
-© 2021-2022 FitMe. All rights reserved.
+© 2021-2023 FitMe. All rights reserved.
