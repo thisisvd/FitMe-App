@@ -8,10 +8,6 @@
     <string name="close">CLOSE</string>
     <string name="inviteFriends">Hi! I use FitME app to track my runs and walking stats. Use my invite link to download the app - https://drive.google.com/drive/folders/1tmUjJbfLZajQUwAkBN9LgoJldlOtbSmC?usp=sharing\n\n Stay fit, Stay healthy!\n Thankyou! </string>
 
-    <!--    Real Add Unit IDS -->
-    <!--    <string name="banner_add_id">ca-app-pub-7258972489562157/1946107147</string>-->
-    <!--    <string name="interstitial_add_id">ca-app-pub-7258972489562157/3624336116</string>-->
-
     <!--    FAKE Add Unit IDS -->
     <string name="banner_add_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="interstitial_add_id">ca-app-pub-3940256099942544/1033173712</string>
