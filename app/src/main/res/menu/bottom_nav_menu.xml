@@ -23,9 +23,9 @@
         app:cnb_textColor="@color/white" />
 
     <item
-        android:id="@+id/statisticsFragment"
-        android:title="Statistics"
-        android:icon="@drawable/statistics_icons8"
+        android:id="@+id/videoListFragment"
+        android:title="Tutorials"
+        android:icon="@drawable/baseline_ondemand_video_24"
         app:cnb_backgroundColor="@color/black"
         app:cnb_iconColor="@color/white"
         app:cnb_iconTintMode="src_in"

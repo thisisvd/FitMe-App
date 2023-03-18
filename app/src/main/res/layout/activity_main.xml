@@ -67,6 +67,7 @@
                 android:layout_above="@+id/bottomNavigationView"
                 android:layout_centerHorizontal="true"
                 app:adSize="SMART_BANNER"
+                android:visibility="gone"
                 app:adUnitId="@string/banner_add_id">
 
             </com.google.android.gms.ads.AdView>

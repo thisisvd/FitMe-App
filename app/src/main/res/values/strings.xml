@@ -1,17 +1,18 @@
 <resources>
     <string name="app_name">FitME</string>
 
-    <string name="MAPS_API_kEY">AIzaSyBf4RmpYPt8ZiG7SmISU0I9Y--XlxL-DMM</string>
+    <string name="MAPS_API_kEY">AIzaSyAzohx_00_q4jtGxXpyJyYm8qaU77zHqho</string>
+    <string name="CLIENT_ID_API_KEY">254350108678-4pcmasqacj7s54604k6mrrd0tq16r270.apps.googleusercontent.com</string>
 
     <string name="open">OPEN</string>
     <string name="close">CLOSE</string>
     <string name="inviteFriends">Hi! I use FitME app to track my runs and walking stats. Use my invite link to download the app - https://drive.google.com/drive/folders/1tmUjJbfLZajQUwAkBN9LgoJldlOtbSmC?usp=sharing\n\n Stay fit, Stay healthy!\n Thankyou! </string>
 
-<!--    Real Add Unit IDS -->
-<!--    <string name="banner_add_id">ca-app-pub-7258972489562157/1946107147</string>-->
-<!--    <string name="interstitial_add_id">ca-app-pub-7258972489562157/3624336116</string>-->
+    <!--    Real Add Unit IDS -->
+    <!--    <string name="banner_add_id">ca-app-pub-7258972489562157/1946107147</string>-->
+    <!--    <string name="interstitial_add_id">ca-app-pub-7258972489562157/3624336116</string>-->
 
-<!--    FAKE Add Unit IDS -->
+    <!--    FAKE Add Unit IDS -->
     <string name="banner_add_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="interstitial_add_id">ca-app-pub-3940256099942544/1033173712</string>
 

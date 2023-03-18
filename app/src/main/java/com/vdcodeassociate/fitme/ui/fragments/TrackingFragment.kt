@@ -96,7 +96,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
 
             // Finish a run
             btnFinishRun.setOnClickListener {
-                zoomToSeeMap()
+//                zoomToSeeMap()
                 saveDataToRoom()
             }
 

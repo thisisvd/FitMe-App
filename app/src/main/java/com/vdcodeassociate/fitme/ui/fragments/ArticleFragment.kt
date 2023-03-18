@@ -1,11 +1,12 @@
 package com.vdcodeassociate.fitme.ui.fragments
 
+import android.app.Dialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
@@ -23,14 +24,17 @@ class ArticleFragment: Fragment(R.layout.fragment_articles) {
     // TAG
     private var TAG = "ArticleFragment"
 
-    // viewBinding
+    // view binding
     private lateinit var binding: FragmentArticlesBinding
 
-    // Recycler adapter
+    // recycler adapter
     private lateinit var articleAdapter: ArticleAdapter
 
-    // viewModel
+    // view model
     private val viewModel: NewsViewModel by viewModels()
+
+    // alert progress dialog
+    private lateinit var dialog: Dialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,6 +42,16 @@ class ArticleFragment: Fragment(R.layout.fragment_articles) {
 
         // get args
         val getArgs = arguments?.getInt("amount")
+
+        // init Loading Dialog
+        dialog = Dialog(requireContext())
+        dialog.apply {
+            setContentView(R.layout.custom_dialog_layout)
+            setCancelable(false)
+            if (window != null) {
+                window!!.setBackgroundDrawable(ColorDrawable(0))
+            }
+        }
 
         // init recyclerView
         setUpRecyclerView()
@@ -59,20 +73,7 @@ class ArticleFragment: Fragment(R.layout.fragment_articles) {
             newsTabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
 
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-
-                    var queryPosition = 0
-
-                    when(tab?.position) {
-                        1 -> queryPosition = 1
-                        2 -> queryPosition = 2
-                    }
-
-                    viewModel.isDataAdded = false
-
-                    viewModel.tabLatestNews(queryPosition)
-                    binding.recyclerView.visibility = View.GONE
-                    articleAdapter.notifyDataSetChanged()
-
+                    viewModel.tabLatestNews(tab!!.position)
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -110,29 +111,28 @@ class ArticleFragment: Fragment(R.layout.fragment_articles) {
     // viewModel observer method
     private fun viewModelObserver() {
         // viewModel observe
-        viewModel.getLatestNews.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.getLatestNews.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let { newsResponse ->
-                        articleAdapter.differ.submitList(newsResponse.articles)
-                        articleAdapter.notifyDataSetChanged()
-                        if (viewModel.isDataAdded) {
-                            binding.progress.visibility = View.GONE
-                            binding.recyclerView.visibility = View.VISIBLE
+                        if (!newsResponse.articles.isNullOrEmpty()) {
+                            articleAdapter.differ.submitList(newsResponse.articles)
+                            dialog.dismiss()
                         }
                     }
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Log.e(TAG, "AN error occurred : $message")
+                        Log.d(TAG, "An error occurred : $message")
                     }
+                    dialog.dismiss()
                 }
                 is Resource.Loading -> {
-                    binding.progress.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.GONE
+                    Log.d(TAG, "Articles loading...")
+                    dialog.show()
                 }
             }
-        })
+        }
     }
 
     // set up recycler view

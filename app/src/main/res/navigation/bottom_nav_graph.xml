@@ -16,6 +16,18 @@
         <action
             android:id="@+id/action_setupFragment_to_permissionRequiredFragment"
             app:destination="@id/permissionRequiredFragment" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="photoUrl"
+            app:argType="string" />
+        <argument
+            android:name="userID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/runFragment"
@@ -25,10 +37,6 @@
             android:id="@+id/action_runFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/statisticsFragment"
-        android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.StatisticsFragment"
-        android:label="StatisticsFragment" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.ProfileFragment"
@@ -91,5 +99,23 @@
         <argument
             android:name="article"
             app:argType="com.vdcodeassociate.newsheadlines.kotlin.model.Article" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoListFragment"
+        android:name="com.vdcodeassociate.fitme.ui.fragments.VideoListFragment"
+        android:label="fragment_video_list"
+        tools:layout="@layout/fragment_video_list" >
+        <action
+            android:id="@+id/action_videoListFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.vdcodeassociate.fitme.ui.fragments.VideoFragment"
+        android:label="fragment_video"
+        tools:layout="@layout/fragment_video" >
+        <argument
+            android:name="videoItem"
+            app:argType="com.digitalinclined.edugate.models.youtubemodel.Item" />
     </fragment>
 </navigation>

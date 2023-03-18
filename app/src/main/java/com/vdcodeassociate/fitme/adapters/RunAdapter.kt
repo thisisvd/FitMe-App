@@ -21,7 +21,7 @@ import com.vdcodeassociate.fitme.utils.Utils
 import java.text.SimpleDateFormat
 import kotlin.math.roundToInt
 
-class RunAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RunAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val itemRV = 1
     private val itemAD = 2
@@ -32,10 +32,11 @@ class RunAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.ViewHo
     inner class RunViewHolder(val binding: ItemRunBinding) : RecyclerView.ViewHolder(binding.root)
 
     // ADD ViewHolder
-    inner class ADDViewHolder(val binding: ItemRunAddsBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ADDViewHolder(val binding: ItemRunAddsBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     // differ callback
-    private val diffCallBack = object : DiffUtil.ItemCallback<Run>(){
+    private val diffCallBack = object : DiffUtil.ItemCallback<Run>() {
         override fun areItemsTheSame(oldItem: Run, newItem: Run): Boolean {
             return oldItem.id == newItem.id
         }
@@ -46,7 +47,7 @@ class RunAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     // differ
-    val differ = AsyncListDiffer(this,diffCallBack)
+    val differ = AsyncListDiffer(this, diffCallBack)
 
     fun submitList(list: List<Run>) = differ.submitList(list)
 
@@ -60,11 +61,12 @@ class RunAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.ViewHo
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return if(viewType == itemRV){
-            val binding = ItemRunBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return if (viewType == itemRV) {
+            val binding = ItemRunBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             RunViewHolder(binding)
-        }else {
-            val binding = ItemRunAddsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        } else {
+            val binding =
+                ItemRunAddsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             ADDViewHolder(binding)
         }
 
@@ -223,5 +225,4 @@ class RunAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.ViewHo
     fun setOnItemClickListener(listener: (Run) -> Unit) {
         onItemClickListener = listener
     }
-
 }

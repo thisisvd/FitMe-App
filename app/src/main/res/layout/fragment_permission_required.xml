@@ -45,7 +45,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/allerta"
-            android:text="Welcome, In order to use our application we first need to request location and GPS permission from you. Otherwise we will not be able to provide you with our services. if you agree and wish to continue tap on the button below."
+            android:text="Welcome, To use our application, we first need to request location and GPS permission from you. Otherwise, we will not be able to provide you with our services. If you agree and wish to continue, tap the button below."
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="bold" />

@@ -1,6 +1,8 @@
 package com.vdcodeassociate.fitme.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
+import com.digitalinclined.edugate.models.youtubemodel.Item
 import com.vdcodeassociate.fitme.model.homemodel.WeekStatsHome
 import com.vdcodeassociate.fitme.restapi.weatherapi.model.WeatherResponse
 import com.vdcodeassociate.fitme.room.runs.Run
@@ -10,6 +12,7 @@ import com.vdcodeassociate.fitme.viewmodel.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.lang.Exception
 import java.util.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
@@ -31,10 +34,37 @@ class HomeViewModel @Inject constructor(
     // mediator live Data for sorted runs
     var sortedWeeklyStats = MediatorLiveData<WeekStatsHome>()
 
+    // banner details
+    var getYoutubeSearchResult: MutableLiveData<Resource<List<Item>>> = MutableLiveData()
+
     // init
     init {
-//        getWeatherUpdate("Jabalpur")
         sortWeeklyDate()
+    }
+
+    // get youtube videos result
+    fun getYoutubeResult(query: String) = viewModelScope.launch {
+        getYoutubeSearchResult.postValue(Resource.Loading())
+
+        try {
+            // sending request
+            val response = repository.getYoutubeSearchQuery(query)
+
+            if (response.isSuccessful) {
+                response.body().let { response ->
+                    if (response != null && response.items.isNotEmpty()) {
+                        getYoutubeSearchResult.postValue(Resource.Success(response.items))
+                    }
+                }
+
+            } else {
+                getYoutubeSearchResult.postValue(Resource.Error(response.message().toString()))
+            }
+
+        } catch (e: Exception) {
+            getYoutubeSearchResult.postValue(Resource.Error(e.message.toString()))
+            e.printStackTrace()
+        }
     }
 
     // getting data from repos
@@ -95,5 +125,4 @@ class HomeViewModel @Inject constructor(
             0
         }
     }
-
 }

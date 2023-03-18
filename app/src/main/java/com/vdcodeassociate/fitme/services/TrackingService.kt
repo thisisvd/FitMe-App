@@ -7,6 +7,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_LOW
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
@@ -26,6 +27,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_PAUSE_SERVICE
@@ -102,7 +104,7 @@ class TrackingService: LifecycleService() {
         super.onCreate()
         postInitValues()
         currentNotificationBuilder = baseNotificationBuilder
-        fusedLocationProviderClient = FusedLocationProviderClient(this)
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         isTracking.observe(this, Observer {
             updateLocationTracking(it)
@@ -165,12 +167,21 @@ class TrackingService: LifecycleService() {
             val pauseIntent = Intent(this,TrackingService::class.java).apply {
                 action = ACTION_PAUSE_SERVICE
             }
-            PendingIntent.getService(this,1,pauseIntent, FLAG_UPDATE_CURRENT)
-        }else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.getService(this, 1, pauseIntent, FLAG_IMMUTABLE)
+            } else {
+                PendingIntent.getService(this, 1, pauseIntent, FLAG_UPDATE_CURRENT)
+            }
+        } else {
             val resumeIntent = Intent(this, TrackingService::class.java).apply {
                 action = ACTION_START_OR_RESUME_SERVICE
             }
-            PendingIntent.getService(this,1,resumeIntent, FLAG_UPDATE_CURRENT)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.getService(this, 1, resumeIntent, FLAG_IMMUTABLE)
+
+            } else {
+                PendingIntent.getService(this, 1, resumeIntent, FLAG_UPDATE_CURRENT)
+            }
         }
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -253,7 +264,7 @@ class TrackingService: LifecycleService() {
 
     // location callback
     private val locationCallback = object : LocationCallback(){
-        override fun onLocationResult(p0: LocationResult?) {
+        override fun onLocationResult(p0: LocationResult) {
             super.onLocationResult(p0)
             if(isTracking.value!!){
                 p0?.locations?.let { locations ->

@@ -36,27 +36,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabGravity="fill"
-        app:tabTextColor="#C4C4C4"
-        app:tabSelectedTextColor="@color/black"
+        app:tabIndicatorColor="@color/black"
         app:tabInlineLabel="true"
-        app:tabIndicatorColor="@color/black"/>
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="#C4C4C4" />
 
-    <RelativeLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone" />
-
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

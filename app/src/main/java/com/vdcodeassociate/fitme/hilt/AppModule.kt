@@ -21,12 +21,16 @@ import com.vdcodeassociate.fitme.constants.Constants.RUNNING_DATABASE_NAME
 import com.vdcodeassociate.fitme.constants.Constants.SCHEDULE_DATABASE_NAME
 import com.vdcodeassociate.fitme.constants.Constants.SHARED_PREFERENCES_NAME
 import com.vdcodeassociate.fitme.constants.Constants.WEATHER_URL
+import com.vdcodeassociate.fitme.constants.Constants.YOUTUBE_API_URL
 import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIHelper
 import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIHelperImpl
 import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIInterface
 import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIHelper
 import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIHelperImpl
 import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIInterface
+import com.vdcodeassociate.fitme.restapi.youtubeapi.api.YoutubeAPIHelper
+import com.vdcodeassociate.fitme.restapi.youtubeapi.api.YoutubeAPIHelperImpl
+import com.vdcodeassociate.fitme.restapi.youtubeapi.api.YoutubeAPIInterface
 import com.vdcodeassociate.fitme.room.runs.RunDatabase
 import com.vdcodeassociate.fitme.room.schedules.ScheduleDatabase
 import dagger.Module
@@ -176,5 +180,21 @@ object AppModule {
     @Singleton
     fun provideApiHelperWeather(apiHelper: WeatherAPIHelperImpl): WeatherAPIHelper = apiHelper
 
+    // youtube search video query
+    @Singleton
+    @Provides
+    @Named("YoutubeAPI")
+    fun provideRetrofitYoutubeVideos(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(YOUTUBE_API_URL)
+        .client(okHttpClient)
+        .build()
+
+    @Provides
+    fun provideApiInterfaceYoutubeVideos(@Named("YoutubeAPI") retrofit: Retrofit) = retrofit.create(YoutubeAPIInterface::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApiHelperYoutubeVideos(apiHelper: YoutubeAPIHelperImpl): YoutubeAPIHelper = apiHelper
 
 }

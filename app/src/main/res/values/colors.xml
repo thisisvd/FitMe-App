@@ -13,4 +13,11 @@
     <color name="black_normal_text">#373938</color>
     <color name="text_view_normal_color">#787878</color>
     <color name="card_back_light">#33A6A4A4</color>
+
+    // Extra colors
+    <color name="light_grey">#9F9F9F</color>
+    <color name="color_red">#FF0303</color>
+    <color name="light_grey_light">#409F9F9F</color>
+    <color name="secondary_theme_color">#F1C40F</color>
+
 </resources>

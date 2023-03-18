@@ -60,9 +60,7 @@ class AvatarDialog: DialogFragment() {
             avatarOthers.setOnClickListener {
                 changeAvatarID(R.drawable.profile_other_image)
             }
-
         }
-
     }
 
     // change const avatar id
@@ -93,5 +91,4 @@ class AvatarDialog: DialogFragment() {
     fun setOnItemClickListener(listener: (Int) -> Unit) {
         onItemClickListener = listener
     }
-
 }

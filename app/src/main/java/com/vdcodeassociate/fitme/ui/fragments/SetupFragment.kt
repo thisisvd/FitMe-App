@@ -3,22 +3,15 @@ package com.vdcodeassociate.runningtrackerapp.ui.Fragments
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
-import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textview.MaterialTextView
 import com.vdcodeassociate.fitme.R
-import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
 import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_BROADCASTID
@@ -34,17 +27,17 @@ import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
 import com.vdcodeassociate.fitme.databinding.FragmentSetupBinding
 import com.vdcodeassociate.fitme.ui.fragments.AvatarDialog
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.prefs.AbstractPreferences
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SetupFragment : Fragment(R.layout.fragment_setup){
+class SetupFragment : Fragment(R.layout.fragment_setup) {
 
     // TAG
     private val TAG = "SetupFragment"
 
-    // viewBinding
-    private lateinit var binding: FragmentSetupBinding
+    // view binding
+    private var _binding: FragmentSetupBinding? = null
+    private val binding get() = _binding!!
 
     // shared pref
     @Inject
@@ -53,50 +46,71 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
     @set:Inject       // to inject primitives
     var isAppFirstOpen = true
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        _binding = FragmentSetupBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSetupBinding.bind(view)
-
         binding.apply {
 
-            avatar.setOnClickListener{
+            // click listeners
+            setOnClickListeners()
+
+            if (!isAppFirstOpen) {
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.setupFragment, true)
+                    .build()
+                findNavController().navigate(
+                    R.id.action_setupFragment_to_permissionRequiredFragment,
+                    savedInstanceState,
+                    navOptions
+                )
+            }
+
+        }
+    }
+
+    // on click listeners
+    private fun setOnClickListeners() {
+        binding.apply {
+
+            // avatar click
+            avatar.setOnClickListener {
                 var dialog = AvatarDialog()
-                dialog.show(parentFragmentManager,"Avatar Fragment")
+                dialog.show(parentFragmentManager, "Avatar Fragment")
                 dialog.setOnItemClickListener {
                     avatar.setImageResource(it)
                 }
             }
 
+            // gender init
             gender.apply {
-                setAdapter(ArrayAdapter(requireContext() , android.R.layout.simple_dropdown_item_1line , listOf("Male", "Female" , "Others")))
+                setAdapter(
+                    ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_dropdown_item_1line,
+                        listOf("Male", "Female", "Others")
+                    )
+                )
             }
 
+            // continue click
             continueButton.setOnClickListener {
-                if(!isTextEmpty()){
-                    val success = writeDataToSharedPreference()
-                    if (success) {
-                        findNavController().navigate(R.id.action_setupFragment_to_permissionRequiredFragment)
-                    } else {
-                        Log.i(TAG,"Error at saving data to share preferences.")
-                    }
-                }else {
-                    Log.i(TAG,"Error at Text Not Empty.")
+                if (writeDataToSharedPreference()) {
+                    findNavController().navigate(R.id.action_setupFragment_to_permissionRequiredFragment)
                 }
             }
-
         }
-
-        if(!isAppFirstOpen){
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.setupFragment,true)
-                .build()
-            findNavController().navigate(R.id.action_setupFragment_to_permissionRequiredFragment,savedInstanceState,navOptions)
-        }
-
     }
 
     // error set to nulls
-    private fun allLayoutNull(){
+    private fun allLayoutNull() {
         binding.apply {
             nameLayout.error = null
             ageLayout.error = null
@@ -104,7 +118,12 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
             weightLayout.error = null
             heightLayout.error = null
             avatar.borderColor = Color.parseColor("#FF000000")
-            changeAvatarTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black_normal_text))
+            changeAvatarTextView.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.black_normal_text
+                )
+            )
         }
     }
 
@@ -142,7 +161,7 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
             if (weight.text!!.isEmpty()) {
                 weightLayout!!.error = "Weight can't be empty!"
                 result = true
-            }else if(weight.text!!.toString().toFloat() > 300){
+            } else if (weight.text!!.toString().toFloat() > 300) {
                 weightLayout!!.error = "Enter a valid Weight < 300 kg!"
                 result = true
             }
@@ -150,12 +169,12 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
             if (height.text!!.isEmpty()) {
                 heightLayout!!.error = "Height can't be empty!"
                 result = true
-            }else if(height.text!!.toString().toFloat() > 250){
+            } else if (height.text!!.toString().toFloat() > 250) {
                 heightLayout!!.error = "Enter a valid Height < 250 cm"
                 result = true
             }
 
-            if(AVATAR_ID == R.drawable.question_mark5){
+            if (AVATAR_ID == R.drawable.question_mark5) {
                 avatar.borderColor = Color.parseColor("#B1001A")
                 changeAvatarTextView.setTextColor(Color.parseColor("#B1001A"))
                 result = true
@@ -180,10 +199,10 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
                 .putFloat(KEY_HEIGHT, height.text.toString().toFloat())
                 .putInt(KEY_IMAGE, AVATAR_ID)
                 .putBoolean(KEY_FIRST_TIME_TOGGLE, false)
-                .putInt(KEY_STEP_GOAL,1000)
-                .putFloat(KEY_DISTANCE_GOAL,1.0f)
-                .putInt(KEY_HEART_POINTS,0)
-                .putInt(KEY_BROADCASTID,0)
+                .putInt(KEY_STEP_GOAL, 1000)
+                .putFloat(KEY_DISTANCE_GOAL, 1.0f)
+                .putInt(KEY_HEART_POINTS, 0)
+                .putInt(KEY_BROADCASTID, 0)
                 .apply()
 
         }
@@ -191,4 +210,8 @@ class SetupFragment : Fragment(R.layout.fragment_setup){
         return true
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

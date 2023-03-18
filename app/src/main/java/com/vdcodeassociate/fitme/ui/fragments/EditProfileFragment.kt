@@ -1,6 +1,5 @@
 package com.vdcodeassociate.fitme.ui.fragments
 
-import android.app.AlertDialog
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -9,8 +8,6 @@ import android.view.View
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.vdcodeassociate.fitme.R
@@ -177,7 +174,7 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
         val pGender = sharedPreferences.getString(Constants.KEY_GENDER, "")
         val pWeight = sharedPreferences.getFloat(Constants.KEY_WEIGHT, 80f)
         val pHeight = sharedPreferences.getFloat(Constants.KEY_HEIGHT, 80f)
-        val pImage = sharedPreferences.getInt(KEY_IMAGE, R.drawable.question_mark5)
+        val pImage = sharedPreferences.getInt(KEY_IMAGE, R.drawable.profile_other_image)
         AVATAR_ID = pImage
         binding.apply {
             name.setText(pName)

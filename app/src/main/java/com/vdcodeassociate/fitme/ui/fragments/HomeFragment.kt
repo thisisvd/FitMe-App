@@ -1,6 +1,5 @@
 package com.vdcodeassociate.fitme.ui.fragments
 
-import android.app.Activity
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -11,9 +10,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import app.futured.donut.DonutSection
@@ -22,9 +18,6 @@ import com.vdcodeassociate.fitme.databinding.FragmentHomeBinding
 import com.vdcodeassociate.fitme.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import java.sql.Timestamp
-
-import org.eazegraph.lib.models.BarModel
-
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -32,12 +25,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
 import com.vdcodeassociate.fitme.constants.Constants.KEY_HEART_POINTS
-import com.vdcodeassociate.fitme.constants.Constants.KEY_HEIGHT
-import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.ui.MainActivity
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
@@ -46,14 +36,6 @@ import com.vdcodeassociate.fitme.viewmodel.ScheduleViewModel
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
-import devlight.io.library.ArcProgressStackView
-import java.lang.Math.round
-import kotlin.math.roundToInt
-import org.eazegraph.lib.models.ValueLinePoint
-
-import org.eazegraph.lib.models.ValueLineSeries
-import im.dacer.androidcharts.LineView
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -67,7 +49,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModelRuns: MainViewModel by viewModels()
     private val viewModelSchedule: ScheduleViewModel by viewModels()
 
-    // viewBinding
+    // view binding
     private lateinit var binding: FragmentHomeBinding
 
     // Injected Shared preferences
@@ -108,11 +90,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             // Heart point injection
             homeWeeksHeartPts.text = sharedPreferences.getInt(KEY_HEART_POINTS, 0).toString()
 
-            // Home stats to Statistics fragment
-            homeStats.setOnClickListener {
-                (activity as MainActivity)!!.navigateToFragment(R.id.statisticsFragment)
-            }
-
             // Last run to run fragment
             homeLastRunLayout.setOnClickListener {
                 (activity as MainActivity)!!.navigateToFragment(R.id.runFragment)
@@ -135,20 +112,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             viewAllSchedules.setOnClickListener {
                 findNavController().navigate(R.id.scheduleFragment)
             }
-
         }
-
-        // barChart
-//        val barChart = binding.homeBarChart
-//        barChart.addBar(BarModel("Sun", 0.0f, -0xa9480f))
-//        barChart.addBar(BarModel("Mon", 0.0f, -0xa9480f))
-//        barChart.addBar(BarModel("Tue", 2f, -0xa9480f))
-//        barChart.addBar(BarModel("Wed", 2.7f, -0xa9480f))
-//        barChart.addBar(BarModel("Thu", 1f, -0xa9480f))
-//        barChart.addBar(BarModel("Fri", 0f, -0xa9480f))
-//        barChart.addBar(BarModel("Sat", 2f, -0xa9480f))
-//        barChart.startAnimation()
-
     }
 
     // viewModel observers
@@ -292,6 +256,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onPrepareOptionsMenu(menu: Menu) {
         val alertMenuItem = menu!!.findItem(R.id.profileFragmentIcon)
         val rootView = alertMenuItem.actionView as FrameLayout
+        // load user image
         rootView.findViewById<ImageView>(R.id.nav_profile_image).setImageResource(AVATAR_ID)
         rootView.setOnClickListener {
             onOptionsItemSelected(alertMenuItem)

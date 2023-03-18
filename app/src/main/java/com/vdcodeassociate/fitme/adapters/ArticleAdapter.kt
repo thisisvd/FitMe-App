@@ -16,7 +16,8 @@ import com.vdcodeassociate.newsheadlines.kotlin.model.Article
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.NewsViewHolder>() {
 
     // ViewHolder inner class
-    inner class NewsViewHolder(val binding: NewsItemsBinding): RecyclerView.ViewHolder(binding.root)
+    inner class NewsViewHolder(val binding: NewsItemsBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     // Diff Util call back
     private val differCallback = object : DiffUtil.ItemCallback<Article>() {
@@ -36,7 +37,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.NewsViewHolder>() {
     // Recycler Components
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         return NewsViewHolder(
-            NewsItemsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            NewsItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -50,7 +51,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.NewsViewHolder>() {
         requestOptions.centerCrop()
 
         holder.binding.apply {
-            if(article.urlToImage != null) {
+            if (article.urlToImage != null) {
                 Glide.with(root)
                     .load(article.urlToImage)
                     .apply(requestOptions)
@@ -66,8 +67,6 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.NewsViewHolder>() {
                 onItemClickListener?.let { it(article) }
             }
         }
-
-
     }
 
     override fun getItemCount(): Int {
@@ -79,5 +78,4 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.NewsViewHolder>() {
     fun setOnItemClickListener(listener: (Article) -> Unit) {
         onItemClickListener = listener
     }
-
 }

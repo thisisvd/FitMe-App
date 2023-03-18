@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/menu_sort_by"
+            android:title="Sort by">
+            <menu>
+                <item
+                    android:id="@+id/menu_social_all"
+                    android:title="All Posts" />
+                <item
+                    android:id="@+id/menu_social_friends"
+                    android:title="Friends Posts" />
+                <item
+                    android:id="@+id/menu_social_me"
+                    android:title="My Posts" />
+            </menu>
+        </item>
+    </group>
+
+
+</menu>

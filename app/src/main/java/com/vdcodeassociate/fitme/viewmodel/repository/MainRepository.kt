@@ -2,6 +2,7 @@ package com.vdcodeassociate.fitme.viewmodel.repository
 
 import com.vdcodeassociate.fitme.restapi.newsapi.NewsAPIHelper
 import com.vdcodeassociate.fitme.restapi.weatherapi.api.WeatherAPIHelper
+import com.vdcodeassociate.fitme.restapi.youtubeapi.api.YoutubeAPIHelper
 import com.vdcodeassociate.fitme.room.runs.Run
 import com.vdcodeassociate.fitme.room.runs.RunDao
 import com.vdcodeassociate.fitme.room.schedules.Schedule
@@ -13,6 +14,7 @@ class MainRepository @Inject constructor(
     val runDao: RunDao,
     private val newsAPIHelper: NewsAPIHelper,
     private val weatherAPIHelper: WeatherAPIHelper,
+    private val youtubeAPIHelper: YoutubeAPIHelper,
     private val scheduleDao: ScheduleDao
 ) {
 
@@ -49,6 +51,9 @@ class MainRepository @Inject constructor(
 
     // Current Weather functions -
     suspend fun getWeatherUpdate(query: String) = weatherAPIHelper.getWeatherUpdate(query)
+
+    // get youtube search query videos
+    suspend fun getYoutubeSearchQuery(query: String) = youtubeAPIHelper.getYoutubeSearchQuery(query)
 
     // Schedule Room Database
     // insert data in schedule db

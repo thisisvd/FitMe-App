@@ -9,27 +9,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.MainThread
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.vdcodeassociate.fitme.R
-import com.vdcodeassociate.fitme.constants.Constants
-import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
-import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_BROADCASTID
-import com.vdcodeassociate.fitme.databinding.ChooseAvatarDialogBinding
 import com.vdcodeassociate.fitme.databinding.SchedulerDialogBinding
 import com.vdcodeassociate.fitme.room.schedules.Schedule
-import com.vdcodeassociate.fitme.ui.MainActivity
 import com.vdcodeassociate.fitme.viewmodel.ScheduleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
-import javax.xml.datatype.DatatypeConstants.MONTHS
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint

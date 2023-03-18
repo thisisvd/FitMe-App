@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.ui.MainActivity
@@ -23,20 +24,18 @@ object ServiceModule {
     @Provides
     fun provideFusedLocationProviderClient(
         @ApplicationContext app: Context
-    ) = FusedLocationProviderClient(app)
+    ) = LocationServices.getFusedLocationProviderClient(app)
 
     @ServiceScoped
     @Provides
     fun provideMainActivityPendingIntent(
         @ApplicationContext app: Context
-    ) = PendingIntent.getActivity(
-        app,
-        0,
-        Intent(app, MainActivity::class.java).also {
-            it.action = Constants.ACTION_SHOW_TRACKING_FRAGMENT
-        },
-        PendingIntent.FLAG_UPDATE_CURRENT
-    )
+    ) = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+        PendingIntent.getActivity(app, 0, Intent(app, MainActivity::class.java).also { it.action = Constants.ACTION_SHOW_TRACKING_FRAGMENT }, PendingIntent.FLAG_IMMUTABLE)
+    } else {
+        PendingIntent.getActivity(app, 0, Intent(app, MainActivity::class.java).also { it.action = Constants.ACTION_SHOW_TRACKING_FRAGMENT }, PendingIntent.FLAG_UPDATE_CURRENT)
+    }
+
 
     // notification builder to construct actual notification with foreground service and a pending
     // intent which leads the user from notification to tracking activity

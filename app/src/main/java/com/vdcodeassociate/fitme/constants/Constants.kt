@@ -1,7 +1,10 @@
 package com.vdcodeassociate.fitme.constants
 
+import android.content.res.Resources
 import android.graphics.Color
+import androidx.lifecycle.MutableLiveData
 import com.vdcodeassociate.fitme.R
+import com.vdcodeassociate.fitme.utils.Resource
 
 object Constants {
 
@@ -10,11 +13,12 @@ object Constants {
 
         // Weather URL
         const val WEATHER_URL = "http://api.weatherapi.com/v1/"
-        const val WEATHER_API_KEY = "002e410db6ef45eaae3174227210511"
 
         // News URL
-        const val API_KEY = "e6a7a646f7404e96a430f16b307c60e5"
         const val BASE_URL = "https://newsapi.org/"
+
+        // Youtube API URL
+        const val YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/"
 
         // Database Constant
         const val RUNNING_DATABASE_NAME = "running_db"
@@ -65,5 +69,11 @@ object Constants {
 
         // advt. count
         var MAIN_AD_COUNT = 0
+
+        // image selection code
+        const val IMAGE_SELECTION_CODE = 9965
+
+        // firebase userId's
+        const val USER_ID = "6NMEfmmnwjPEoIA8mYCC"
 
 }

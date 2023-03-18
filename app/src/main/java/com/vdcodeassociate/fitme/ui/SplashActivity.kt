@@ -6,6 +6,7 @@ import android.content.Intent
 
 import android.os.CountDownTimer
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import com.vdcodeassociate.fitme.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
@@ -17,8 +18,10 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.apply {
+
+            // Force No Night mode
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
             // delay LaunchScreen for 6 sec
             object : CountDownTimer(6000, 1000) {
