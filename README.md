@@ -6,9 +6,7 @@ A Running Tracker App which tracks run or walk distance by using maps SDK and pe
 
 ## Objective
 
-Number of smartphone users has spread rapidly around the globe, along with this the use of Health and fitness apps has also increased because people prefer to track their fitness from their mobile rather than the traditional method of going and seeing a doctor. 
-There are several health and fitness apps in the market that are loaded with tons of features ,but these irrelevant features distracts the user and also makes the app complex to use ,taking away the main purpose of the app.
-So keeping in mind all these factors we have developed a fitness app FITME which is user friendly and easy to use and has hassle free experience which does not distracts the users from their main goal.
+The number of smartphone users has spread rapidly around the globe, along with this the use of Health and fitness apps has also increased because people prefer to track their fitness from their mobile rather than the traditional method of going and seeing a doctor. Several health and fitness apps in the market are loaded with tons of features, hat but these irrelevant features distract the user and also make the app complex to use, taking away the main purpose of the app. So keeping in mind all these factors we have developed a fitness app FITME which is user-friendly and easy to use and has a hassle-free experience t does not distract the users from their main goal.
 
 ## Acknowledgements
 
