@@ -2,18 +2,13 @@ package com.vdcodeassociate.fitme.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.widget.DialogTitle
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hsalf.smileyrating.SmileyRating
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.databinding.FragmentSupportBinding
-import kotlin.properties.Delegates
 
 class SupportFragment : Fragment(R.layout.fragment_support) {
 
@@ -44,7 +39,7 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
             // Smile Listener
             smileRating.setSmileySelectedListener { type ->
 
-                when{
+                when {
                     SmileyRating.Type.GREAT == type -> smileCount = 5
                     SmileyRating.Type.GOOD == type -> smileCount = 4
                     SmileyRating.Type.OKAY == type -> smileCount = 3
@@ -66,8 +61,8 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
 
             // edit text on watch listener
             supportEditText.apply {
-                doOnTextChanged { _, _ , _, _ ->
-                    if(supportLayout.error != null){
+                doOnTextChanged { _, _, _, _ ->
+                    if (supportLayout.error != null) {
                         supportLayout.error = null
                     }
                 }
@@ -81,32 +76,43 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
     private fun onButtonPressed(isHelp: String) {
         if (!isTextEmpty()) {
             if (isHelp == "Get Help!") {
-                showDialog("Request Sent!","Your request has been successfully recorded and will be responded soon!",R.drawable.help_red_icons8)
-            }else {
-                showDialog("Feedback!","Thank you for taking the time to provide your feedback, it help us to improve your experience!",R.drawable.feedback_big_icons8)
+                showDialog(
+                    "Request Sent!",
+                    "Your request has been successfully recorded and will be responded soon!",
+                    R.drawable.help_red_icons8
+                )
+            } else {
+                showDialog(
+                    "Feedback!",
+                    "Thank you for taking the time to provide your feedback, it help us to improve your experience!",
+                    R.drawable.feedback_big_icons8
+                )
             }
         }
     }
 
     // on complete dialog
-    private fun showDialog(title: String, message: String, icon: Int){
-        val dialog = MaterialAlertDialogBuilder(requireContext(),R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+    private fun showDialog(title: String, message: String, icon: Int) {
+        val dialog = MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        )
             .setTitle(title)
             .setMessage(message)
             .setIcon(icon)
-            .setPositiveButton("OK"){ _, _ ->
+            .setPositiveButton("OK") { _, _ ->
                 requireActivity().onBackPressed()
             }
             .create()
         dialog.show()
     }
 
-    private fun isTextEmpty(): Boolean{
+    private fun isTextEmpty(): Boolean {
         var result = false
 
         binding.apply {
 
-            if (supportEditText.text!!.isEmpty()){
+            if (supportEditText.text!!.isEmpty()) {
                 supportLayout.error = "Required!"
                 result = true
             }

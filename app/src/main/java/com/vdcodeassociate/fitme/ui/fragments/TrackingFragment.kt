@@ -41,7 +41,7 @@ import kotlin.math.roundToInt
 const val CANCEL_TRACKING_DIALOG_TAG = "Cancel Dialog"
 
 @AndroidEntryPoint
-class TrackingFragment : Fragment(R.layout.fragment_tracking){
+class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     // ViewModel
     private val viewModel: MainViewModel by viewModels()
@@ -137,17 +137,17 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
 
         TrackingService.timeRunsInMillis.observe(viewLifecycleOwner, Observer {
             currentTimeInMillis = it
-            val formattedTime = TrackingUtility.getFormattedStopWatchTime(currentTimeInMillis,true)
+            val formattedTime = TrackingUtility.getFormattedStopWatchTime(currentTimeInMillis, true)
             binding.tvTimer.text = formattedTime
         })
     }
 
     // toggle run button services
-    private fun toggleRun(){
-        if(isTracking){
+    private fun toggleRun() {
+        if (isTracking) {
             binding.cancel.visibility = View.VISIBLE
             sendCommandToService(ACTION_PAUSE_SERVICE)
-        }else {
+        } else {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
         }
     }
@@ -185,8 +185,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     }
 
     // Moving camera to users position
-    private fun moveCamera(){
-        if(pathPoints.isNotEmpty() && pathPoints.last().isNotEmpty()){
+    private fun moveCamera() {
+        if (pathPoints.isNotEmpty() && pathPoints.last().isNotEmpty()) {
             map?.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
                     pathPoints.last().last(),
@@ -198,8 +198,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
 
     private fun zoomToSeeMap() {
         val bounce = LatLngBounds.Builder()
-        for(polyline in pathPoints){
-            for(pos in polyline){
+        for (polyline in pathPoints) {
+            for (pos in polyline) {
                 bounce.include(pos)
             }
         }
@@ -214,20 +214,26 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
         )
     }
 
-    private fun saveDataToRoom(){
+    private fun saveDataToRoom() {
         map?.snapshot { bitmap ->
             var distanceInMeters = 0
-            for(polyline in pathPoints){
+            for (polyline in pathPoints) {
                 distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
             }
 
-            val avgSpeed = round((distanceInMeters/1000f) / (currentTimeInMillis / 1000f / 60 / 60) * 10) / 10f
+            val avgSpeed =
+                round((distanceInMeters / 1000f) / (currentTimeInMillis / 1000f / 60 / 60) * 10) / 10f
             val dateTimeStamp = Calendar.getInstance().timeInMillis
             val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
 
             // calculate steps goals
-            var stepGoal = ((distanceInMeters/1000f) * 1312).roundToInt() >= sharedPreferences.getInt(KEY_STEP_GOAL,1000)
-            var distanceGoal = ((distanceInMeters/1000f)) >= sharedPreferences.getFloat(KEY_DISTANCE_GOAL,1.0f)
+            var stepGoal =
+                ((distanceInMeters / 1000f) * 1312).roundToInt() >= sharedPreferences.getInt(
+                    KEY_STEP_GOAL,
+                    1000
+                )
+            var distanceGoal =
+                ((distanceInMeters / 1000f)) >= sharedPreferences.getFloat(KEY_DISTANCE_GOAL, 1.0f)
 
             // adding value to run Model (Dataclass) -
             val run = Run(
@@ -237,8 +243,9 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
                 distanceInMeters,
                 currentTimeInMillis,
                 caloriesBurned,
-                18,8.09f,"Clear",
-                stepGoal, distanceGoal)
+                18, 8.09f, "Clear",
+                stepGoal, distanceGoal
+            )
 
             // cal. and save heart point
             calculateNSaveHeartPts(stepGoal, distanceGoal)
@@ -258,22 +265,22 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     }
 
     // calculate HeartPts
-    private fun calculateNSaveHeartPts(stepGoal: Boolean, distGoal: Boolean){
+    private fun calculateNSaveHeartPts(stepGoal: Boolean, distGoal: Boolean) {
         var heartPoint = if (stepGoal && distGoal) {
             2
         } else {
             0
         }
 
-        val oldHeartPoint = sharedPreferences.getInt(KEY_HEART_POINTS,0)
+        val oldHeartPoint = sharedPreferences.getInt(KEY_HEART_POINTS, 0)
         heartPoint += oldHeartPoint
-        sharedPreferences.edit().putInt(KEY_HEART_POINTS,heartPoint).apply()
+        sharedPreferences.edit().putInt(KEY_HEART_POINTS, heartPoint).apply()
 
     }
 
     // All polyline re-added
-    private fun addAllPolyline(){
-        for(polyline in pathPoints){
+    private fun addAllPolyline() {
+        for (polyline in pathPoints) {
             val polylineOption = PolylineOptions()
                 .color(POLYLINE_COLOR)
                 .width(POLYLINE_WIDTH)
@@ -283,9 +290,9 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     }
 
     // Draw a polyline
-    private fun addLatestPolyline(){
-        if(pathPoints.isNotEmpty() && pathPoints.last().size > 1){
-            val preLastLatLng = pathPoints.last()[pathPoints.last().size-2]
+    private fun addLatestPolyline() {
+        if (pathPoints.isNotEmpty() && pathPoints.last().size > 1) {
+            val preLastLatLng = pathPoints.last()[pathPoints.last().size - 2]
             val lasLatLng = pathPoints.last().last()
             val polylineOption = PolylineOptions()
                 .color(POLYLINE_COLOR)
@@ -297,20 +304,20 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking){
     }
 
     private fun sendCommandToService(action: String) =
-        Intent(requireContext(),TrackingService::class.java).also {
+        Intent(requireContext(), TrackingService::class.java).also {
             it.action = action
             requireContext().startService(it)
         }
 
-    private fun showCancelDialog(){
+    private fun showCancelDialog() {
         Dialog().apply {
             setListener {
                 stopRun()
             }
-        }.show(parentFragmentManager,CANCEL_TRACKING_DIALOG_TAG)
+        }.show(parentFragmentManager, CANCEL_TRACKING_DIALOG_TAG)
     }
 
-    private fun stopRun(){
+    private fun stopRun() {
         binding.tvTimer.text = "00:00:00:00"
         sendCommandToService(ACTION_STOP_SERVICE)
         findNavController().navigate(R.id.action_trackingFragment_to_runFragment)

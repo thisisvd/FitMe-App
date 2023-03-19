@@ -2,14 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/schedulesItems"
+    <item
+        android:id="@+id/schedulesItems"
         android:icon="@drawable/alert_bell_icons8"
-        app:showAsAction="always"
-        android:title="Schedule" />
+        android:title="Schedule"
+        app:showAsAction="always" />
 
-    <item android:id="@+id/profileFragmentIcon"
-        app:showAsAction="always"
+    <item
+        android:id="@+id/profileFragmentIcon"
+        android:title="Profile"
         app:actionLayout="@layout/round_image_view"
-        android:title="Profile" />
+        app:showAsAction="always" />
 
 </menu>

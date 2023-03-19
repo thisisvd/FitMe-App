@@ -3,7 +3,6 @@ package com.vdcodeassociate.fitme.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
-
 import android.os.CountDownTimer
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate

@@ -33,19 +33,9 @@ import com.vdcodeassociate.fitme.constants.Constants
 import com.vdcodeassociate.fitme.constants.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
 import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
-import com.vdcodeassociate.fitme.constants.Constants.KEY_BROADCASTID
-import com.vdcodeassociate.fitme.constants.Constants.KEY_DISTANCE_GOAL
-import com.vdcodeassociate.fitme.constants.Constants.KEY_FIRST_TIME_TOGGLE
-import com.vdcodeassociate.fitme.constants.Constants.KEY_GENDER
-import com.vdcodeassociate.fitme.constants.Constants.KEY_HEART_POINTS
-import com.vdcodeassociate.fitme.constants.Constants.KEY_HEIGHT
 import com.vdcodeassociate.fitme.constants.Constants.KEY_IMAGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_NAME
-import com.vdcodeassociate.fitme.constants.Constants.KEY_STEP_GOAL
-import com.vdcodeassociate.fitme.constants.Constants.KEY_WEIGHT
 import com.vdcodeassociate.fitme.databinding.ActivityMainBinding
-import com.vdcodeassociate.fitme.model.serveruserstorage.UserFirebaseDataClass
-import com.vdcodeassociate.fitme.room.runs.RunDao
 import com.vdcodeassociate.fitme.utils.Permissions
 import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -232,11 +222,13 @@ class MainActivity : AppCompatActivity() {
     // setting up nav drawer header
     fun setUpHeader() {
         val header = binding.mainNavView.getHeaderView(0)
-        header.findViewById<TextView>(R.id.nav_name).text = sharedPreferences.getString(KEY_NAME, "")
-        header.findViewById<TextView>(R.id.nav_age).text = "${sharedPreferences.getInt(KEY_AGE, 0)} Years"
+        header.findViewById<TextView>(R.id.nav_name).text =
+            sharedPreferences.getString(KEY_NAME, "")
+        header.findViewById<TextView>(R.id.nav_age).text =
+            "${sharedPreferences.getInt(KEY_AGE, 0)} Years"
         // load user image
-            header.findViewById<ImageView>(R.id.nav_profile_image)
-                .setImageResource(AVATAR_ID)
+        header.findViewById<ImageView>(R.id.nav_profile_image)
+            .setImageResource(AVATAR_ID)
     }
 
     // All Toolbar's Menu Item selected
@@ -355,28 +347,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-    }
-
-    // Save user data to Shared Preference from firebase
-    private fun writeDataToSharedPreference(userData: UserFirebaseDataClass): Boolean {
-        binding.apply {
-
-            // all data set into shared preferences
-            sharedPreferences.edit()
-                .putString(KEY_NAME, userData.userName)
-                .putInt(KEY_AGE, userData.userAge!!.toInt())
-                .putString(KEY_GENDER, userData.userGender)
-                .putFloat(KEY_WEIGHT, userData.userWeight!!.toFloat())
-                .putFloat(KEY_HEIGHT, userData.userHeight!!.toFloat())
-                .putInt(KEY_IMAGE, Constants.AVATAR_ID)
-                .putBoolean(KEY_FIRST_TIME_TOGGLE, false)
-                .putInt(KEY_STEP_GOAL, userData.stepGoal!!)
-                .putFloat(KEY_DISTANCE_GOAL, userData.distanceGoal!!.toFloat())
-                .putInt(KEY_HEART_POINTS, userData.keyHeartPoints!!.toInt())
-                .putInt(KEY_BROADCASTID, 0)
-                .apply()
-        }
-        return true
     }
 
     // GPS activity results

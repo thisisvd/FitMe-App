@@ -13,7 +13,7 @@ object Permissions {
             android.Manifest.permission.ACCESS_FINE_LOCATION,
         )
 
-    fun requestLocationPermission(fragment: Fragment){
+    fun requestLocationPermission(fragment: Fragment) {
         EasyPermissions.requestPermissions(
             fragment,
             "This application cannot work without Location Permission",

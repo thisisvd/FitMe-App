@@ -6,19 +6,19 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.vdcodeassociate.fitme.databinding.ScheduleItemsBinding
-import com.vdcodeassociate.fitme.room.runs.Run
 import com.vdcodeassociate.fitme.room.schedules.Schedule
 import com.vdcodeassociate.fitme.utils.Utils
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 
-class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>() {
+class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>() {
 
     // inner class
-    inner class ScheduleViewHolder(val binding: ScheduleItemsBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ScheduleViewHolder(val binding: ScheduleItemsBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     // differ callback
-    val differCallBack = object : DiffUtil.ItemCallback<Schedule>(){
+    val differCallBack = object : DiffUtil.ItemCallback<Schedule>() {
 
         override fun areItemsTheSame(oldItem: Schedule, newItem: Schedule): Boolean {
             return false
@@ -31,12 +31,13 @@ class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>(
     }
 
     // differ
-    val differ = AsyncListDiffer(this,differCallBack)
+    val differ = AsyncListDiffer(this, differCallBack)
 
     fun submitList(list: List<Schedule>) = differ.submitList(list)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleViewHolder {
-        val binding = ScheduleItemsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            ScheduleItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ScheduleViewHolder(binding)
     }
 
@@ -75,5 +76,4 @@ class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>(
     fun setOnItemClickListener(listener: (Schedule) -> Unit) {
         onItemClickListener = listener
     }
-
 }

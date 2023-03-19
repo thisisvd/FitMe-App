@@ -3,7 +3,7 @@
     package="com.vdcodeassociate.fitme">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
@@ -33,8 +33,7 @@
             android:name=".ui.MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan">
-          </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
 
         <receiver
             android:name=".ui.fragments.notification.NotificationScheduler"
@@ -46,7 +45,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7258972489562157~7467571722"/>
+            android:value="ca-app-pub-7258972489562157~7467571722" />
 
         <meta-data
             android:name="com.google.android.gms.version"

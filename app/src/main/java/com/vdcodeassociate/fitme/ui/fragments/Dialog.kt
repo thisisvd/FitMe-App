@@ -6,7 +6,7 @@ import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vdcodeassociate.fitme.R
 
-class Dialog: DialogFragment() {
+class Dialog : DialogFragment() {
 
     // create dialog
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -14,12 +14,12 @@ class Dialog: DialogFragment() {
             .setTitle("Cancel the Run?")
             .setMessage("Are you sure to cancel the current run?")
             .setIcon(R.drawable.ic_delete)
-            .setPositiveButton("Yes") { _,_ ->
+            .setPositiveButton("Yes") { _, _ ->
                 yesListener?.let { yes ->
                     yes()
                 }
             }
-            .setNegativeButton("No") { dialogInterface,_ ->
+            .setNegativeButton("No") { dialogInterface, _ ->
                 dialogInterface.cancel()
             }
             .create()
@@ -28,7 +28,7 @@ class Dialog: DialogFragment() {
     // on click listener -
     private var yesListener: (() -> Unit)? = null
 
-    fun setListener(listener: () -> Unit){
+    fun setListener(listener: () -> Unit) {
         yesListener = listener
     }
 

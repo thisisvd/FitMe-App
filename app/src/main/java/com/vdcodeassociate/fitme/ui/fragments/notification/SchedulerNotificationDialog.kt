@@ -24,7 +24,7 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
-class SchedulerNotificationDialog: DialogFragment() {
+class SchedulerNotificationDialog : DialogFragment() {
 
     // viewBinding
     private lateinit var binding: SchedulerDialogBinding
@@ -63,7 +63,7 @@ class SchedulerNotificationDialog: DialogFragment() {
             }
 
             scheduleBtn.setOnClickListener {
-                if(!isTextEmpty()){
+                if (!isTextEmpty()) {
                     scheduleNotification()
                     dialog!!.dismiss()
                 }
@@ -74,7 +74,7 @@ class SchedulerNotificationDialog: DialogFragment() {
     }
 
     // viewModel Observers
-    private fun saveDataToRoom(schedule: Schedule){
+    private fun saveDataToRoom(schedule: Schedule) {
         viewModel.insertSchedule(schedule)
     }
 
@@ -101,7 +101,7 @@ class SchedulerNotificationDialog: DialogFragment() {
 
         val intent = Intent(requireActivity(), NotificationScheduler::class.java)
         val title = binding.title.text.toString()
-        intent.putExtra(messageExtra,title)
+        intent.putExtra(messageExtra, title)
 
         val pendingIntent = PendingIntent.getBroadcast(
             requireActivity(),
@@ -123,7 +123,7 @@ class SchedulerNotificationDialog: DialogFragment() {
         updateBroadcastID()
 
         // new schedule instance
-        val schedule = Schedule(broadcastID,title,time,0f,0)
+        val schedule = Schedule(broadcastID, title, time, 0f, 0)
 
         // save data in room
         saveDataToRoom(schedule)
@@ -131,9 +131,9 @@ class SchedulerNotificationDialog: DialogFragment() {
     }
 
     // updating the broad cast ID in shared pref
-    private fun updateBroadcastID(){
+    private fun updateBroadcastID() {
         broadcastID++
-        sharedPreferences.edit().putInt(KEY_BROADCASTID,broadcastID).apply()
+        sharedPreferences.edit().putInt(KEY_BROADCASTID, broadcastID).apply()
     }
 
     // get Time from date picker
@@ -146,7 +146,7 @@ class SchedulerNotificationDialog: DialogFragment() {
         val year = binding.datePicker.year
 
         val calender = Calendar.getInstance()
-        calender.set(year,month,day,hour,minute)
+        calender.set(year, month, day, hour, minute)
         return calender.timeInMillis
     }
 
@@ -155,9 +155,10 @@ class SchedulerNotificationDialog: DialogFragment() {
         val name = "Notification Channel"
         val desc = "A Description of the channel"
         val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val channel = NotificationChannel(channelID,name,importance)
+        val channel = NotificationChannel(channelID, name, importance)
         channel.description = desc
-        val notificationManager = requireActivity().getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            requireActivity().getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
 

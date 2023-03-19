@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel  // injection to view model internally
 class MainViewModel @Inject constructor(
     val repository: MainRepository
-): ViewModel(){
+) : ViewModel() {
 
     // last Run
     val lastRun = repository.getLastItem()
@@ -28,34 +28,34 @@ class MainViewModel @Inject constructor(
 
     init {
         runs.addSource(runSortedByDate) { result ->
-            if(sortType == SortsEnum.DATE) {
+            if (sortType == SortsEnum.DATE) {
                 result?.let { runs.value = it }
             }
         }
         runs.addSource(runSortedByAvgSpeed) { result ->
-            if(sortType == SortsEnum.AVG_SPEED) {
+            if (sortType == SortsEnum.AVG_SPEED) {
                 result?.let { runs.value = it }
             }
         }
         runs.addSource(runSortedByCaloriesBurned) { result ->
-            if(sortType == SortsEnum.CALORIES_BURNED) {
+            if (sortType == SortsEnum.CALORIES_BURNED) {
                 result?.let { runs.value = it }
             }
         }
         runs.addSource(runSortedByDistance) { result ->
-            if(sortType == SortsEnum.DISTANCE) {
+            if (sortType == SortsEnum.DISTANCE) {
                 result?.let { runs.value = it }
             }
         }
         runs.addSource(runSortedByTimeInMillis) { result ->
-            if(sortType == SortsEnum.TIME) {
+            if (sortType == SortsEnum.TIME) {
                 result?.let { runs.value = it }
             }
         }
 
     }
 
-    fun sortRuns(sortType: SortsEnum) = when(sortType) {
+    fun sortRuns(sortType: SortsEnum) = when (sortType) {
         SortsEnum.DATE -> runSortedByDate.value?.let { runs.value = it }
         SortsEnum.TIME -> runSortedByTimeInMillis.value?.let { runs.value = it }
         SortsEnum.AVG_SPEED -> runSortedByAvgSpeed.value?.let { runs.value = it }
@@ -66,7 +66,7 @@ class MainViewModel @Inject constructor(
     }
 
     // insert new run
-    fun insertRun(run : Run) = viewModelScope.launch {
+    fun insertRun(run: Run) = viewModelScope.launch {
         repository.insertRun(run)
     }
 

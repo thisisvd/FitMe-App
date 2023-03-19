@@ -29,14 +29,14 @@
                     android:layout_height="100dp"
                     android:src="@drawable/profile_other_image"
                     app:civ_border_color="#FF000000"
-                    app:civ_border_width="1dp"/>
+                    app:civ_border_width="1dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
                     android:layout_margin="10dp"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView
@@ -201,8 +201,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="3">
@@ -307,11 +307,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/allerta"
                 android:text="Set Daily Goal -"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-                android:layout_marginBottom="10dp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -322,47 +322,47 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/profileStepsGoalLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:errorEnabled="true"
-                    android:layout_weight="1"
-                    app:errorTextColor="#B1001A"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    app:errorEnabled="true"
+                    app:errorTextColor="#B1001A">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/profileStepsGoal"
                         android:layout_width="match_parent"
-                        android:drawablePadding="10dp"
                         android:layout_height="wrap_content"
-                        android:hint="Steps"
-                        android:textSize="15sp"
+                        android:drawablePadding="10dp"
                         android:ems="10"
-                        android:inputType="number"/>
+                        android:hint="Steps"
+                        android:inputType="number"
+                        android:textSize="15sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/profileDistanceGoalLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:errorEnabled="true"
-                    android:layout_weight="1"
-                    app:errorTextColor="#B1001A"
                     android:layout_width="match_parent"
-                    android:layout_below="@+id/signinTextView2"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/signinTextView2"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    app:errorEnabled="true"
+                    app:errorTextColor="#B1001A">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/profileDistanceGoal"
                         android:layout_width="match_parent"
-                        android:drawablePadding="10dp"
                         android:layout_height="wrap_content"
-                        android:hint="Distance in km"
-                        android:textSize="15sp"
+                        android:drawablePadding="10dp"
                         android:ems="10"
-                        android:inputType="number"/>
+                        android:hint="Distance in km"
+                        android:inputType="number"
+                        android:textSize="15sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -372,13 +372,13 @@
                 android:id="@+id/saveChanges"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="save"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/black"
                 android:layout_gravity="end"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:visibility="gone"/>
+                android:backgroundTint="@color/black"
+                android:text="save"
+                android:textColor="@color/white"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -390,20 +390,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/allerta"
                 android:text="Statistics - Intermediate Results"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"/>
+                android:textStyle="bold" />
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:useDefaultMargins="true"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp" >
+                android:layout_marginBottom="12dp"
+                android:columnCount="2"
+                android:useDefaultMargins="true">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -446,8 +446,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
                     android:layout_columnWeight="1"
+                    android:layout_marginLeft="12dp"
                     android:background="@drawable/green_card_curve_background"
                     android:gravity="center"
                     android:orientation="vertical"
@@ -522,8 +522,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
                     android:layout_columnWeight="1"
+                    android:layout_marginLeft="12dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/blue_card_curve_background"
                     android:gravity="center"
@@ -560,16 +560,15 @@
 
             </GridLayout>
 
-            <org.eazegraph.lib.charts.StackedBarChart
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <org.eazegraph.lib.charts.StackedBarChart xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/stackedbarchart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                app:egFixedBarWidth="true"
-                app:egShowValues="false"
                 app:egBarWidth="20dp"
-                app:egLegendHeight="40dp"/>
+                app:egFixedBarWidth="true"
+                app:egLegendHeight="40dp"
+                app:egShowValues="false" />
 
         </LinearLayout>
 

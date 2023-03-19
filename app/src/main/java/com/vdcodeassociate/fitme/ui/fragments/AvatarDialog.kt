@@ -9,7 +9,7 @@ import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants.AVATAR_ID
 import com.vdcodeassociate.fitme.databinding.ChooseAvatarDialogBinding
 
-class AvatarDialog: DialogFragment() {
+class AvatarDialog : DialogFragment() {
 
     // viewBinding
     private lateinit var binding: ChooseAvatarDialogBinding
@@ -64,7 +64,7 @@ class AvatarDialog: DialogFragment() {
     }
 
     // change const avatar id
-    private fun changeAvatarID(id: Int){
+    private fun changeAvatarID(id: Int) {
         AVATAR_ID = id
         dialog!!.dismiss()
         onItemClickListener?.let {
@@ -82,7 +82,10 @@ class AvatarDialog: DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog!!.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialog!!.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
     }
 
     // On click listener

@@ -7,13 +7,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.databinding.FragmentPermissionRequiredBinding
-import com.vdcodeassociate.fitme.utils.Permissions
 import com.vdcodeassociate.fitme.utils.Permissions.hasLocationPermission
 import com.vdcodeassociate.fitme.utils.Permissions.requestLocationPermission
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
-class PermissionRequiredFragment: Fragment(R.layout.fragment_permission_required), EasyPermissions.PermissionCallbacks {
+class PermissionRequiredFragment : Fragment(R.layout.fragment_permission_required),
+    EasyPermissions.PermissionCallbacks {
 
     // viewBinding
     private lateinit var binding: FragmentPermissionRequiredBinding
@@ -25,9 +25,9 @@ class PermissionRequiredFragment: Fragment(R.layout.fragment_permission_required
         requestPermission()
 
         binding.continueButton.setOnClickListener {
-            if(hasLocationPermission(requireContext())){
+            if (hasLocationPermission(requireContext())) {
                 findNavController().navigate(R.id.action_permissionRequiredFragment_to_homeFragment2)
-            }else {
+            } else {
                 requestLocationPermission(this)
             }
         }
@@ -35,7 +35,7 @@ class PermissionRequiredFragment: Fragment(R.layout.fragment_permission_required
     }
 
     private fun requestPermission() {
-        if(hasLocationPermission(requireContext())){
+        if (hasLocationPermission(requireContext())) {
             findNavController().navigate(R.id.action_permissionRequiredFragment_to_homeFragment2)
         }
     }
@@ -46,19 +46,19 @@ class PermissionRequiredFragment: Fragment(R.layout.fragment_permission_required
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        if(EasyPermissions.somePermissionPermanentlyDenied(requireActivity(),perms)){
+        if (EasyPermissions.somePermissionPermanentlyDenied(requireActivity(), perms)) {
             findNavController().navigate(R.id.action_permissionRequiredFragment_to_homeFragment2)
-        }else {
+        } else {
             requestLocationPermission(this)
         }
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        Toast.makeText(requireContext(),"Location Permission Denied!",Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Location Permission Denied!", Toast.LENGTH_SHORT).show()
         AppSettingsDialog.Builder(requireActivity()).build().show()
     }
 

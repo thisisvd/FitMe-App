@@ -4,7 +4,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants
@@ -31,9 +30,23 @@ object ServiceModule {
     fun provideMainActivityPendingIntent(
         @ApplicationContext app: Context
     ) = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-        PendingIntent.getActivity(app, 0, Intent(app, MainActivity::class.java).also { it.action = Constants.ACTION_SHOW_TRACKING_FRAGMENT }, PendingIntent.FLAG_IMMUTABLE)
+        PendingIntent.getActivity(
+            app,
+            0,
+            Intent(app, MainActivity::class.java).also {
+                it.action = Constants.ACTION_SHOW_TRACKING_FRAGMENT
+            },
+            PendingIntent.FLAG_IMMUTABLE
+        )
     } else {
-        PendingIntent.getActivity(app, 0, Intent(app, MainActivity::class.java).also { it.action = Constants.ACTION_SHOW_TRACKING_FRAGMENT }, PendingIntent.FLAG_UPDATE_CURRENT)
+        PendingIntent.getActivity(
+            app,
+            0,
+            Intent(app, MainActivity::class.java).also {
+                it.action = Constants.ACTION_SHOW_TRACKING_FRAGMENT
+            },
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
     }
 
 
@@ -44,7 +57,7 @@ object ServiceModule {
     fun provideBaseNotificationBuilder(
         @ApplicationContext app: Context,
         pendingIntent: PendingIntent
-    ) =  NotificationCompat.Builder(app, Constants.NOTIFICATION_CHANNEL_ID)
+    ) = NotificationCompat.Builder(app, Constants.NOTIFICATION_CHANNEL_ID)
         .setAutoCancel(false)
         .setOngoing(true)
         .setSmallIcon(R.drawable.ic_directions_run_black_24dp)

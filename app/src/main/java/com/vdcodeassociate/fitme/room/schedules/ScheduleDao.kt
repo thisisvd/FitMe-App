@@ -2,7 +2,6 @@ package com.vdcodeassociate.fitme.room.schedules
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.vdcodeassociate.fitme.room.runs.Run
 
 @Dao
 interface ScheduleDao {
@@ -22,6 +21,5 @@ interface ScheduleDao {
     // get last Item from db
     @Query("SELECT * FROM schedule_table ORDER BY timeStamp ASC LIMIT 1")
     fun getLastScheduledItem(): LiveData<Schedule>
-
 
 }

@@ -9,15 +9,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="15dp"
@@ -41,16 +41,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/allerta"
-            android:text="Hello, "
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/allerta"
+                android:text="Hello, "
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/homeUserName"
@@ -66,11 +66,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
                 android:fontFamily="@font/allerta"
                 android:text=" 👋"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:layout_marginRight="10dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -78,8 +78,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ECE3DB"
             android:layout_marginTop="10dp"
+            android:background="#ECE3DB"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -136,8 +136,8 @@
                                 android:id="@+id/weatherIcon"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:scaleType="centerCrop"
-                                android:background="@drawable/white_curve_background_lite" />
+                                android:background="@drawable/white_curve_background_lite"
+                                android:scaleType="centerCrop" />
 
                             <TextView
                                 android:id="@+id/weatherStatus"
@@ -152,72 +152,72 @@
 
                         </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                    <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/weatherCelcius"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/allerta"
-                                android:textColor="@color/white"
-                                android:textSize="45sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/allerta"
-                                android:text=" °C"
-                                android:textColor="@color/white"
-                                android:textSize="45sp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/allerta"
-                                android:text="Feels like "
-                                android:textColor="@color/white"
-                                android:textSize="11sp"
-                                android:textStyle="bold" />
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/weatherCelciusFeelsLike"
+                                <TextView
+                                    android:id="@+id/weatherCelcius"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/allerta"
+                                    android:textColor="@color/white"
+                                    android:textSize="45sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/allerta"
+                                    android:text=" °C"
+                                    android:textColor="@color/white"
+                                    android:textSize="45sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/allerta"
-                                android:textColor="@color/white"
-                                android:textSize="11sp"
-                                android:textStyle="bold" />
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/allerta"
-                                android:text=" °C"
-                                android:textColor="@color/white"
-                                android:textSize="11sp"
-                                android:textStyle="bold" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/allerta"
+                                    android:text="Feels like "
+                                    android:textColor="@color/white"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/weatherCelciusFeelsLike"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/allerta"
+                                    android:textColor="@color/white"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/allerta"
+                                    android:text=" °C"
+                                    android:textColor="@color/white"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
-
-                    </LinearLayout>
 
                     </LinearLayout>
 
@@ -436,10 +436,10 @@
                     android:id="@+id/homeNewsButton2"
                     android:layout_width="211dp"
                     android:layout_height="123dp"
-                    android:background="#ECE3DB"
-                    android:scaleType="fitCenter"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:background="#ECE3DB"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/girl_run_img" />
 
                 <RelativeLayout
@@ -535,10 +535,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:stretchColumns="1"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:stretchColumns="1">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -738,10 +738,10 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:background="@drawable/curve_background">
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/curve_background"
+                    android:gravity="center">
 
                     <ImageView
                         android:id="@+id/homeImgSteps1"
@@ -784,36 +784,36 @@
                 </RelativeLayout>
 
                 <!--                <view-->
-<!--                    android:id="@+id/lineView1"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    class="im.dacer.androidcharts.LineView"-->
-<!--                    android:background="@color/white"-->
-<!--                    />-->
+                <!--                    android:id="@+id/lineView1"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    class="im.dacer.androidcharts.LineView"-->
+                <!--                    android:background="@color/white"-->
+                <!--                    />-->
 
-<!--                <org.eazegraph.lib.charts.ValueLineChart-->
-<!--                    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--                    android:id="@+id/cubiclinechart"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    app:egUseCubic="true"-->
-<!--                    android:layout_weight="1"-->
-<!--                    app:egUseOverlapFill="true"-->
-<!--                    app:egCurveSmoothness="0.4"-->
-<!--                    app:egLegendHeight="20dp"-->
-<!--                    app:egShowStandardValue="true"/>-->
+                <!--                <org.eazegraph.lib.charts.ValueLineChart-->
+                <!--                    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                <!--                    android:id="@+id/cubiclinechart"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    app:egUseCubic="true"-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    app:egUseOverlapFill="true"-->
+                <!--                    app:egCurveSmoothness="0.4"-->
+                <!--                    app:egLegendHeight="20dp"-->
+                <!--                    app:egShowStandardValue="true"/>-->
 
-<!--                <com.majorik.sparklinelibrary.SparkLineLayout-->
-<!--                    android:id="@+id/sparkLine"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_margin="10dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:background="@color/white"-->
-<!--                    app:s_line_thickness="4dp"-->
-<!--                    app:s_split_left_color="#F9BE59"-->
-<!--                    app:s_split_line="true"-->
-<!--                    app:s_split_right_color="#E95B4D" />-->
+                <!--                <com.majorik.sparklinelibrary.SparkLineLayout-->
+                <!--                    android:id="@+id/sparkLine"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:layout_margin="10dp"-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    android:background="@color/white"-->
+                <!--                    app:s_line_thickness="4dp"-->
+                <!--                    app:s_split_left_color="#F9BE59"-->
+                <!--                    app:s_split_line="true"-->
+                <!--                    app:s_split_right_color="#E95B4D" />-->
 
             </LinearLayout>
 
@@ -823,34 +823,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="13dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:background="@drawable/card_background"
             android:gravity="center_vertical"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/homeNoLastRun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/allerta"
-                android:text="No last run data available!"
                 android:layout_gravity="center"
                 android:layout_margin="30dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/allerta"
+                android:text="No last run data available!"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-                android:layout_weight="1"
                 android:textStyle="bold"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/homeLastRunLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_weight="5"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -992,8 +992,8 @@
                     android:layout_width="50dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="15dp"
-                    app:cardCornerRadius="6dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:cardCornerRadius="6dp">
 
                     <ImageView
                         android:id="@+id/homeLastRunImage"
@@ -1022,8 +1022,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1065,7 +1065,7 @@
             android:background="@drawable/card_background_lite"
             android:orientation="vertical"
             android:padding="10dp"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1082,19 +1082,19 @@
             android:id="@+id/scheduleRuns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:background="@drawable/card_background_lite"
             android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_margin="10dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/layoutGoalSet"
                 android:layout_alignParentLeft="true"
-                android:text="Running at park"
+                android:layout_toLeftOf="@+id/layoutGoalSet"
                 android:maxLines="2"
+                android:text="Running at park"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -1142,9 +1142,9 @@
                 android:id="@+id/layoutGoalSet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="25dp"
-                android:layout_alignParentRight="true"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -1198,23 +1198,23 @@
         </RelativeLayout>
 
         <!--        <app.futured.donut.DonutProgressView-->
-<!--            android:id="@+id/donut_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="256dp"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:padding="10dp"-->
-<!--            app:donut_bgLineColor="@color/white"-->
-<!--            app:donut_gapAngle="90"-->
-<!--            app:donut_gapWidth="50"-->
-<!--            app:donut_strokeWidth="10dp" />-->
+        <!--            android:id="@+id/donut_view"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="256dp"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:padding="10dp"-->
+        <!--            app:donut_bgLineColor="@color/white"-->
+        <!--            app:donut_gapAngle="90"-->
+        <!--            app:donut_gapWidth="50"-->
+        <!--            app:donut_strokeWidth="10dp" />-->
 
-<!--        <org.eazegraph.lib.charts.BarChart xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--            android:id="@+id/homeBarChart"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="256dp"-->
-<!--            app:egBarWidth="20dp"-->
-<!--            app:egFixedBarWidth="true"-->
-<!--            app:egLegendHeight="40dp" />-->
+        <!--        <org.eazegraph.lib.charts.BarChart xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--            android:id="@+id/homeBarChart"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="256dp"-->
+        <!--            app:egBarWidth="20dp"-->
+        <!--            app:egFixedBarWidth="true"-->
+        <!--            app:egLegendHeight="40dp" />-->
 
     </LinearLayout>
 

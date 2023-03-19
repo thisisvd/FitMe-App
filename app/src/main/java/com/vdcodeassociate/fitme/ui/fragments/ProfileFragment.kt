@@ -10,7 +10,6 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.google.android.material.tabs.TabLayoutMediator
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.constants.Constants.KEY_AGE
 import com.vdcodeassociate.fitme.constants.Constants.KEY_DISTANCE_GOAL
@@ -35,7 +34,7 @@ import kotlin.math.roundToInt
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment(R.layout.fragment_profile){
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     // TAG
     private val TAG = "ProfileFragment"
@@ -78,7 +77,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
 
             // Text Watcher for Steps Goal
             profileStepsGoal.doAfterTextChanged {
-                if(pStepsGoal.toString() != it.toString()) {
+                if (pStepsGoal.toString() != it.toString()) {
                     saveChanges.visibility = View.VISIBLE
                 } else {
                     saveChanges.visibility = View.GONE
@@ -87,7 +86,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
 
             // Text Watcher for Distance Goal
             profileDistanceGoal.doAfterTextChanged {
-                if(pDistanceGoal.toString() != it.toString()) {
+                if (pDistanceGoal.toString() != it.toString()) {
                     saveChanges.visibility = View.VISIBLE
                 } else {
                     saveChanges.visibility = View.GONE
@@ -108,8 +107,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         if (!isTextEmpty()) {
             binding.apply {
                 sharedPreferences.edit()
-                    .putInt(KEY_STEP_GOAL,profileStepsGoal!!.text.toString().toInt())
-                    .putFloat(KEY_DISTANCE_GOAL,profileDistanceGoal!!.text.toString().toFloat())
+                    .putInt(KEY_STEP_GOAL, profileStepsGoal!!.text.toString().toInt())
+                    .putFloat(KEY_DISTANCE_GOAL, profileDistanceGoal!!.text.toString().toFloat())
                     .apply()
                 loadFieldsFromSharedPreferences()
             }
@@ -117,15 +116,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
     }
 
     // viewModel observers
-    private fun viewModelObservers(){
+    private fun viewModelObservers() {
 
         binding.apply {
 
             viewModelStatistics.apply {
                 totalCaloriesBurned.observe(viewLifecycleOwner, Observer {
-                    if(it != null) {
+                    if (it != null) {
                         profileCalories.text = "$it kcal"
-                    }else {
+                    } else {
                         profileCalories.text = "0 kcal"
                     }
                 })
@@ -179,11 +178,21 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
 
         val mStackedBarChart = binding.stackedbarchart
 
-        for(run in runs){
-            val model = StackedBarModel(Utils().DateFormatRuns(run,false))
-            model.addBar(BarModel((run.distanceInMeters.toFloat() / 1000f), Color.parseColor("#EE7D72")))
+        for (run in runs) {
+            val model = StackedBarModel(Utils().DateFormatRuns(run, false))
+            model.addBar(
+                BarModel(
+                    (run.distanceInMeters.toFloat() / 1000f),
+                    Color.parseColor("#EE7D72")
+                )
+            )
             model.addBar(BarModel(run.avgSpeedInKMH, Color.parseColor("#2ECC71")))
-            model.addBar(BarModel((run.caloriesBurned.toFloat() / 10f), Color.parseColor("#F9BE59")))
+            model.addBar(
+                BarModel(
+                    (run.caloriesBurned.toFloat() / 10f),
+                    Color.parseColor("#F9BE59")
+                )
+            )
             mStackedBarChart.addBar(model)
         }
 
@@ -235,9 +244,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         val pWeight = sharedPreferences.getFloat(KEY_WEIGHT, 80f)
         val pHeight = sharedPreferences.getFloat(KEY_HEIGHT, 80f)
         val pImage = sharedPreferences.getInt(KEY_IMAGE, R.drawable.profile_other_image)
-        val heartPoints = sharedPreferences.getInt(KEY_HEART_POINTS,0)
-        pStepsGoal = sharedPreferences.getInt(KEY_STEP_GOAL,1000)
-        pDistanceGoal = sharedPreferences.getFloat(KEY_DISTANCE_GOAL,1.0f)
+        val heartPoints = sharedPreferences.getInt(KEY_HEART_POINTS, 0)
+        pStepsGoal = sharedPreferences.getInt(KEY_STEP_GOAL, 1000)
+        pDistanceGoal = sharedPreferences.getFloat(KEY_DISTANCE_GOAL, 1.0f)
         binding.apply {
             profileName.text = pName
             profileGender.text = pGender

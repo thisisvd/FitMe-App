@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/homeFragment2"
-        android:title="Home"
-        android:icon="@drawable/home_icons8"
         android:enabled="true"
+        android:icon="@drawable/home_icons8"
+        android:title="Home"
         app:cnb_backgroundColor="@color/black"
         app:cnb_iconColor="@color/white"
         app:cnb_iconTintMode="src_in"
@@ -14,9 +14,9 @@
 
     <item
         android:id="@+id/runFragment"
-        android:title="Run"
-        android:icon="@drawable/run_icons8"
         android:enabled="true"
+        android:icon="@drawable/run_icons8"
+        android:title="Run"
         app:cnb_backgroundColor="@color/black"
         app:cnb_iconColor="@color/white"
         app:cnb_iconTintMode="src_in"
@@ -24,8 +24,8 @@
 
     <item
         android:id="@+id/videoListFragment"
-        android:title="Tutorials"
         android:icon="@drawable/baseline_ondemand_video_24"
+        android:title="Tutorials"
         app:cnb_backgroundColor="@color/black"
         app:cnb_iconColor="@color/white"
         app:cnb_iconTintMode="src_in"
@@ -33,8 +33,8 @@
 
     <item
         android:id="@+id/profileFragment"
-        android:title="Profile"
         android:icon="@drawable/profile_icons8"
+        android:title="Profile"
         app:cnb_backgroundColor="@color/black"
         app:cnb_iconColor="@color/white"
         app:cnb_iconTintMode="src_in"

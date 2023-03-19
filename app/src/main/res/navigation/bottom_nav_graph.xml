@@ -5,14 +5,15 @@
     android:id="@+id/bottom_nav_graph"
     app:startDestination="@id/setupFragment">
 
-    <action android:id="@+id/action_global_tracking_fragment"
+    <action
+        android:id="@+id/action_global_tracking_fragment"
         app:destination="@+id/trackingFragment"
         app:launchSingleTop="true" />
 
     <fragment
         android:id="@+id/setupFragment"
         android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.SetupFragment"
-        android:label="SetupFragment" >
+        android:label="SetupFragment">
         <action
             android:id="@+id/action_setupFragment_to_permissionRequiredFragment"
             app:destination="@id/permissionRequiredFragment" />
@@ -32,7 +33,7 @@
     <fragment
         android:id="@+id/runFragment"
         android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.RunFragment"
-        android:label="RunFragment" >
+        android:label="RunFragment">
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
@@ -44,7 +45,7 @@
     <fragment
         android:id="@+id/trackingFragment"
         android:name="com.vdcodeassociate.runningtrackerapp.ui.Fragments.TrackingFragment"
-        android:label="TrackingFragment" >
+        android:label="TrackingFragment">
         <action
             android:id="@+id/action_trackingFragment_to_runFragment"
             app:destination="@id/runFragment" />
@@ -52,7 +53,7 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.vdcodeassociate.fitme.ui.fragments.ArticleFragment"
-        android:label="NewsFragment" >
+        android:label="NewsFragment">
         <action
             android:id="@+id/action_newsFragment_to_articleWebPage"
             app:destination="@id/articleWebPage" />
@@ -64,7 +65,7 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.vdcodeassociate.fitme.ui.fragments.EditProfileFragment"
-        android:label="EditProfileFragment" >
+        android:label="EditProfileFragment">
         <action
             android:id="@+id/action_editProfileFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -72,7 +73,7 @@
     <fragment
         android:id="@+id/permissionRequiredFragment"
         android:name="com.vdcodeassociate.fitme.ui.fragments.PermissionRequiredFragment"
-        android:label="PermissionRequiredFragment" >
+        android:label="PermissionRequiredFragment">
         <action
             android:id="@+id/action_permissionRequiredFragment_to_homeFragment2"
             app:destination="@id/homeFragment2" />
@@ -81,13 +82,12 @@
         android:id="@+id/scheduleFragment"
         android:name="com.vdcodeassociate.fitme.ui.fragments.ScheduleFragment"
         android:label="fragment_schedule"
-        tools:layout="@layout/fragment_schedule" >
-    </fragment>
+        tools:layout="@layout/fragment_schedule"></fragment>
     <fragment
         android:id="@+id/supportFragment"
         android:name="com.vdcodeassociate.fitme.ui.fragments.SupportFragment"
         android:label="fragment_support"
-        tools:layout="@layout/fragment_support" >
+        tools:layout="@layout/fragment_support">
         <argument
             android:name="myArgs"
             app:argType="string" />
@@ -95,7 +95,7 @@
     <fragment
         android:id="@+id/articleWebPage"
         android:name="com.vdcodeassociate.fitme.ui.fragments.ArticleWebPage"
-        android:label="ArticleWebPage" >
+        android:label="ArticleWebPage">
         <argument
             android:name="article"
             app:argType="com.vdcodeassociate.newsheadlines.kotlin.model.Article" />
@@ -104,7 +104,7 @@
         android:id="@+id/videoListFragment"
         android:name="com.vdcodeassociate.fitme.ui.fragments.VideoListFragment"
         android:label="fragment_video_list"
-        tools:layout="@layout/fragment_video_list" >
+        tools:layout="@layout/fragment_video_list">
         <action
             android:id="@+id/action_videoListFragment_to_videoFragment"
             app:destination="@id/videoFragment" />
@@ -113,7 +113,7 @@
         android:id="@+id/videoFragment"
         android:name="com.vdcodeassociate.fitme.ui.fragments.VideoFragment"
         android:label="fragment_video"
-        tools:layout="@layout/fragment_video" >
+        tools:layout="@layout/fragment_video">
         <argument
             android:name="videoItem"
             app:argType="com.digitalinclined.edugate.models.youtubemodel.Item" />

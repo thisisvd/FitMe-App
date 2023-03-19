@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
+class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     // TAG
     private val TAG = "EditProfileFragment"
@@ -42,9 +42,9 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
         binding.apply {
 
             // avatar call back from AvatarDialog
-            avatar.setOnClickListener{
+            avatar.setOnClickListener {
                 var dialog = AvatarDialog()
-                dialog.show(parentFragmentManager,"Avatar Fragment")
+                dialog.show(parentFragmentManager, "Avatar Fragment")
                 dialog.setOnItemClickListener {
                     avatar.setImageResource(it)
                 }
@@ -123,7 +123,7 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
             if (weight.text!!.isEmpty()) {
                 weightLayout!!.error = "Weight can't be empty!"
                 result = true
-            }else if(weight.text!!.toString().toFloat() > 300){
+            } else if (weight.text!!.toString().toFloat() > 300) {
                 weightLayout!!.error = "Enter a valid Weight < 300 kg!"
                 result = true
             }
@@ -131,12 +131,12 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
             if (height.text!!.isEmpty()) {
                 heightLayout!!.error = "Height can't be empty!"
                 result = true
-            }else if(height.text!!.toString().toFloat() > 250){
+            } else if (height.text!!.toString().toFloat() > 250) {
                 heightLayout!!.error = "Enter a valid Height < 250 cm"
                 result = true
             }
 
-            if(AVATAR_ID == R.drawable.question_mark5){
+            if (AVATAR_ID == R.drawable.question_mark5) {
                 avatar.borderColor = Color.parseColor("#B1001A")
                 changeAvatarTextView.setTextColor(Color.parseColor("#B1001A"))
                 result = true
@@ -148,7 +148,7 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
     }
 
     // Update user data in shared prefs.
-    private fun applyChangesToSharedPreference() : Boolean {
+    private fun applyChangesToSharedPreference(): Boolean {
         binding.apply {
 
             // all data set into shared preferences
@@ -187,7 +187,7 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
     }
 
     // reset null layouts
-    private fun allLayoutNull(){
+    private fun allLayoutNull() {
         binding.apply {
             nameLayout.error = null
             ageLayout.error = null
@@ -195,7 +195,12 @@ class EditProfileFragment: Fragment(R.layout.fragment_edit_profile) {
             weightLayout.error = null
             heightLayout.error = null
             avatar.borderColor = Color.parseColor("#FF000000")
-            changeAvatarTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black_normal_text))
+            changeAvatarTextView.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.black_normal_text
+                )
+            )
         }
     }
 

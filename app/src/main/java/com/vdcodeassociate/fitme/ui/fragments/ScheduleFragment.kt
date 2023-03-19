@@ -3,10 +3,7 @@ package com.vdcodeassociate.fitme.ui.fragments
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -14,15 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.vdcodeassociate.fitme.R
-import com.vdcodeassociate.fitme.adapters.RunAdapter
 import com.vdcodeassociate.fitme.adapters.ScheduleAdapter
 import com.vdcodeassociate.fitme.databinding.*
-import com.vdcodeassociate.fitme.room.schedules.Schedule
 import com.vdcodeassociate.fitme.ui.fragments.notification.SchedulerNotificationDialog
-import com.vdcodeassociate.fitme.viewmodel.MainViewModel
 import com.vdcodeassociate.fitme.viewmodel.ScheduleViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
 class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
@@ -86,11 +79,11 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
     }
 
     // Swiping to delete functionality for delete schedule's
-    private fun deleteSchedule(view: View){
+    private fun deleteSchedule(view: View) {
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-        ){
+        ) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -103,8 +96,8 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
                 val position = viewHolder.adapterPosition
                 val schedule = scheduleAdapter.differ.currentList[position]
                 viewModel.deleteSchedule(schedule)
-                Snackbar.make(view,"Successfully deleted article!", Snackbar.LENGTH_SHORT).apply {
-                    setAction("Undo"){
+                Snackbar.make(view, "Successfully deleted article!", Snackbar.LENGTH_SHORT).apply {
+                    setAction("Undo") {
                         viewModel.insertSchedule(schedule)
                         scheduleAdapter.notifyDataSetChanged()
                     }
@@ -119,7 +112,7 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
     }
 
     // setting up recycler view
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         scheduleAdapter = ScheduleAdapter()
         binding.apply {
             recyclerView.apply {

@@ -19,7 +19,7 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.vdcodeassociate.fitme.databinding.FragmentArticlesBinding
 
 @AndroidEntryPoint
-class ArticleFragment: Fragment(R.layout.fragment_articles) {
+class ArticleFragment : Fragment(R.layout.fragment_articles) {
 
     // TAG
     private var TAG = "ArticleFragment"
@@ -65,7 +65,7 @@ class ArticleFragment: Fragment(R.layout.fragment_articles) {
             newsTabLayout.addTab(newsTabLayout.newTab().setText("EXERCISE & MEDITATION"))
 
             // getting tab position
-            if(getArgs != null) {
+            if (getArgs != null) {
                 newsTabLayout.getTabAt(getArgs.toInt())?.select()
             }
 
@@ -89,7 +89,7 @@ class ArticleFragment: Fragment(R.layout.fragment_articles) {
             // Set Up adapter
             articleAdapter.setOnItemClickListener {
                 val bundle = Bundle().apply {
-                    putSerializable("article",it)
+                    putSerializable("article", it)
                 }
                 findNavController().navigate(
                     R.id.action_newsFragment_to_articleWebPage,

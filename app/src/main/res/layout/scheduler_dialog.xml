@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="10dp">
 
@@ -45,18 +45,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            app:errorEnabled="true"
             android:layout_weight="1"
             app:endIconMode="custom"
-            app:errorTextColor="#B1001A" >
+            app:errorEnabled="true"
+            app:errorTextColor="#B1001A">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/step"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Steps"
-                android:text="0"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:text="0" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,18 +67,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            app:errorEnabled="true"
             android:layout_weight="1"
             app:endIconMode="custom"
-            app:errorTextColor="#B1001A" >
+            app:errorEnabled="true"
+            app:errorTextColor="#B1001A">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Distance in km"
-                android:text="0"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                android:text="0" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,26 +93,26 @@
             android:id="@+id/datePicker"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_weight="1"
             android:layout_margin="10dp"
-            android:datePickerMode="spinner"
-            android:calendarViewShown="false"/>
+            android:layout_weight="1"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
 
         <TimePicker
             android:id="@+id/timePicker"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_weight="1"
             android:layout_margin="10dp"
-            android:timePickerMode="spinner"/>
+            android:layout_weight="1"
+            android:timePickerMode="spinner" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/cancelBtn"

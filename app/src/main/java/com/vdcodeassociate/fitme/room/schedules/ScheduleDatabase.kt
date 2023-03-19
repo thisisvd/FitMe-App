@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
     version = 1,
     exportSchema = false
 )
-abstract class ScheduleDatabase: RoomDatabase() {
+abstract class ScheduleDatabase : RoomDatabase() {
 
     abstract fun scheduleDao(): ScheduleDao
 

@@ -1,6 +1,5 @@
 package com.vdcodeassociate.fitme.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsViewModel @Inject constructor(
     private val repository: MainRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val latestNews = MutableLiveData<Resource<ResponseModel>>()
 
@@ -33,8 +32,8 @@ class NewsViewModel @Inject constructor(
     }
 
     // handle Response for LatestNews()
-    private fun handleLatestNewsResponse(response: Response<ResponseModel>) : Resource<ResponseModel>{
-        if(response.isSuccessful){
+    private fun handleLatestNewsResponse(response: Response<ResponseModel>): Resource<ResponseModel> {
+        if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)
             }
@@ -42,12 +41,12 @@ class NewsViewModel @Inject constructor(
         return Resource.Error(response.message())
     }
 
-    fun tabLatestNews(tabValue: Int){
+    fun tabLatestNews(tabValue: Int) {
         // local variable
         var query = "fitness tips"
 
         // select query wrt to selected tab
-        when(tabValue) {
+        when (tabValue) {
             1 -> query = "diet"
             2 -> query = "meditation"
         }

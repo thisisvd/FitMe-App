@@ -7,11 +7,10 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.snackbar.Snackbar
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.databinding.FragmentArticleWebPageBinding
 
-class ArticleWebPage: Fragment(R.layout.fragment_article_web_page) {
+class ArticleWebPage : Fragment(R.layout.fragment_article_web_page) {
 
     // viewBinding
     private lateinit var binding: FragmentArticleWebPageBinding
@@ -30,7 +29,7 @@ class ArticleWebPage: Fragment(R.layout.fragment_article_web_page) {
 
             // web view implementation
             webView.apply {
-                webViewClient = object : WebViewClient(){
+                webViewClient = object : WebViewClient() {
 
                     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                         super.onPageStarted(view, url, favicon)

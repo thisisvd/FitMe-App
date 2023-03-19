@@ -15,6 +15,7 @@
     </style>
 
     // profile tab style
+
     <style name="TabProfileTextTheme" parent="Widget.MaterialComponents.TabLayout.Colored">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/black</item>

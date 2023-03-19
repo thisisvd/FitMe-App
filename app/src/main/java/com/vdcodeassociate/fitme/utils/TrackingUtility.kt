@@ -6,21 +6,18 @@ import android.location.Location
 import android.os.Build
 import com.vdcodeassociate.fitme.services.Polyline
 import pub.devrel.easypermissions.EasyPermissions
-import java.sql.Time
 import java.util.concurrent.TimeUnit
-import kotlin.math.min
-
 
 object TrackingUtility {
 
     fun hasLocationPermissions(context: Context) =
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             EasyPermissions.hasPermissions(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
-        }else {
+        } else {
             EasyPermissions.hasPermissions(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -32,9 +29,9 @@ object TrackingUtility {
     // calculate distance
     fun calculatePolylineLength(polyline: Polyline): Float {
         var distance = 0f
-        for(i in 0..polyline.size - 2) {
+        for (i in 0..polyline.size - 2) {
             val pos1 = polyline[i]
-            val pos2 = polyline[i+1]
+            val pos2 = polyline[i + 1]
 
             var result = FloatArray(1)
 
@@ -53,24 +50,24 @@ object TrackingUtility {
     }
 
     // milliseconds to timer formats
-    fun getFormattedStopWatchTime(ms: Long, includeMillis: Boolean = false): String{
+    fun getFormattedStopWatchTime(ms: Long, includeMillis: Boolean = false): String {
         var milliseconds = ms
         val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
         milliseconds -= TimeUnit.HOURS.toMillis(hours)
         val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
         milliseconds -= TimeUnit.MINUTES.toMillis(minutes)
         val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
-        if (!includeMillis){
-            return "${if(hours < 10) "0" else ""}$hours:" +
-                    "${if(minutes < 10) "0" else ""}$minutes:" +
-                    "${if(seconds < 10) "0" else ""}$seconds"
+        if (!includeMillis) {
+            return "${if (hours < 10) "0" else ""}$hours:" +
+                    "${if (minutes < 10) "0" else ""}$minutes:" +
+                    "${if (seconds < 10) "0" else ""}$seconds"
         }
         milliseconds -= TimeUnit.SECONDS.toMillis(seconds)
         milliseconds /= 10
-        return "${if(hours < 10) "0" else ""}$hours:" +
-                "${if(minutes < 10) "0" else ""}$minutes:" +
-                "${if(seconds < 10) "0" else ""}$seconds:" +
-                "${if(milliseconds < 10) "0" else ""}$milliseconds"
+        return "${if (hours < 10) "0" else ""}$hours:" +
+                "${if (minutes < 10) "0" else ""}$minutes:" +
+                "${if (seconds < 10) "0" else ""}$seconds:" +
+                "${if (milliseconds < 10) "0" else ""}$milliseconds"
     }
 
 }

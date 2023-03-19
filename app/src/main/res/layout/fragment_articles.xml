@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/newsFragmentID"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:id="@+id/newsFragmentID">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -15,17 +15,17 @@
             android:id="@+id/backNews"
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
+            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
         <TextView
             android:id="@+id/tvToolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/allerta"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
+            android:fontFamily="@font/allerta"
             android:gravity="center_vertical"
             android:text="Fitness Articles"
-            android:layout_gravity="center"
             android:textColor="@android:color/black"
             android:textSize="22sp" />
 

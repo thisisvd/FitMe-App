@@ -7,7 +7,7 @@ import javax.inject.Inject
 //only one instance of ApiService throughout the application lifecycle for any number of network calls
 class NewsAPIHelperImpl @Inject constructor(
     private val apiInterface: NewsAPIInterface
-): NewsAPIHelper {
+) : NewsAPIHelper {
 
     override suspend fun getLatestNews(query: String): Response<ResponseModel> =
         apiInterface.getBreakingNews(query)

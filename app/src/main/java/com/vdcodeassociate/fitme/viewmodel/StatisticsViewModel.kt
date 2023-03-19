@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class StatisticsViewModel @Inject constructor(
     val repository: MainRepository
-): ViewModel(){
+) : ViewModel() {
 
     var totalItemCount = repository.getTotalItemCount()
     val totalTimeRun = repository.getTotalTimeInMillis()
@@ -28,7 +28,7 @@ class StatisticsViewModel @Inject constructor(
         calTotalHealthPoints()
     }
 
-    private fun calTotalHealthPoints(){
+    private fun calTotalHealthPoints() {
         var heartPts = 0
 
         // cal heart points
@@ -51,5 +51,4 @@ class StatisticsViewModel @Inject constructor(
             0
         }
     }
-
 }

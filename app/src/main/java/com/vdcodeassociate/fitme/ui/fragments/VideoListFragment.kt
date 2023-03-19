@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -140,7 +139,11 @@ class VideoListFragment : Fragment() {
                     is Resource.Error -> {
                         response.message?.let { message ->
                             Log.e(TAG, "An error occurred : $message")
-                            Snackbar.make(binding.root,"Error occurred! Please try again after some time.",Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(
+                                binding.root,
+                                "Error occurred! Please try again after some time.",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
                         }
                         dialog.dismiss()
                     }
@@ -169,7 +172,7 @@ class VideoListFragment : Fragment() {
                 val bundle = bundleOf(
                     "videoItem" to it
                 )
-                findNavController().navigate(R.id.action_videoListFragment_to_videoFragment,bundle)
+                findNavController().navigate(R.id.action_videoListFragment_to_videoFragment, bundle)
             }
         }
     }

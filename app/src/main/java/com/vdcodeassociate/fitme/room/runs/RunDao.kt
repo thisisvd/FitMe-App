@@ -19,23 +19,23 @@ interface RunDao {
 
     // sort a run by timestamp
     @Query("SELECT * FROM running_table ORDER BY timestamp DESC")
-    fun getAllRunSortedByDate():LiveData<List<Run>>
+    fun getAllRunSortedByDate(): LiveData<List<Run>>
 
     // sort a run by timeInMillis
     @Query("SELECT * FROM RUNNING_TABLE ORDER BY timeInMillis DESC")
-    fun getAllRunSortedByTimeInMillis():LiveData<List<Run>>
+    fun getAllRunSortedByTimeInMillis(): LiveData<List<Run>>
 
     // sort a run by caloriesBurned
     @Query("SELECT * FROM RUNNING_TABLE ORDER BY caloriesBurned DESC")
-    fun getAllRunSortedByCaloriesBurned():LiveData<List<Run>>
+    fun getAllRunSortedByCaloriesBurned(): LiveData<List<Run>>
 
     // sort a run by avgSpeedInKMH
     @Query("SELECT * FROM RUNNING_TABLE ORDER BY avgSpeedInKMH DESC")
-    fun getAllRunSortedByAvgSpeed():LiveData<List<Run>>
+    fun getAllRunSortedByAvgSpeed(): LiveData<List<Run>>
 
     // sort a run by distanceInMeters
     @Query("SELECT * FROM RUNNING_TABLE ORDER BY distanceInMeters DESC")
-    fun getAllRunSortedByDistance():LiveData<List<Run>>
+    fun getAllRunSortedByDistance(): LiveData<List<Run>>
 
     // total of a run by timeInMillis
     @Query("SELECT SUM(timeInMillis) FROM running_table")

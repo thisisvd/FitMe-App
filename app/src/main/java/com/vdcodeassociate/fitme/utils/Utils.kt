@@ -9,20 +9,20 @@ import java.util.concurrent.TimeUnit
 
 class Utils {
 
-    fun getTimeInWords(ms: Long): String{
+    fun getTimeInWords(ms: Long): String {
         var milliseconds = ms
         val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
         milliseconds -= TimeUnit.HOURS.toMillis(hours)
         val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
         milliseconds -= TimeUnit.MINUTES.toMillis(minutes)
         val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
-        if(hours != 0L){
+        if (hours != 0L) {
             return "$hours Hours $minutes Minutes $seconds Seconds"
-        }else if(minutes != 0L){
+        } else if (minutes != 0L) {
             return "$minutes Minutes $seconds Seconds"
-        }else if(seconds != 0L){
+        } else if (seconds != 0L) {
             return "$seconds Seconds"
-        }else {
+        } else {
             return ""
         }
     }
@@ -59,7 +59,7 @@ class Utils {
             timeInMillis = run.timestamp
         }
 
-        val dateFormat = if(inRun) SimpleDateFormat("EEEE, d MMM, yyyy", Locale.getDefault())
+        val dateFormat = if (inRun) SimpleDateFormat("EEEE, d MMM, yyyy", Locale.getDefault())
         else SimpleDateFormat("d MMM, yy", Locale.getDefault())
 
         return dateFormat.format(calendar.time)
@@ -85,7 +85,7 @@ class Utils {
         return country.toLowerCase()
     }
 
-    fun getMinutes(ms: Long): Int{
+    fun getMinutes(ms: Long): Int {
         var milliseconds = ms
         val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
         milliseconds -= TimeUnit.HOURS.toMillis(hours)
@@ -94,7 +94,7 @@ class Utils {
         val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
         return when {
             hours != 0L -> {
-                (hours*60).toInt()
+                (hours * 60).toInt()
             }
             minutes != 0L -> {
                 minutes.toInt()
@@ -125,5 +125,4 @@ class Utils {
             }
         }
     }
-
 }

@@ -90,58 +90,67 @@ object AppModule {
     @Singleton
     @Provides
     fun provideSharedPreferences(@ApplicationContext app: Context) =
-        app.getSharedPreferences(SHARED_PREFERENCES_NAME,MODE_PRIVATE)
+        app.getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE)
 
     @Singleton
     @Provides
-    fun providesName(sharedPreference: SharedPreferences) = sharedPreference.getString((KEY_NAME),"") ?: ""
+    fun providesName(sharedPreference: SharedPreferences) =
+        sharedPreference.getString((KEY_NAME), "") ?: ""
 
     @Singleton
     @Provides
-    fun providesAge(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_AGE),18)
+    fun providesAge(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_AGE), 18)
 
     @Singleton
     @Provides
-    fun providesGender(sharedPreference: SharedPreferences) = sharedPreference.getString((KEY_GENDER),"") ?: ""
+    fun providesGender(sharedPreference: SharedPreferences) =
+        sharedPreference.getString((KEY_GENDER), "") ?: ""
 
     @Singleton
     @Provides
-    fun providesHeight(sharedPreference: SharedPreferences) = sharedPreference.getFloat((KEY_HEIGHT),173f)
+    fun providesHeight(sharedPreference: SharedPreferences) =
+        sharedPreference.getFloat((KEY_HEIGHT), 173f)
 
     @Singleton
     @Provides
-    fun providesWeight(sharedPreference: SharedPreferences) = sharedPreference.getFloat((KEY_WEIGHT),80f)
+    fun providesWeight(sharedPreference: SharedPreferences) =
+        sharedPreference.getFloat((KEY_WEIGHT), 80f)
 
     @Singleton
     @Provides
-    fun providesImage(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_IMAGE), R.drawable.question_mark5)
+    fun providesImage(sharedPreference: SharedPreferences) =
+        sharedPreference.getInt((KEY_IMAGE), R.drawable.question_mark5)
 
     @Singleton
     @Provides
-    fun providesStepsGoal(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_STEP_GOAL), 0)
+    fun providesStepsGoal(sharedPreference: SharedPreferences) =
+        sharedPreference.getInt((KEY_STEP_GOAL), 0)
 
     @Singleton
     @Provides
-    fun providesDistanceGoal(sharedPreference: SharedPreferences) = sharedPreference.getFloat((KEY_DISTANCE_GOAL), 0f)
+    fun providesDistanceGoal(sharedPreference: SharedPreferences) =
+        sharedPreference.getFloat((KEY_DISTANCE_GOAL), 0f)
 
     @Singleton
     @Provides
-    fun providesHeartPoints(sharedPreference: SharedPreferences) = sharedPreference.getInt((KEY_HEART_POINTS), 0)
+    fun providesHeartPoints(sharedPreference: SharedPreferences) =
+        sharedPreference.getInt((KEY_HEART_POINTS), 0)
 
     @Singleton
     @Provides
-    fun providesFirstTimeToggle(sharedPreference: SharedPreferences) = sharedPreference.getBoolean((KEY_FIRST_TIME_TOGGLE),true)
+    fun providesFirstTimeToggle(sharedPreference: SharedPreferences) =
+        sharedPreference.getBoolean((KEY_FIRST_TIME_TOGGLE), true)
 
     // News element Singleton Provides
     @Singleton
     @Provides
-    fun provideOkHttpClient() = if (BuildConfig.DEBUG){
+    fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .build()
-    }else{
+    } else {
         OkHttpClient
             .Builder()
             .build()
@@ -157,7 +166,8 @@ object AppModule {
         .build()
 
     @Provides
-    fun provideApiInterface(@Named("News") retrofit: Retrofit) = retrofit.create(NewsAPIInterface::class.java)
+    fun provideApiInterface(@Named("News") retrofit: Retrofit) =
+        retrofit.create(NewsAPIInterface::class.java)
 
     @Provides
     @Singleton
@@ -174,7 +184,8 @@ object AppModule {
         .build()
 
     @Provides
-    fun provideApiInterfaceWeather(@Named("Weather") retrofit: Retrofit) = retrofit.create(WeatherAPIInterface::class.java)
+    fun provideApiInterfaceWeather(@Named("Weather") retrofit: Retrofit) =
+        retrofit.create(WeatherAPIInterface::class.java)
 
     @Provides
     @Singleton
@@ -191,7 +202,8 @@ object AppModule {
         .build()
 
     @Provides
-    fun provideApiInterfaceYoutubeVideos(@Named("YoutubeAPI") retrofit: Retrofit) = retrofit.create(YoutubeAPIInterface::class.java)
+    fun provideApiInterfaceYoutubeVideos(@Named("YoutubeAPI") retrofit: Retrofit) =
+        retrofit.create(YoutubeAPIInterface::class.java)
 
     @Provides
     @Singleton

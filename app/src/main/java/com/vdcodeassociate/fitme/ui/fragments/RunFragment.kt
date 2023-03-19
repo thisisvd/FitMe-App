@@ -25,7 +25,7 @@ import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
 @AndroidEntryPoint
-class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionCallbacks{
+class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionCallbacks {
 
     // viewModel
     private val viewModel: MainViewModel by viewModels()
@@ -62,7 +62,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     }
 
     // viewModel Observer
-    private fun viewModelObserver(){
+    private fun viewModelObserver() {
 
         binding.apply {
 
@@ -106,7 +106,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     }
 
     // Recycler view setup
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         runAdapter = RunAdapter(requireContext())
         binding.apply {
             rvRuns.apply {
@@ -117,11 +117,11 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     }
 
     // checking for location permissions
-    private fun requestPermission(){
-        if(TrackingUtility.hasLocationPermissions(requireContext())){
+    private fun requestPermission() {
+        if (TrackingUtility.hasLocationPermissions(requireContext())) {
             return
         }
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             EasyPermissions.requestPermissions(
                 this,
                 "You need to accept location permissions to use this app.",
@@ -137,9 +137,9 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        if(EasyPermissions.somePermissionPermanentlyDenied(this,perms)){
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             AppSettingsDialog.Builder(this).build().show()
-        }else {
+        } else {
             requestPermission()
         }
     }
@@ -151,19 +151,20 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
     // Snack bar on Deleting a run from recycler view
-    private fun onSNACK(view: View, run: Run){
+    private fun onSNACK(view: View, run: Run) {
         viewModel.deleteRun(run)
         runAdapter.notifyDataSetChanged()
         Snackbar.make(
             view.findViewById(R.id.runFragmentID),
             "Deleted a run from recent runs!",
-            Snackbar.LENGTH_LONG).setAction(
+            Snackbar.LENGTH_LONG
+        ).setAction(
             "UNDO"
-        ){
+        ) {
             viewModel.insertRun(run)
             runAdapter.notifyDataSetChanged()
         }.setActionTextColor(Color.parseColor("#FED32C")).show()

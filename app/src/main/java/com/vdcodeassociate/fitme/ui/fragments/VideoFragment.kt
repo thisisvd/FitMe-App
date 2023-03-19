@@ -12,7 +12,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.vdcodeassociate.fitme.databinding.FragmentVideoBinding
 
-
 class VideoFragment : Fragment() {
 
     // TAG
@@ -62,7 +61,7 @@ class VideoFragment : Fragment() {
                 youtubePlayerView.addYouTubePlayerListener(object :
                     AbstractYouTubePlayerListener() {
                     override fun onReady(youTubePlayer: YouTubePlayer) {
-                            youTubePlayer.loadVideo(args.videoItem.id.videoId, 0f)
+                        youTubePlayer.loadVideo(args.videoItem.id.videoId, 0f)
                     }
                 })
             }

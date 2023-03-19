@@ -14,9 +14,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="fill"
-        app:tabMode="scrollable"
         app:tabIndicatorColor="@color/black"
         app:tabInlineLabel="true"
+        app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/black"
         app:tabTextColor="#C4C4C4" />
 
@@ -24,10 +24,10 @@
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        tools:listitem="@layout/video_container_item_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/video_tab_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/video_tab_layout"
+        tools:listitem="@layout/video_container_item_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

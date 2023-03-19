@@ -20,11 +20,11 @@
             android:layout_width="111dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:cardCornerRadius="5dp"
-            android:elevation="0dp"
             android:layout_margin="5dp"
+            android:elevation="0dp"
+            android:outlineAmbientShadowColor="@color/white"
             android:outlineSpotShadowColor="@color/white"
-            android:outlineAmbientShadowColor="@color/white">
+            app:cardCornerRadius="5dp">
 
             <ImageView
                 android:id="@+id/vNewsImage"
@@ -47,16 +47,16 @@
             android:maxLines="3"
             android:textColor="#080707"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/LLIV1"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:gravity="center_vertical"
-            android:layout_alignRight="@+id/LLIV1"
             android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView

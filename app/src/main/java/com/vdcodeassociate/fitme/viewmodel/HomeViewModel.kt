@@ -1,6 +1,5 @@
 package com.vdcodeassociate.fitme.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.digitalinclined.edugate.models.youtubemodel.Item
 import com.vdcodeassociate.fitme.model.homemodel.WeekStatsHome
@@ -20,7 +19,7 @@ import kotlin.math.roundToInt
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     val repository: MainRepository
-): ViewModel() {
+) : ViewModel() {
 
     // weather private value
     private val weatherUpdate = MutableLiveData<Resource<WeatherResponse>>()
@@ -75,8 +74,8 @@ class HomeViewModel @Inject constructor(
     }
 
     // handle Response for getWeatherUpdate()
-    private fun handleWeatherUpdateResponse(response: Response<WeatherResponse>) : Resource<WeatherResponse> {
-        if(response.isSuccessful){
+    private fun handleWeatherUpdateResponse(response: Response<WeatherResponse>): Resource<WeatherResponse> {
+        if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)
             }
@@ -85,7 +84,7 @@ class HomeViewModel @Inject constructor(
     }
 
     // selecting run's happened in week
-    private fun sortWeeklyDate(){
+    private fun sortWeeklyDate() {
         var tempList = mutableListOf<Run>()
         var calories = 0
         var distance = 0F
