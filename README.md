@@ -26,6 +26,7 @@ So keeping in mind all these factors we have developed a fitness app FITME which
 <img src="app/src/main/res/drawable/screenshot_004.png" width="150">
 <img src="app/src/main/res/drawable/screenshot_005.jpg" width="150">
 <img src="app/src/main/res/drawable/screenshot_006.png" width="150">
+<img src="app/src/main/res/drawable/screenshot_007.png" width="150">
 </p>
  
 ## Main Tech Stack
