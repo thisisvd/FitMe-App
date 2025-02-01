@@ -1,5 +1,6 @@
 package com.vdcodeassociate.fitme.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.digitalinclined.edugate.models.youtubemodel.Item
 import com.vdcodeassociate.fitme.model.homemodel.WeekStatsHome
@@ -50,9 +51,9 @@ class HomeViewModel @Inject constructor(
             val response = repository.getYoutubeSearchQuery(query)
 
             if (response.isSuccessful) {
-                response.body().let { response ->
-                    if (response != null && response.items.isNotEmpty()) {
-                        getYoutubeSearchResult.postValue(Resource.Success(response.items))
+                response.body().let {
+                    if (it != null && it.items.isNotEmpty()) {
+                        getYoutubeSearchResult.postValue(Resource.Success(it.items))
                     }
                 }
 

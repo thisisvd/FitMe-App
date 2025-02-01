@@ -2,7 +2,6 @@
     <string name="app_name">FitME</string>
 
     <string name="MAPS_API_kEY">API_KEY</string>
-    <string name="CLIENT_ID_API_KEY">API_KEY</string>
 
     <string name="open">OPEN</string>
     <string name="close">CLOSE</string>

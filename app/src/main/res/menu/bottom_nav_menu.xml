@@ -6,38 +6,26 @@
         android:id="@+id/homeFragment2"
         android:enabled="true"
         android:icon="@drawable/home_icons8"
-        android:title="Home"
-        app:cnb_backgroundColor="@color/black"
-        app:cnb_iconColor="@color/white"
-        app:cnb_iconTintMode="src_in"
-        app:cnb_textColor="@color/white" />
+        android:title="Home" />
+<!--        app:cnb_backgroundColor="@color/black"-->
+<!--        app:cnb_iconColor="@color/white"-->
+<!--        app:cnb_iconTintMode="src_in"-->
+<!--        app:cnb_textColor="@color/white" />-->
 
     <item
         android:id="@+id/runFragment"
         android:enabled="true"
         android:icon="@drawable/run_icons8"
-        android:title="Run"
-        app:cnb_backgroundColor="@color/black"
-        app:cnb_iconColor="@color/white"
-        app:cnb_iconTintMode="src_in"
-        app:cnb_textColor="@color/white" />
+        android:title="Run" />
 
     <item
         android:id="@+id/videoListFragment"
         android:icon="@drawable/baseline_ondemand_video_24"
-        android:title="Tutorials"
-        app:cnb_backgroundColor="@color/black"
-        app:cnb_iconColor="@color/white"
-        app:cnb_iconTintMode="src_in"
-        app:cnb_textColor="@color/white" />
+        android:title="Tutorials" />
 
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/profile_icons8"
-        android:title="Profile"
-        app:cnb_backgroundColor="@color/black"
-        app:cnb_iconColor="@color/white"
-        app:cnb_iconTintMode="src_in"
-        app:cnb_textColor="@color/white" />
+        android:title="Profile" />
 
 </menu>

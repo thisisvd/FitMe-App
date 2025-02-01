@@ -130,7 +130,7 @@ class VideoListFragment : Fragment() {
                 when (response) {
                     is Resource.Success -> {
                         response.data?.let { videosList ->
-                            if (!videosList.isNullOrEmpty()) {
+                            if (videosList.isNotEmpty()) {
                                 recyclerAdapter.differ.submitList(videosList)
                                 dialog.dismiss()
                             }

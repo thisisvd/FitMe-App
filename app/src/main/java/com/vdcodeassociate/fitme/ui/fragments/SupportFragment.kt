@@ -6,7 +6,6 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.hsalf.smileyrating.SmileyRating
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.databinding.FragmentSupportBinding
 
@@ -37,17 +36,17 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
             }
 
             // Smile Listener
-            smileRating.setSmileySelectedListener { type ->
-
-                when {
-                    SmileyRating.Type.GREAT == type -> smileCount = 5
-                    SmileyRating.Type.GOOD == type -> smileCount = 4
-                    SmileyRating.Type.OKAY == type -> smileCount = 3
-                    SmileyRating.Type.BAD == type -> smileCount = 2
-                    SmileyRating.Type.TERRIBLE == type -> smileCount = 1
-                }
-
-            }
+//            smileRating.setSmileySelectedListener { type ->
+//
+//                when {
+//                    SmileyRating.Type.GREAT == type -> smileCount = 5
+//                    SmileyRating.Type.GOOD == type -> smileCount = 4
+//                    SmileyRating.Type.OKAY == type -> smileCount = 3
+//                    SmileyRating.Type.BAD == type -> smileCount = 2
+//                    SmileyRating.Type.TERRIBLE == type -> smileCount = 1
+//                }
+//
+//            }
 
             // on button clicked
             supportButton.setOnClickListener {
@@ -132,7 +131,7 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
                 supportButton.text = "Send your request"
             } else {
                 supportUTextSmall.visibility = View.VISIBLE
-                smileRating.visibility = View.VISIBLE
+//                smileRating.visibility = View.VISIBLE
                 supportImage.setImageResource(R.drawable.feedback_ultra_icons8)
                 supportUText.text = "Do you have some feedback?"
                 supportUTextSmall.text = "So we did a good job?"

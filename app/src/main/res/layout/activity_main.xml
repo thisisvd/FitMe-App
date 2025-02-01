@@ -72,14 +72,14 @@
 
             </com.google.android.gms.ads.AdView>
 
-            <com.ismaeldivita.chipnavigation.ChipNavigationBar
+            <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
                 android:elevation="16dp"
                 android:padding="6dp"
-                app:cnb_menuResource="@menu/bottom_nav_menu" />
+                app:menu="@menu/bottom_nav_menu"/>
 
         </LinearLayout>
 

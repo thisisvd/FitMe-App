@@ -56,12 +56,12 @@
             android:textSize="13sp"
             android:textStyle="bold" />
 
-        <com.hsalf.smileyrating.SmileyRating
-            android:id="@+id/smile_rating"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:visibility="gone" />
+<!--        <com.hsalf.smileyrating.SmileyRating-->
+<!--            android:id="@+id/smile_rating"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:visibility="gone" />-->
 
         <TextView
             android:id="@+id/supportUTextSmall"

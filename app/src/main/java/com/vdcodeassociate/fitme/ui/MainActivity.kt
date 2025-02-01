@@ -109,20 +109,28 @@ class MainActivity : AppCompatActivity() {
         locationUpdate()
 
         // setting nav host fragments
-        binding.bottomNavigationView.setItemSelected(R.id.homeFragment2)
+//        binding.bottomNavigationView.setItemSelected(R.id.homeFragment2)
         binding.bottomNavigationView.setOnItemSelectedListener {
-            when (it) {
+            when (it.itemId) {
                 R.id.homeFragment2 -> {
                     navHostFragment.findNavController().navigate(R.id.homeFragment2)
+                    true
                 }
                 R.id.runFragment -> {
                     navHostFragment.findNavController().navigate(R.id.runFragment)
+                    true
                 }
                 R.id.videoListFragment -> {
                     navHostFragment.findNavController().navigate(R.id.videoListFragment)
+                    true
                 }
                 R.id.profileFragment -> {
                     navHostFragment.findNavController().navigate(R.id.profileFragment)
+                    true
+                }
+
+                else -> {
+                    true
                 }
             }
         }
@@ -156,7 +164,7 @@ class MainActivity : AppCompatActivity() {
     // navigate to any other fragments
     fun navigateToFragment(id: Int) {
         navHostFragment.findNavController().navigate(id)
-        binding.bottomNavigationView.setItemSelected(id)
+        // binding.bottomNavigationView.setItemSelected(id)
     }
 
     // navigate to the tracking fragment
@@ -182,37 +190,30 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.profileDrawer -> {
                     navigateToFragment(R.id.profileFragment)
-                    true
                 }
                 R.id.scheduleRuns -> {
                     navHostFragment.findNavController().navigate(R.id.scheduleFragment)
-                    true
                 }
                 R.id.savedTips -> {
                     navHostFragment.findNavController().navigate(R.id.newsFragment)
-                    true
                 }
                 R.id.inviteFriends -> {
                     inviteFriend()
-                    true
                 }
                 R.id.getHelp -> {
                     val bundle = Bundle().apply {
                         putString("myArgs", "Get Help!")
                     }
                     navHostFragment.findNavController().navigate(R.id.supportFragment, bundle)
-                    true
                 }
                 R.id.giveFeedback -> {
                     val bundle = Bundle().apply {
                         putString("myArgs", "Feedback!")
                     }
                     navHostFragment.findNavController().navigate(R.id.supportFragment, bundle)
-                    true
                 }
                 R.id.aboutUs -> {
                     Toast.makeText(applicationContext, "About Us!", Toast.LENGTH_SHORT).show()
-                    true
                 }
             }
             true
@@ -247,7 +248,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.homeLastRunLayout -> {
-                binding.bottomNavigationView.setItemSelected(R.id.runFragment)
+                // binding.bottomNavigationView.setItemSelected(R.id.runFragment)
                 true
             }
             else -> false

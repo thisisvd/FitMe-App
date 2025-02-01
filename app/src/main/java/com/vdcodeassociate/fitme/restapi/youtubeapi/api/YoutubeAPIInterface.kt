@@ -18,7 +18,7 @@ interface YoutubeAPIInterface {
         @Query("type")
         type: String = "video",
         @Query("key")
-        key: String = BuildConfig.MAPS_API_KEY,
+        key: String = BuildConfig.GOOGLE_PLATFORM_API_KEY,
         @Query("maxResults")
         maxResults: Int = 30,
         @Query("part")

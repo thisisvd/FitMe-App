@@ -21,16 +21,21 @@ android {
 
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
-
-        buildConfigField "String", "WEATHER_API_KEY", "\"${properties.getProperty("WEATHER_API_KEY")}\""
-        buildConfigField "String", "ARTICLES_API_KEY", "\"${properties.getProperty("ARTICLES_API_KEY")}\""
-        buildConfigField "String", "MAPS_API_KEY", "\"${properties.getProperty("MAPS_API_KEY")}\""
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            buildConfigField 'String', 'ARTICLES_API_KEY', ARTICLES_API_KEY
+            buildConfigField 'String', 'WEATHER_API_KEY', WEATHER_API_KEY
+            buildConfigField 'String', 'GOOGLE_PLATFORM_API_KEY', GOOGLE_PLATFORM_API_KEY
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            buildConfigField 'String', 'ARTICLES_API_KEY', ARTICLES_API_KEY
+            buildConfigField 'String', 'WEATHER_API_KEY', WEATHER_API_KEY
+            buildConfigField 'String', 'GOOGLE_PLATFORM_API_KEY', GOOGLE_PLATFORM_API_KEY
         }
     }
 
@@ -125,7 +130,7 @@ dependencies {
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 
     // chip navigation bar
-    implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.2.0'
+    // implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.2.0'
 
     // circular image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -134,17 +139,17 @@ dependencies {
     implementation 'com.github.blackfizz:eazegraph:1.2.2@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
 
-    implementation 'im.dacer:AndroidCharts:1.0.4'
+    // implementation 'im.dacer:AndroidCharts:1.0.4'
 
     implementation("app.futured.donut:donut:2.2.0")
 
     implementation 'com.github.majorkik:SparkLineLayout:1.0.1'
 
     // arc graph
-    implementation 'devlight.io:arcprogressstackview:1.0.4'
+    // implementation 'devlight.io:arcprogressstackview:1.0.4'
 
     // smile rating bar
-    implementation 'com.github.sujithkanna:smileyrating:2.0.0'
+    // implementation 'com.github.sujithkanna:smileyrating:2.0.0'
 
     // google admob dependency
     implementation 'com.google.android.gms:play-services-ads:20.5.0'
