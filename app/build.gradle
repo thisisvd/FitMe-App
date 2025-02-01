@@ -14,13 +14,9 @@ android {
         applicationId "com.vdcodeassociate.fitme"
         minSdk 21
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
-
+        versionCode 2
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file("local.properties").newDataInputStream())
     }
 
     buildTypes {
@@ -29,6 +25,7 @@ android {
             buildConfigField 'String', 'ARTICLES_API_KEY', ARTICLES_API_KEY
             buildConfigField 'String', 'WEATHER_API_KEY', WEATHER_API_KEY
             buildConfigField 'String', 'GOOGLE_PLATFORM_API_KEY', GOOGLE_PLATFORM_API_KEY
+            buildConfigField 'String', 'CLIENT_ID_API_KEY', CLIENT_ID_API_KEY
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -36,6 +33,7 @@ android {
             buildConfigField 'String', 'ARTICLES_API_KEY', ARTICLES_API_KEY
             buildConfigField 'String', 'WEATHER_API_KEY', WEATHER_API_KEY
             buildConfigField 'String', 'GOOGLE_PLATFORM_API_KEY', GOOGLE_PLATFORM_API_KEY
+            buildConfigField 'String', 'CLIENT_ID_API_KEY', CLIENT_ID_API_KEY
         }
     }
 
@@ -52,6 +50,12 @@ android {
     }
     kapt {
         correctErrorTypes true
+    }
+
+    android.applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach {
+            outputFileName = "Fitme-android-v${variant.versionName}-b${variant.versionCode}-${variant.baseName}.apk"
+        }
     }
 }
 
