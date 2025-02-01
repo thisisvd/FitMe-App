@@ -125,7 +125,7 @@ dependencies {
 
     // Arch lifecycles
     implementation 'android.arch.lifecycle:extensions:1.1.1'
-    kapt "android.arch.persistence.room:compiler:1.0.0"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
 
     // location
     implementation 'com.google.android.gms:play-services-location:11.0.2'
