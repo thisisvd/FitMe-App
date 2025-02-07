@@ -60,18 +60,6 @@
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
 
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/bottomNavigationView"
-                android:layout_centerHorizontal="true"
-                android:visibility="gone"
-                app:adSize="SMART_BANNER"
-                app:adUnitId="@string/banner_add_id">
-
-            </com.google.android.gms.ads.AdView>
-
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"

@@ -9,18 +9,6 @@
     android:paddingRight="12dp"
     android:paddingBottom="6dp">
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottomNavigationView"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        app:adSize="MEDIUM_RECTANGLE"
-        app:adUnitId="@string/banner_add_id">
-
-    </com.google.android.gms.ads.AdView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

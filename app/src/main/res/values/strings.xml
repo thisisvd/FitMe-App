@@ -1,15 +1,11 @@
 <resources>
     <string name="app_name">FitME</string>
 
-    <string name="MAPS_API_kEY">API_KEY</string>
+    <string name="MAPS_API_kEY">AIzaSyAzohx_00_q4jtGxXpyJyYm8qaU77zHqho</string>
 
     <string name="open">OPEN</string>
     <string name="close">CLOSE</string>
     <string name="inviteFriends">Hi! I use FitME app to track my runs and walking stats. Use my invite link to download the app - https://drive.google.com/drive/folders/1tmUjJbfLZajQUwAkBN9LgoJldlOtbSmC?usp=sharing\n\n Stay fit, Stay healthy!\n Thankyou! </string>
-
-    <!--    FAKE Add Unit IDS -->
-    <string name="banner_add_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="interstitial_add_id">ca-app-pub-3940256099942544/1033173712</string>
 
     <string-array name="filter_options">
         <item>Date</item>
@@ -18,7 +14,5 @@
         <item>Average Speed</item>
         <item>Calories Burned</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

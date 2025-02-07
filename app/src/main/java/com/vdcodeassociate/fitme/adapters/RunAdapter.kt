@@ -9,10 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.databinding.ItemRunAddsBinding
 import com.vdcodeassociate.fitme.databinding.ItemRunBinding
@@ -177,40 +173,7 @@ class RunAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewH
                     removeRun.setOnClickListener {
                         onItemClickListener?.let { it(run) }
                     }
-
-                    // load banner add
-                    MobileAds.initialize(context) {}
-
-                    val adRequest = AdRequest.Builder().build()
-                    adView.loadAd(adRequest)
-
-                    adView.adListener = object : AdListener() {
-                        override fun onAdLoaded() {
-                            // Code to be executed when an ad finishes loading.
-                            Log.d(TAG, "AdLoaded")
-                        }
-
-                        override fun onAdFailedToLoad(adError: LoadAdError) {
-                            // Code to be executed when an ad request fails.
-                            Log.d(TAG, "AdFailed : $adError")
-                        }
-
-                        override fun onAdOpened() {
-                            // Code to be executed when an ad opens an overlay that
-                            // covers the screen.
-                        }
-
-                        override fun onAdClicked() {
-                            // Code to be executed when the user clicks on an ad.
-                        }
-
-                        override fun onAdClosed() {
-                            // Code to be executed when the user is about to return
-                            // to the app after tapping on an ad.
-                        }
-                    }
                 }
-
             }
         }
     }
