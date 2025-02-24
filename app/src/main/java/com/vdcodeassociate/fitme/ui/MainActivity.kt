@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
 import com.google.android.gms.common.api.Status
@@ -109,7 +110,7 @@ class MainActivity : AppCompatActivity() {
         locationUpdate()
 
         // setting nav host fragments
-//        binding.bottomNavigationView.setItemSelected(R.id.homeFragment2)
+        binding.bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.homeFragment2 -> {
