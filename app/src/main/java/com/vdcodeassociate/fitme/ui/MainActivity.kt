@@ -214,7 +214,7 @@ class MainActivity : AppCompatActivity() {
                     navHostFragment.findNavController().navigate(R.id.supportFragment, bundle)
                 }
                 R.id.aboutUs -> {
-                    Toast.makeText(applicationContext, "About Us!", Toast.LENGTH_SHORT).show()
+                    navHostFragment.findNavController().navigate(R.id.aboutUsFragment)
                 }
             }
             true
@@ -390,7 +390,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // invite Friend
-    private fun inviteFriend() {
+    fun inviteFriend() {
         val sharingIntent = Intent(Intent.ACTION_SEND)
         sharingIntent.type = "text/plain"
         val shareBody = getString(R.string.inviteFriends)
