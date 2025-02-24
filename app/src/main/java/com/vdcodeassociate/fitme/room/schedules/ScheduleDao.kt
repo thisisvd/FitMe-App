@@ -14,6 +14,10 @@ interface ScheduleDao {
     @Delete
     suspend fun deleteScheduleRun(schedule: Schedule)
 
+    // delete a run by id
+    @Query("DELETE FROM schedule_table WHERE id=:id")
+    suspend fun deleteScheduleById(id: Int)
+
     // sort schedules with timestamp
     @Query("SELECT * FROM schedule_table ORDER BY timeStamp ASC")
     fun getScheduledRuns(): LiveData<List<Schedule>>

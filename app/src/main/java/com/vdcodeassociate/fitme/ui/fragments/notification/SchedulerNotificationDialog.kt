@@ -39,7 +39,6 @@ class SchedulerNotificationDialog : DialogFragment() {
     // Broadcasting ID
     private var broadcastID by Delegates.notNull<Int>()
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = SchedulerDialogBinding.bind(view)
@@ -95,13 +94,13 @@ class SchedulerNotificationDialog : DialogFragment() {
     }
 
     // schedule a notification
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun scheduleNotification() {
-        var alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val intent = Intent(requireActivity(), NotificationScheduler::class.java)
         val title = binding.title.text.toString()
         intent.putExtra(messageExtra, title)
+        intent.putExtra(messageBroadcastId, broadcastID)
 
         val pendingIntent = PendingIntent.getBroadcast(
             requireActivity(),
@@ -127,7 +126,6 @@ class SchedulerNotificationDialog : DialogFragment() {
 
         // save data in room
         saveDataToRoom(schedule)
-
     }
 
     // updating the broad cast ID in shared pref
@@ -137,7 +135,6 @@ class SchedulerNotificationDialog : DialogFragment() {
     }
 
     // get Time from date picker
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun getTime(): Long {
         val minute = binding.timePicker.minute
         val hour = binding.timePicker.hour

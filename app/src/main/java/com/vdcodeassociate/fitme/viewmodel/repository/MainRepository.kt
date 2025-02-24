@@ -62,10 +62,12 @@ class MainRepository @Inject constructor(
     // delete data in schedule db
     suspend fun deleteScheduledRuns(schedule: Schedule) = scheduleDao.deleteScheduleRun(schedule)
 
+    // delete data by id
+    suspend fun deleteScheduledById(id: Int) = scheduleDao.deleteScheduleById(id)
+
     // get data from schedule db
     fun getScheduledRuns() = scheduleDao.getScheduledRuns()
 
     // get last scheduled run
     fun getLastScheduledItem() = scheduleDao.getLastScheduledItem()
-
 }

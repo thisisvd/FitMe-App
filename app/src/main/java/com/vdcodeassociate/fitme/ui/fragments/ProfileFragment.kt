@@ -143,27 +143,31 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         binding.tvTotalTime.text = totalTimeRun
                     }
                 })
-                totalDistance.observe(viewLifecycleOwner, Observer {
+                totalDistance.observe(viewLifecycleOwner) {
                     it?.let {
                         val km = it / 1000f
                         val totalDistance = (km * 10f).roundToInt() / 10f
                         val totalDistanceString = "$totalDistance km"
                         binding.tvTotalDistance.text = totalDistanceString
                     }
-                })
-                totalAvgSpeed.observe(viewLifecycleOwner, Observer {
+                }
+                totalAvgSpeed.observe(viewLifecycleOwner) {
                     it?.let {
-                        val avgSpeed = ((it / totalItemCountVar) * 10f).roundToInt() / 10f
-                        val avgSpeedString = "$avgSpeed km/h"
-                        binding.tvAverageSpeed.text = avgSpeedString
+                        if (totalItemCountVar > 0) {  // Check if totalItemCountVar is not zero
+                            val avgSpeed = ((it / totalItemCountVar) * 10f).roundToInt() / 10f
+                            val avgSpeedString = "$avgSpeed km/h"
+                            binding.tvAverageSpeed.text = avgSpeedString
+                        } else {
+                            binding.tvAverageSpeed.text = "0.0 km/h"
+                        }
                     }
-                })
-                totalCaloriesBurned.observe(viewLifecycleOwner, Observer {
+                }
+                totalCaloriesBurned.observe(viewLifecycleOwner) {
                     it?.let {
                         val totalCalories = "$it Kcal"
                         binding.tvTotalCalories.text = totalCalories
                     }
-                })
+                }
             }
 
             // bar graph viewModel setups
