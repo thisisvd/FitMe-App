@@ -111,6 +111,9 @@ class MainActivity : AppCompatActivity() {
 
         // setting nav host fragments
         binding.bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
+        binding.bottomNavigationView.setOnItemReselectedListener {
+            // don nothing
+        }
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.homeFragment2 -> {

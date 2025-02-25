@@ -23,10 +23,10 @@ class SplashActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
             // delay LaunchScreen for 6 sec
-            object : CountDownTimer(6000, 1000) {
+            object : CountDownTimer(3000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
 
-                    if (millisUntilFinished / 1000 == 2L) {
+                    if (millisUntilFinished / 1000 == 1L) {
                         splashScreenProgressBar.visibility = View.VISIBLE
                     }
                 }

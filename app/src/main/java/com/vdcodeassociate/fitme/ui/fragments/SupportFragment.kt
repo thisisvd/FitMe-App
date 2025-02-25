@@ -73,6 +73,7 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
                 when (value) {
                     is Resource.Success -> {
                         value.data?.let {
+                            progressCircular.visibility = View.GONE
                             if (it == "Feedback") {
                                 showDialog(
                                     "Feedback!",
@@ -95,10 +96,12 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
                             Snackbar.make(requireView(), "Error occurred!", Snackbar.LENGTH_SHORT)
                                 .show()
                         }
+                        progressCircular.visibility = View.GONE
                     }
 
                     is Resource.Loading -> {
                         Log.d(TAG, "Loading...")
+                        progressCircular.visibility = View.VISIBLE
                     }
                 }
             }
@@ -111,7 +114,7 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
             if (!isTextEmpty(isHelp)) {
                 if (isHelp == "Get Help!") {
                     viewModel.addHelp(
-                        supportEditText.text.toString(), supportEditText.text.toString()
+                        supportEditTextHelpEmail.text.toString(), supportEditText.text.toString()
                     )
                 } else {
                     viewModel.addFeedback(supportEditText.text.toString())

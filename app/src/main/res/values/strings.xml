@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FitME</string>
 
-    <string name="MAPS_API_kEY">MAPS_API_kEY</string>
+    <string name="MAPS_API_kEY">AIzaSyAzohx_00_q4jtGxXpyJyYm8qaU77zHqho</string>
 
     <string name="open">OPEN</string>
     <string name="close">CLOSE</string>
