@@ -28,6 +28,7 @@ android {
             buildConfigField 'String', 'GOOGLE_PLATFORM_API_KEY', GOOGLE_PLATFORM_API_KEY
             buildConfigField 'String', 'CLIENT_ID_API_KEY', CLIENT_ID_API_KEY
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
 
         debug {
