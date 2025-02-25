@@ -125,4 +125,10 @@ class Utils {
             }
         }
     }
+
+    fun generateUniqueId(): String {
+        val timestamp = System.currentTimeMillis()
+        val uniquePart = UUID.randomUUID().toString()
+        return "$timestamp-$uniquePart"
+    }
 }

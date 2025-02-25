@@ -1,56 +1,50 @@
 package com.vdcodeassociate.fitme.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.vdcodeassociate.fitme.R
 import com.vdcodeassociate.fitme.databinding.FragmentSupportBinding
+import com.vdcodeassociate.fitme.utils.Resource
+import com.vdcodeassociate.fitme.viewmodel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SupportFragment : Fragment(R.layout.fragment_support) {
+
+    private val TAG = "SupportFragment"
 
     // viewBinding
     private lateinit var binding: FragmentSupportBinding
 
     // getting arguments as passed
-    val args: SupportFragmentArgs by navArgs()
+    private val args: SupportFragmentArgs by navArgs()
 
-    // private smile count
-    private var smileCount = 4
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSupportBinding.bind(view)
 
         // getting arguments as passed
-        val isHelp = args?.myArgs
+        val isHelp = args.myArgs
 
         binding.apply {
 
             // get ready which fragment is being used
-            if (isHelp != null) {
-                setUpFragment(isHelp)
-                binding.toolbar.text = isHelp
-            }
-
-            // Smile Listener
-//            smileRating.setSmileySelectedListener { type ->
-//
-//                when {
-//                    SmileyRating.Type.GREAT == type -> smileCount = 5
-//                    SmileyRating.Type.GOOD == type -> smileCount = 4
-//                    SmileyRating.Type.OKAY == type -> smileCount = 3
-//                    SmileyRating.Type.BAD == type -> smileCount = 2
-//                    SmileyRating.Type.TERRIBLE == type -> smileCount = 1
-//                }
-//
-//            }
+            setUpFragment(isHelp)
+            binding.toolbar.text = isHelp
 
             // on button clicked
             supportButton.setOnClickListener {
-                onButtonPressed(isHelp!!)
+                onButtonPressed(isHelp)
             }
 
             // onBack pressed
@@ -67,8 +61,38 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
                 }
             }
 
+            // view model observers
+            viewModelObservers()
         }
+    }
 
+    // observers
+    private fun viewModelObservers() {
+        binding.apply {
+
+            viewModel.supportObserver.observe(viewLifecycleOwner) { value ->
+                when (value) {
+                    is Resource.Success -> {
+                        value.data?.let {
+                            showDialog(
+                                "Feedback!",
+                                "Thank you for taking the time to provide your feedback, it help us to improve your experience!",
+                                R.drawable.feedback_big_icons8
+                            )
+                        }
+                    }
+                    is Resource.Error -> {
+                        value.message?.let { message ->
+                            Log.d(TAG, "An error occurred : $message")
+                            Snackbar.make(requireView(), "Error occurred!", Snackbar.LENGTH_SHORT).show()
+                        }
+                    }
+                    is Resource.Loading -> {
+                        Log.d(TAG, "Loading...")
+                    }
+                }
+            }
+        }
     }
 
     // on button pressed
@@ -81,11 +105,7 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
                     R.drawable.help_red_icons8
                 )
             } else {
-                showDialog(
-                    "Feedback!",
-                    "Thank you for taking the time to provide your feedback, it help us to improve your experience!",
-                    R.drawable.feedback_big_icons8
-                )
+                viewModel.addFeedback(binding.supportEditText.text.toString())
             }
         }
     }
@@ -100,8 +120,9 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
             .setMessage(message)
             .setIcon(icon)
             .setPositiveButton("OK") { _, _ ->
-                requireActivity().onBackPressed()
+                findNavController().popBackStack()
             }
+            .setCancelable(false)
             .create()
         dialog.show()
     }

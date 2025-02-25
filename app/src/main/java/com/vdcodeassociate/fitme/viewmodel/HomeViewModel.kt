@@ -1,19 +1,26 @@
 package com.vdcodeassociate.fitme.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.digitalinclined.edugate.models.youtubemodel.Item
+import com.google.firebase.Firebase
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.database
 import com.vdcodeassociate.fitme.model.homemodel.WeekStatsHome
 import com.vdcodeassociate.fitme.restapi.weatherapi.model.WeatherResponse
 import com.vdcodeassociate.fitme.room.runs.Run
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.utils.Utils
 import com.vdcodeassociate.fitme.viewmodel.repository.MainRepository
+import com.vdcodeassociate.newsheadlines.kotlin.model.ResponseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.lang.Exception
-import java.util.*
+import java.util.Calendar
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -37,9 +44,29 @@ class HomeViewModel @Inject constructor(
     // banner details
     var getYoutubeSearchResult: MutableLiveData<Resource<List<Item>>> = MutableLiveData()
 
+    private var database: DatabaseReference? = null
+
     // init
     init {
         sortWeeklyDate()
+        database = Firebase.database.reference.child("fitme/fitme-android-v1/users")
+    }
+
+    private val _supportObserver = MutableLiveData<Resource<String>>()
+    val supportObserver: LiveData<Resource<String>> get() = _supportObserver
+
+    fun addFeedback(feedback: String) = viewModelScope.launch {
+        _supportObserver.value = Resource.Loading()
+        database?.let {
+            it.child("feedbacks").child(Utils().generateUniqueId()).setValue(feedback)
+                .addOnSuccessListener {
+                    Log.d("TAG_MY_TAG", "Feedback added successfully!")
+                    _supportObserver.value = Resource.Success("Success")
+                }
+                .addOnFailureListener { e ->
+                    _supportObserver.value = Resource.Error(e.message.toString())
+                }
+        }
     }
 
     // get youtube videos result
