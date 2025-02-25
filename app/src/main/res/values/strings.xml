@@ -24,4 +24,5 @@
     <string name="about_us_dependencies_text">Dagger Hilt (Dependency Injection), MVVM/MVP, ROOM Database, Retrofit, Navigation, Glide, Maps, charts and many dependencies.</string>
     <string name="about_us_share">Share app</string>
     <string name="about_us_tech_stack_string">Client: Kotlin, SQLite(Room), Android Studio \nAPI\'s: weatherapi, newsapi(for articles)\nSDK\'s: Google MAP\'s SDK</string>
+    <string name="img">img</string>
 </resources>

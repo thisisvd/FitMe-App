@@ -16,6 +16,7 @@
             android:id="@+id/back"
             android:layout_width="22dp"
             android:layout_height="22dp"
+            android:contentDescription="@string/img"
             android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
         <TextView
@@ -23,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:fontFamily="@font/allerta"
             android:textColor="@android:color/black"
             android:textSize="22sp" />
@@ -56,13 +57,6 @@
             android:textSize="13sp"
             android:textStyle="bold" />
 
-<!--        <com.hsalf.smileyrating.SmileyRating-->
-<!--            android:id="@+id/smile_rating"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:visibility="gone" />-->
-
         <TextView
             android:id="@+id/supportUTextSmall"
             android:layout_width="wrap_content"
@@ -72,6 +66,27 @@
             android:textColor="@color/black_normal_text"
             android:textSize="11sp"
             android:visibility="gone" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/supportLayout_help_email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            app:errorEnabled="true"
+            app:errorTextColor="#B1001A">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/supportEditText_help_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:inputType="textEmailAddress"
+                android:textSize="15sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/supportLayout"
@@ -90,7 +105,7 @@
                 android:layout_height="200dp"
                 android:ems="10"
                 android:gravity="top|start"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -2,9 +2,9 @@ package com.vdcodeassociate.fitme.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -49,7 +49,7 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
 
             // onBack pressed
             back.setOnClickListener {
-                requireActivity().onBackPressed()
+                findNavController().popBackStack()
             }
 
             // edit text on watch listener
@@ -69,24 +69,34 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
     // observers
     private fun viewModelObservers() {
         binding.apply {
-
             viewModel.supportObserver.observe(viewLifecycleOwner) { value ->
                 when (value) {
                     is Resource.Success -> {
                         value.data?.let {
-                            showDialog(
-                                "Feedback!",
-                                "Thank you for taking the time to provide your feedback, it help us to improve your experience!",
-                                R.drawable.feedback_big_icons8
-                            )
+                            if (it == "Feedback") {
+                                showDialog(
+                                    "Feedback!",
+                                    "Thank you for taking the time to provide your feedback, it help us to improve your experience!",
+                                    R.drawable.feedback_big_icons8
+                                )
+                            } else if (it == "Help") {
+                                showDialog(
+                                    "Request Sent!",
+                                    "Your request has been successfully recorded and will be responded soon!",
+                                    R.drawable.help_red_icons8
+                                )
+                            }
                         }
                     }
+
                     is Resource.Error -> {
                         value.message?.let { message ->
                             Log.d(TAG, "An error occurred : $message")
-                            Snackbar.make(requireView(), "Error occurred!", Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(requireView(), "Error occurred!", Snackbar.LENGTH_SHORT)
+                                .show()
                         }
                     }
+
                     is Resource.Loading -> {
                         Log.d(TAG, "Loading...")
                     }
@@ -97,15 +107,15 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
 
     // on button pressed
     private fun onButtonPressed(isHelp: String) {
-        if (!isTextEmpty()) {
-            if (isHelp == "Get Help!") {
-                showDialog(
-                    "Request Sent!",
-                    "Your request has been successfully recorded and will be responded soon!",
-                    R.drawable.help_red_icons8
-                )
-            } else {
-                viewModel.addFeedback(binding.supportEditText.text.toString())
+        binding.apply {
+            if (!isTextEmpty(isHelp)) {
+                if (isHelp == "Get Help!") {
+                    viewModel.addHelp(
+                        supportEditText.text.toString(), supportEditText.text.toString()
+                    )
+                } else {
+                    viewModel.addFeedback(supportEditText.text.toString())
+                }
             }
         }
     }
@@ -113,55 +123,51 @@ class SupportFragment : Fragment(R.layout.fragment_support) {
     // on complete dialog
     private fun showDialog(title: String, message: String, icon: Int) {
         val dialog = MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(title)
-            .setMessage(message)
-            .setIcon(icon)
-            .setPositiveButton("OK") { _, _ ->
-                findNavController().popBackStack()
-            }
-            .setCancelable(false)
-            .create()
+            requireContext(), R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        ).setTitle(title).setMessage(message).setIcon(icon).setPositiveButton("OK") { _, _ ->
+            findNavController().popBackStack()
+        }.setCancelable(false).create()
         dialog.show()
     }
 
-    private fun isTextEmpty(): Boolean {
-        var result = false
-
+    private fun isTextEmpty(isHelp: String): Boolean {
         binding.apply {
+            var result = false
+
+            if (isHelp == "Get Help!") {
+                if (supportEditTextHelpEmail.text!!.isEmpty()) {
+                    supportLayoutHelpEmail.error = "Required!"
+                    result = true
+                }
+            }
 
             if (supportEditText.text!!.isEmpty()) {
                 supportLayout.error = "Required!"
                 result = true
             }
 
+            return result
         }
-
-        return result
     }
 
     private fun setUpFragment(isHelp: String) {
         binding.apply {
-
             if (isHelp == "Get Help!") {
                 supportImage.setImageResource(R.drawable.inquiry_icons8)
                 supportUText.text = "Type your query below you will be responded soon!"
                 supportEditText.hint = "Type your issue here!"
                 supportButton.text = "Send your request"
+                supportEditTextHelpEmail.hint = "Type your email here!"
+                supportLayoutHelpEmail.visibility = View.VISIBLE
             } else {
                 supportUTextSmall.visibility = View.VISIBLE
-//                smileRating.visibility = View.VISIBLE
                 supportImage.setImageResource(R.drawable.feedback_ultra_icons8)
                 supportUText.text = "Do you have some feedback?"
                 supportUTextSmall.text = "So we did a good job?"
                 supportEditText.hint = "Tell us in words..."
                 supportButton.text = "Submit"
+                supportLayoutHelpEmail.visibility = View.GONE
             }
-
         }
-
     }
-
 }

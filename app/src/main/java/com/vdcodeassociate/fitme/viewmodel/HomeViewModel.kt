@@ -1,6 +1,5 @@
 package com.vdcodeassociate.fitme.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,7 +15,6 @@ import com.vdcodeassociate.fitme.room.runs.Run
 import com.vdcodeassociate.fitme.utils.Resource
 import com.vdcodeassociate.fitme.utils.Utils
 import com.vdcodeassociate.fitme.viewmodel.repository.MainRepository
-import com.vdcodeassociate.newsheadlines.kotlin.model.ResponseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -60,10 +58,25 @@ class HomeViewModel @Inject constructor(
         database?.let {
             it.child("feedbacks").child(Utils().generateUniqueId()).setValue(feedback)
                 .addOnSuccessListener {
-                    Log.d("TAG_MY_TAG", "Feedback added successfully!")
-                    _supportObserver.value = Resource.Success("Success")
+                    _supportObserver.value = Resource.Success("Feedback")
+                }.addOnFailureListener { e ->
+                    _supportObserver.value = Resource.Error(e.message.toString())
                 }
-                .addOnFailureListener { e ->
+        }
+    }
+
+    fun addHelp(email: String, help: String) = viewModelScope.launch {
+        _supportObserver.value = Resource.Loading()
+        database?.let {
+
+            val mapData = mapOf(
+                "email" to email, "help" to help
+            )
+
+            it.child("help").child(Utils().generateUniqueId()).setValue(mapData)
+                .addOnSuccessListener {
+                    _supportObserver.value = Resource.Success("Help")
+                }.addOnFailureListener { e ->
                     _supportObserver.value = Resource.Error(e.message.toString())
                 }
         }
