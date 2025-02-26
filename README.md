@@ -30,11 +30,11 @@
 ## Introduction
 FitME is a running tracker app that tracks run or walk distance using maps SDK. It performs some tasks, shows track routes on the maps, schedules things, and shows articles by Android Jetpack Architecture. Tracks the health of the user by runs and calorie burns and shows the user's statistics.
 
-`Features:` Tracks running distance, steps, calories, and weather; provides diet plans, exercises, workouts, and recommended YouTube videos; sets up alerts and goals for daily achievements; view statistics, etc.
+`Features:` Tracks running distance, steps, calories, and weather, provides diet plans, exercises, workouts, and recommended YouTube videos, sets up alerts and goals for daily achievements; view statistics, etc.
 
 ## Objective and Usage
 
-The number of smartphone users has spread rapidly around the globe; along with this, the use of health and fitness apps has also increased because people prefer to track their fitness from their mobile rather than the traditional method of going and seeing a doctor. Several health and fitness apps on the market are loaded with tons of features, but these irrelevant features distract the user and also make the app complex to use, taking away the main purpose of the app. So keeping in mind all these factors, we have developed a fitness app, FITME, which is user-friendly and easy to use and has a hassle-free experience that does not distract the users from their main goal.
+The number of smartphone users has spread rapidly around the globe, along with this, the use of health and fitness apps has also increased because people prefer to track their fitness from their mobile rather than the traditional method of going and seeing a doctor. Several health and fitness apps on the market are loaded with tons of features, but these irrelevant features distract the user and also make the app complex to use, taking away the main purpose of the app. So keeping in mind all these factors, we have developed a fitness app, FITME, which is user-friendly and easy to use and has a hassle-free experience that does not distract the users from their main goal.
 
 ## Screenshots
 
@@ -59,7 +59,7 @@ The number of smartphone users has spread rapidly around the globe; along with t
 
 ## How to use
 
-  - Clone the project and run the application
+  - Clone the project on your system.
 ```bash
 git clone https://github.com/thisisvd/FitMe-App.git
 ```
