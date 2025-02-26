@@ -39,7 +39,6 @@ The number of smartphone users has spread rapidly around the globe, along with t
 ## Screenshots
 
 <p float="left">
-<img src="https://github.com/thisisvd/FitMe-App/blob/master/support/screenshots/fm_record.gif" width="150">
 <img src="https://github.com/thisisvd/FitMe-App/blob/master/support/screenshots/fm_1.png" width="150">
 <img src="https://github.com/thisisvd/FitMe-App/blob/master/support/screenshots/fm_2.png" width="150">
 <img src="https://github.com/thisisvd/FitMe-App/blob/master/support/screenshots/fm_3.png" width="150">
@@ -49,6 +48,7 @@ The number of smartphone users has spread rapidly around the globe, along with t
 <img src="https://github.com/thisisvd/FitMe-App/blob/master/support/screenshots/fm_7.png" width="150">
 <img src="https://github.com/thisisvd/FitMe-App/blob/master/support/screenshots/fm_8.png" width="150">
 <img src="https://github.com/thisisvd/FitMe-App/blob/master/support/screenshots/fm_9.png" width="150">
+<img src="https://github.com/thisisvd/FitMe-App/blob/master/support/screenshots/fm_10.png" width="150">
 </p>
 
 ## Project Sources
