@@ -24,7 +24,6 @@
  <a href="#project-sources">Project Sources</a> •
  <a href="#how-to-use">How to use</a> •
  <a href="#tech-stack">Tech Stack</a> •
- <a href="#other-dependencies-and-all">Dependencies</a> •
  <a href="#license">License</a>
 </p>
 
