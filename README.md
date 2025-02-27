@@ -28,9 +28,10 @@
 </p>
 
 ## Introduction
-FitME is a running tracker app that tracks run or walk distance using maps SDK. It performs some tasks, shows track routes on the maps, schedules things, and shows articles by Android Jetpack Architecture. Tracks the health of the user by runs and calorie burns and shows the user's statistics.
 
-`Features:` Tracks running distance, steps, calories, and weather, provides diet plans, exercises, workouts, and recommended YouTube videos, sets up alerts and goals for daily achievements, view statistics, etc.
+FitME is a running tracker app that tracks run or walk distance using maps SDK. It performs some tasks, shows track routes on the maps, schedules things, and shows articles by using Android Jetpack Architecture. Tracks the health of the user by runs and calorie burns and shows the user's statistics.
+
+`Features:` Tracks running distance, steps, calories, and weather, provides diet plans, exercises, workouts, and recommend YouTube videos, sets up alerts and goals for daily achievements, view statistics, etc.
 
 ## Objective and Usage
 
